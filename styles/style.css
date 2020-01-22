@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+/*General*/
+
+/*nav bovenaan de admin pagina*/
+.general-nav {
+    margin-top: 50px;
+}
+.general-main {
+    margin-top: 25px;
+}
+
+
+
+/*Write page*/
+
+/*Textarea van abstract*/
+.form-control {
+    resize: none;
+}
+/*Container van ckeditor*/
+.write-ckeditor-container {
+    margin-top: 25px;
+}
+/*Nav tabs van write page*/
+.write-nav-tabs {
+    margin-top: 25px;
+}
+/*Container of the different tabs*/
+.write-tabpane-container {
+    margin-top: 25px;
+    margin-bottom: 100px;
+}
+/*Div in the publish section under the radiobuttons*/
+.write-publish-extra {
+    padding-left: 20px;
+    margin-top: 25px;
+}
+.write-publish-extra:nth-child(2) {
+    text-align: right;
+}
+.write-publish-extra button {
+    margin-top: 32px;
+}
