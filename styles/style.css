@@ -12,7 +12,50 @@
 }
 .general-main {
     margin-top: 25px;
+    margin: 0 auto;
 }
+/*Style of the overlay box*/
+.overlay-wrapper {
+    background-color: rgba(0,0,0,0.75);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    display: none;
+}
+.overlay-box {
+    background-color: white;
+    max-width: 600px;
+    margin: 0 auto;
+    border-radius: 5px;
+    position: relative;
+    transition: margin-top 500ms;
+}
+.overlay-title {
+    font-size: 20px;
+    line-height: 45px;
+    padding: 0px 15px;
+    font-weight: normal;
+    display: block;
+    border-bottom: 1px solid lightgrey;
+}
+.close-overlay {
+    position: absolute;
+    font-size: 12px;
+    top: 20px;
+    right: 20px;
+    color: lightgrey;
+    cursor: pointer;
+}
+label {
+    font-weight: bold;
+}
+.overlay-small {
+    color: grey;
+}
+
+
 
 
 
@@ -45,4 +88,113 @@
 }
 .write-publish-extra button {
     margin-top: 32px;
+}
+
+
+
+
+/*Files Page*/
+/*The container of the operations on the dir body*/
+.files-admin-div {
+    display: block !important;
+    margin: 25px 0px;
+}
+/*Container of the alert messages*/
+.alert-messages {
+    width: 70%;
+    margin: 0 auto;
+    padding: 15px 0px;
+}
+/*container of dir body + breadcrumbs*/
+.files-file-directory-container {
+    margin-top: 25px;
+}
+/*Breadcrumbs showing the path*/
+.files-breadcrumbs-directory-path {
+    grid-column: 1/2;
+}
+.files-breadcrumbs-directory-path ol {
+    background-color: rgba(0,0,0,0);
+    margin: 0px;
+    padding: 0px;
+}
+/*The body that shows all the files*/
+.files-directory-body {
+    display: flex !important;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+/*The container containing each individual file/folder in dir body*/
+.files-file-container {
+    padding: 0px 5px 5px 5px;
+    margin: 5px;
+    position: relative;
+    /*border: 1px solid black;*/
+}
+.files-file-container:hover .files-hover-icons {
+    opacity: 1;
+    cursor: pointer;
+    text-shadow: 4px 0px 4px rgba(150, 150, 150, 1); /*Makes the icon clearly visible on all surfaces*/
+}
+.files-hover-icons {
+    position: absolute;
+    font-size: 25px;
+    left: 0%;
+    opacity: 0;
+    transition: opacity 300ms ease;
+}
+/*Icons and text of the file/folder in dir body*/
+.files-icon{
+    font-size: 100px;
+}
+.files-folder-file-name {
+    text-align: center;
+}
+/*Style of the inputs.buttons*/
+.form-group {
+    padding: 0px 25px 15px 25px;
+}
+.button-container {
+    padding: 0px 25px 15px 25px;
+    text-align: right;
+}
+
+
+
+
+
+
+
+
+
+/*Media queries*/
+@media (min-width: 768px) {
+    /*width for main*/
+    main, .general-nav {
+        width: 750px;
+    }
+    /*Fontsize for pdf icon*/
+    .pdf-icon {
+        font-size: 85px;
+    }
+}
+@media (min-width: 992px) {
+    /*width for main*/
+    main, .general-nav {
+        width: 970px;
+    }
+    /*Fontsize for pdf icon*/
+    .pdf-icon {
+        font-size: 75px;
+    }
+}
+@media (min-width: 1200px) {
+    /*width for main*/
+    main, .general-nav {
+        width: 1180px;
+    }
+    /*Fontsize for pdf icon*/
+    .pdf-icon {
+        font-size: 100px;
+    }
 }

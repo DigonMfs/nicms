@@ -10,8 +10,12 @@
         <script src="//cdn.ckeditor.com/4.13.1/full/ckeditor.js"></script>
         <!--//Link to jquery-->
         <script src="../scripts/jquery.js"></script>
+        <!--//Link to functions.js-->
+        <script src="../scripts/functions.js"></script>
         <!--Link To CSS-->
         <link rel="stylesheet" type="text/css" href="../styles/style.css">
+         <!--Link to Font Awesome-->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
         <!--Javascript-->
         <script>
             /*Textarea met ckeditor vervangen*/
@@ -23,7 +27,7 @@
     <body>
         
         <!-- Navigation bar -->
-        <nav class="container col-lg-8 offset-lg-2 col-md-10 offset-md-1 col-sm-12 general-nav">
+        <nav class="container general-nav">
             <ul class="nav nav-pills">
                 <li class="nav-item">
                  <a class="nav-link" href="../articles.php">Articles</a>
@@ -44,7 +48,7 @@
         </nav>
         
         <!-- Main-->
-        <main class="col-lg-8 offset-lg-2 col-md-10 offset-md-1 col-sm-12 general-main">
+        <main class="general-main">
             
             <!-- Title and summary-->
             <div class="card card-body bg-light">
@@ -114,14 +118,40 @@
                 
                 <!-- Tab pane Files-->
                 <div role="tabpanel" class="tab-pane fade" id="tabFiles">
-                    <div class="card card-body bg-light">
-                        
+                    <!--Breadcrumbs-->
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb" id="breadcrumbs">
+                            <li class="breadcrumb-item"><a href="index.php" id="breadcrumbs-0" data-value="HomeDirectory">assets</a></li>
+                        </ol>
+                    </nav>
+                     <!--Directory Actions-->
+                    <div class="card card-body bg-light admin-div">
+                        <button type="button" class="btn btn-primary buttons" onclick="Toggleoverlay('open',1)">Create Folder In Current Directory</button>
+                        <button type="button" class="btn btn-primary buttons" onclick="Toggleoverlay('open',2)">Upload File in Current Directory</button>
                     </div>
+                     <!--Alert messages-->
+                    <div class="alert-messages"></div>
+                    <!--Directory body-->
+                    <div class="card card-body bg-light">
+                         <?php 
+                            include("../php/lookindir.php");
+                        ?>
+                    </div>
+                    
                 </div>
+                
                 <div role="tabpanel" class="tab-pane fade" id="tabDate">4</div>
             </div>
             
         </main>
+        
+        
+        <!--Overlay-->
+        <div class="overlay-wrapper">
+            <div class="overlay-box" id="overlayBody">
+
+            </div>
+        </div>
         
         
        
