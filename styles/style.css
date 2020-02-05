@@ -6,14 +6,15 @@
 
 /*General*/
 
-/*nav bovenaan de admin pagina*/
+/*nav nav at the top of the admin page*/
 .general-nav {
     margin-top: 50px;
 }
 .general-main {
-    margin-top: 25px;
-    margin: 0 auto;
+    margin-top: 25px !important;
+    margin: 0px auto 350px auto;
 }
+
 /*Style of the overlay box*/
 .overlay-wrapper {
     background-color: rgba(0,0,0,0.75);
@@ -51,9 +52,27 @@
 label {
     font-weight: bold;
 }
+.overlay-text {
+    margin-bottom: 0rem;
+}
+.button-container {
+    margin-top: 25px;
+}
 .overlay-small {
     color: grey;
 }
+
+/*Breadcrumbs above the explorer window, at write and files.php*/
+.bread-crumb-links {
+    cursor: pointer;
+}
+.bread-crumb-links:hover {
+    color: #007bff !important;
+}
+.bread-crumb-item:first-child a {
+    color: #007bff;
+}
+
 
 
 
@@ -87,9 +106,40 @@ label {
     text-align: right;
 }
 .write-publish-extra button {
-    margin-top: 32px;
+    margin-top: 25px;
 }
 
+/*category section on write page*/
+/*the category button selectors*/
+.category-dropwdown-selectors {
+    border: 1px solid black;
+    width: 100%;
+    text-align: left !important;
+}
+.custom-select {
+    padding: 0px;
+    margin: 0px 0px 25px 0px;
+}
+.write-category-title {
+    font-size: 25px;
+}
+
+
+/*Files on write page*/
+#overlay-quick {
+    position: fixed;
+    z-index: 999999;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 40px;
+    text-align: center;
+    padding: 25px;
+    display: none;
+}
+#overlay-quick p {
+    margin-top: 15px;
+}
 
 
 
@@ -123,6 +173,8 @@ label {
     display: flex !important;
     flex-direction: row;
     flex-wrap: wrap;
+    max-height: 550px;
+    overflow-y: scroll;
 }
 /*The container containing each individual file/folder in dir body*/
 .files-file-container {

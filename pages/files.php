@@ -26,7 +26,7 @@
         <nav class="container general-nav">
             <ul class="nav nav-pills">
                 <li class="nav-item">
-                 <a class="nav-link" href="../articles.php">Articles</a>
+                 <a class="nav-link" href="articles.php">Articles</a>
                 </li>
                 <li class="nav-item">
                  <a class="nav-link" href="write.php">Write</a>
@@ -60,19 +60,22 @@
                 <!--Breadcrumbs-->
                 <nav aria-label="breadcrumb" class="files-breadcrumbs-directory-path card-header">
                     <ol class="breadcrumb" id="breadcrumbs">
-                        <li class="breadcrumb-item"><a href="files.php" id="breadcrumbs-0" data-value="assets">assets</a></li>
+                        <li class="breadcrumb-item bread-crumb-item"><a class="bread-crumb-links" id="breadcrumbs-0" data-value="assets" onclick="BaseDir(0,'true')">assets</a></li>
                     </ol>
                 </nav>
                 <!--Directory body-->
                 <div class="files-directory-body card-body">
-                     <?php 
+                     <?php
+                        //show folders and files without admin options
+                        /*$admin is true on files.php, if $admin = true, the delete icon will appear on hover, and on click of an image
+                        the image won't be inserted in ckeditor, on false the image will be inserted into ckeditor and no delete icon
+                        will be shown */
+                        $admin = "true";
                         include("../php/lookindir.php");
                     ?>
                 </div>
              </div>
-            
-            
-            
+
         </main>
         
         <!--Overlay-->

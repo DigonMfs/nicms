@@ -30,7 +30,7 @@
         <nav class="container general-nav">
             <ul class="nav nav-pills">
                 <li class="nav-item">
-                 <a class="nav-link" href="../articles.php">Articles</a>
+                 <a class="nav-link" href="articles.php">Articles</a>
                 </li>
                 <li class="nav-item">
                  <a class="nav-link active" href="write.php">Write</a>
@@ -54,17 +54,17 @@
             <div class="card card-body bg-light">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Title</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Title">
+                    <input type="email" class="form-control" id="articleTitle" placeholder="Enter Title">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Password</label>
-                    <textarea class="form-control" id="exampleInputPassword1" placeholder="Enter Summary"></textarea>
+                    <textarea class="form-control" id="articleSummary" placeholder="Enter Summary"></textarea>
                 </div>
             </div>
             
             <!--CKEditor-->
             <div class="write-ckeditor-container">
-                <textarea name="editor1" id="ckeditor" rows="20"></textarea>
+                <textarea name="ckeditor" id="ckeditor" rows="20"></textarea>
             </div>
             
             <!--Navbar for the tabs-->
@@ -86,8 +86,7 @@
             </nav>
             
             <!--All the tabs from the navbar above-->
-            <div class="tab-content write-tabpane-container">
-                
+            <div class="tab-content write-tabpane-container">  
                 <!-- Tab pane publish-->
                 <div role="tabpanel" class="tab-pane fade show active" id="tabPublish">
                     <div class="card card-body bg-light write-publish-checkbox-container">
@@ -99,8 +98,7 @@
                             //show all the channels on the screen
                             include("../php/showpublishmedia.php")
                         ?>
-                    </div><!--checkbox container-->
-                    
+                    </div><!--checkbox container--> 
                     <div class="write-publish-row row d-flex flex-row">
                         <div class="flex-fill write-publish-extra">
                             <label for="exampleInputEmail1">Author</label>
@@ -110,36 +108,46 @@
                             <button class="btn-primary btn" type="submit">Save</button>
                         </div>
                     </div><!--author and publish buttton container-->
-                    
                 </div><!--Tab pane publish-->
                 
                 <!-- Tab pane Categories-->
-                <div role="tabpanel" class="tab-pane fade" id="tabCategories">2</div>
-                
-                <!-- Tab pane Files-->
-                <div role="tabpanel" class="tab-pane fade" id="tabFiles">
-                    <!--Breadcrumbs-->
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb" id="breadcrumbs">
-                            <li class="breadcrumb-item"><a href="index.php" id="breadcrumbs-0" data-value="HomeDirectory">assets</a></li>
-                        </ol>
-                    </nav>
-                     <!--Directory Actions-->
-                    <div class="card card-body bg-light admin-div">
-                        <button type="button" class="btn btn-primary buttons" onclick="Toggleoverlay('open',1)">Create Folder In Current Directory</button>
-                        <button type="button" class="btn btn-primary buttons" onclick="Toggleoverlay('open',2)">Upload File in Current Directory</button>
-                    </div>
-                     <!--Alert messages-->
-                    <div class="alert-messages"></div>
-                    <!--Directory body-->
-                    <div class="card card-body bg-light">
-                         <?php 
-                            include("../php/lookindir.php");
-                        ?>
+                <div role="tabpanel" class="tab-pane fade" id="tabCategories">
+                    
+                    <div class="container-fluid card card-body bg-light">
+                         <div class="container"> 
+                        <h3 class="write-category-title text-primary">Categories</h3>
+                            <?php 
+                                //Include all categories (not subcategories)
+                                include("../php/showcategories.php");
+                            ?>
+                        </div>
+                        <div class="container container-subcategories"></div>
                     </div>
                     
                 </div>
+
+                <!-- Tab pane Files-->
+                <div role="tabpanel" class="tab-pane fade files-file-directory-container card" id="tabFiles">
+                    <!--Breadcrumbs-->
+                    <nav aria-label="breadcrumb" class="files-breadcrumbs-directory-path card-header">
+                        <ol class="breadcrumb" id="breadcrumbs">
+                            <li class="breadcrumb-item bread-crumb-item"><a class="bread-crumb-links" id="breadcrumbs-0" data-value="assets" onclick="BaseDir(0,'false')">assets</a></li>
+                        </ol>
+                    </nav>
+                    <!--directory body-->
+                    <div class="files-directory-body card-body">
+                        <?php 
+                            //show folders and files without admin options
+                            /*$admin is true on files.php, if $admin = true, the delete icon will appear on hover, and on click of an image
+                            the image won't be inserted in ckeditor, on false the image will be inserted into ckeditor and no delete icon
+                            will be shown */
+                            $admin = "false";
+                            include("../php/lookindir.php");
+                        ?>
+                    </div>
+                </div>
                 
+                <!-- Tab pane publish date-->
                 <div role="tabpanel" class="tab-pane fade" id="tabDate">4</div>
             </div>
             
@@ -148,14 +156,12 @@
         
         <!--Overlay-->
         <div class="overlay-wrapper">
-            <div class="overlay-box" id="overlayBody">
-
-            </div>
+            <div class="overlay-box" id="overlayBody"></div>
         </div>
-        
-        
+        <div class="card card-body bg-dark" id="overlay-quick"></div>   
+
        
-       
+
         <!--Bootstrap & Bootstrap related CDN's-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>

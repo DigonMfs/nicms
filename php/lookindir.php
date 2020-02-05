@@ -8,6 +8,12 @@
         $aPath = $_GET["aPath"];
         $dirPath = "../";
         $dirPath .= join("/",$aPath);
+
+        //The only reason aPath can be defined and admin not is from the files.php pages, this means admin == true
+        if (isset($_GET["admin"]))
+            $admin = $_GET["admin"];
+        else 
+            $admin = "true";
         
     }//if ajax
     else {
@@ -20,20 +26,27 @@
         //Create an array containing all files
         $aFiles = scandir($dirPath);
         
-        
+        //go trough all folder/files in dir
         for($i=0;$i<count($aFiles);$i++) {
 
+            //See if file is folder or file
             if (is_dir($dirPath . '/' . $aFiles[$i])) {
 
                 //remove the dots from current and parent directory
                 if ($aFiles[$i] == "." || $aFiles[$i] == "..") {}
                 else {
 
+                    //See if admin == true/false
+                    if ($admin == "true") 
+                        $text = '<i class="fas fa-trash-alt files-hover-icons files-delete" onclick="AskDelete(\''.$dirPath.'\',\''.$aFiles[$i].'\',\'folder\')"></i>';
+                    else 
+                        $text = '';
+
                     //output on screen
                     echo '
                         <div class="files-file-container">
-                            <i class="fas fa-folder text-warning dir-icon files-icon" onclick="DirClick(\''.addslashes($aFiles[$i]).'\')"></i>
-                            <i class="fas fa-trash-alt files-hover-icons files-delete" onclick="Delete(\''.$dirPath.'\',\''.$aFiles[$i].'\',\'folder\')"></i>
+                            <i class="fas fa-folder text-warning dir-icon files-icon" onclick="DirClick(\''.addslashes($aFiles[$i]).'\',\''.$admin.'\')"></i>
+                            '.$text.'
                             <p class="files-folder-file-name">'.$aFiles[$i].'</p>
                         </div>
                     ';
@@ -55,11 +68,18 @@
                     else 
                         $icon = '<i class="fas fa-image img-icon files-icon text-primary"></i>';
 
+                    //Look if admin function should be enabled
+                    if ($admin == "true") {
+                        $container = '<div class="files-file-container">';
+                        $text = '<i class="fas fa-trash-alt files-hover-icons files-delete" onclick="AskDelete(\''.$dirPath.'\',\''.$aFiles[$i].'\',\'file\')"></i>';
+                    } else {
+                        //type is extension, images need to be inserted as an <img>, pdf files not
+                        $container = '<div class="files-file-container" onclick="InsertFile(\''.$dirPath.'\',\''.$aFiles[$i].'\',\''.$extension.'\')">';
+                        $text = '';
+                    }//if $admin ==true
+
                     //Output on screen
-                    echo '
-                        <div class="files-file-container">
-                            '.$icon.'
-                            <i class="fas fa-trash-alt files-hover-icons files-delete" onclick="Delete(\''.$dirPath.'\',\''.$aFiles[$i].'\',\'file\')"></i>
+                    echo $container, $icon, $text.'
                             <p class="files-folder-file-name">'.$aFiles[$i].'</p>
                         </div>
                     ';
