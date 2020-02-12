@@ -4,10 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/niels/NetBeansProjects/nicms/scripts/functions.js</file>
-            <file>file:/home/niels/NetBeansProjects/nicms/pages/write.php</file>
-            <file>file:/home/niels/NetBeansProjects/nicms/php/showcategories.php</file>
+            <file>file:/home/niels/NetBeansProjects/nicms/pages/categories.php</file>
+            <file>file:/home/niels/NetBeansProjects/nicms/php/categories-page/listcategories.php</file>
             <file>file:/home/niels/NetBeansProjects/nicms/styles/style.css</file>
-            <file>file:/home/niels/NetBeansProjects/nicms/php/showsubcategories.php</file>
         </group>
     </open-files>
 </project-private>

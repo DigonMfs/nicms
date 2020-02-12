@@ -26,7 +26,7 @@
     </head>
     <body>
         
-        <!-- Navigation bar -->
+        <!-- Navigation bar -->    
         <nav class="container general-nav">
             <ul class="nav nav-pills">
                 <li class="nav-item">
@@ -42,7 +42,7 @@
                  <a class="nav-link" href="categories.php">Categories</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="calender.php">Calender</a>
+                    <a class="nav-link" href="calender.php">Calendar</a>
                 </li>
              </ul> 
         </nav>
@@ -54,10 +54,10 @@
             <div class="card card-body bg-light">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Title</label>
-                    <input type="email" class="form-control" id="articleTitle" placeholder="Enter Title">
+                    <input type="text" class="form-control" id="articleTitle" placeholder="Enter Title">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
+                    <label for="exampleInputPassword1">Summary</label>
                     <textarea class="form-control" id="articleSummary" placeholder="Enter Summary"></textarea>
                 </div>
             </div>
@@ -87,6 +87,7 @@
             
             <!--All the tabs from the navbar above-->
             <div class="tab-content write-tabpane-container">  
+                
                 <!-- Tab pane publish-->
                 <div role="tabpanel" class="tab-pane fade show active" id="tabPublish">
                     <div class="card card-body bg-light write-publish-checkbox-container">
@@ -101,18 +102,17 @@
                     </div><!--checkbox container--> 
                     <div class="write-publish-row row d-flex flex-row">
                         <div class="flex-fill write-publish-extra">
-                            <label for="exampleInputEmail1">Author</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Author">
+                            <label for="exampleInputEmail1">Signed</label>
+                            <input type="text" class="form-control" id="articleSigner" placeholder="Enter Signer">
                         </div>
                         <div class="flex-fill write-publish-extra">
-                            <button class="btn-primary btn" type="submit">Save</button>
+                            <button class="btn btn-primary" onclick="SaveArticle()" type="submit">Save</button>
                         </div>
                     </div><!--author and publish buttton container-->
                 </div><!--Tab pane publish-->
                 
                 <!-- Tab pane Categories-->
-                <div role="tabpanel" class="tab-pane fade" id="tabCategories">
-                    
+                <div role="tabpanel" class="tab-pane fade" id="tabCategories"> 
                     <div class="container-fluid card card-body bg-light">
                          <div class="container"> 
                         <h3 class="write-category-title text-primary">Categories</h3>
@@ -123,7 +123,6 @@
                         </div>
                         <div class="container container-subcategories"></div>
                     </div>
-                    
                 </div>
 
                 <!-- Tab pane Files-->
@@ -154,6 +153,8 @@
         </main>
         
         
+
+
         <!--Overlay-->
         <div class="overlay-wrapper">
             <div class="overlay-box" id="overlayBody"></div>

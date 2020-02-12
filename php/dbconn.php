@@ -2,7 +2,7 @@
     //Declare and initialise variables
     $servername = "localhost";
     $username = "root";
-    $password = "root";
+    $password = "";
     $dbname = "nicms";
 
     // Create connection

@@ -1,4 +1,5 @@
 <?php
+    //Include connection with the database
     include_once("../php/dbconn.php");
 ?>
 <!DOCTYPE html>
@@ -38,7 +39,7 @@
                  <a class="nav-link" href="categories.php">Categories</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="calender.php">Calender</a>
+                    <a class="nav-link" href="calender.php">Calendar</a>
                 </li>
              </ul> 
         </nav>
@@ -47,12 +48,12 @@
         <main class="general-main">
 
              <!--Directory Actions-->
-            <div class="files-admin-div">
+            <div class="admin files-admin-div">
                 <button type="button" class="btn btn-primary buttons" onclick="Toggleoverlay('open',1)">Create Folder</button>
                 <button type="button" class="btn btn-primary buttons" onclick="Toggleoverlay('open',2)">Upload File</button>
             </div>
              
-             <!--Alert messages-->
+            <!--Alert messages-->
             <div class="files-alert-messages"></div>
               
             <!--Container of the directory window-->

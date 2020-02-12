@@ -4,6 +4,8 @@
     
     //Check if dbconn is set
     if (isset($conn)) {
+		
+    $level = 0;
 
         //Select all categories without a parent_id (parent_id = 0)
         $sql = "SELECT * FROM category WHERE parent_id= 0";
@@ -13,10 +15,11 @@
         if ($result->num_rows > 0) {
 
             //Output non repetetive data
-            echo '<select class="custom-select write-sub-categories-container">';
+            echo '<select class="custom-select write-sub-categories-container" id="articleCategory" onchange="ShowSubCategories(this.value)">';
+            echo '<option option="undefined" value="undefined" selected disabled>Choose a category</option>';
             //Output each category
             while($row = $result->fetch_assoc()) {
-                echo '<option option="'.$row["row_id"].'" onclick="ShowSubCategories('.($level + 1).','.$row["row_id"].')">'.$row["category"].'</option>';
+                echo '<option option="'.$row["row_id"].'" value="0,'.$row["row_id"].'"> '.$row["category"].'</option>';
             }//while
             //Output non repetetive data
             echo '</select> ';

@@ -19,18 +19,19 @@
             //Output non repetetive data
             echo '
                 <h3 class="write-category-title text-primary">Subcategory</h3>
-                <select class="custom-select write-sub-categories-container">
+                <select class="custom-select write-sub-categories-container" id="articleSubcategory" onchange="ShowSubCategories(this.value)">
+                    <option option="undefined" selected disabled>Choose a subcategory</option>
             ';
             //Output each sub category
             while($row = $result->fetch_assoc()) {
-                echo '<option option="'.$row["row_id"].'" onclick="ShowSubCategories('.($level + 1).','.$row["row_id"].')">'.$row["category"].'</option>';
+                echo '<option option="'.$row["row_id"].'" value="'.($level + 1).','.$row["row_id"].'">'.$row["category"].'</option>';
             }//while
             //Output non repetetive data
-            echo '</div> ';
+            echo '</div>';
             
         } else {
             //Output data on screen
-            echo "<p class='alert alert-success' role='alert'>All categories and subcategories have been selected.</p>";
+            echo "<p class='alert alert-success' id='categoriesInfoMessages' role='alert'>All categories and subcategories have been selected.</p>";
             
         }//if $result > 0
         
@@ -39,7 +40,7 @@
         
     } else {
         //variables are not set
-        echo "<p class='alert alert-danger' role='alert'>Undefined values.</p>";
+        echo "<p class='alert alert-danger' id='categoriesInfoMessages' role='alert'>Undefined values.</p>";
         die();
     }
 

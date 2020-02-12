@@ -11,6 +11,8 @@
         <link rel="stylesheet" type="text/css" href="styles/style.css">
     </head>
     <body>
+        
+        <!-- Navigation bar -->  
         <nav class="container col-lg-8 offset-lg-2 col-md-10 offset-md-1 col-sm-12 general-nav">
             <ul class="nav nav-pills">
                 <li class="nav-item">

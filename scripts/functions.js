@@ -183,7 +183,7 @@ function Delete(dirPath,fileName,type) {
             DirClick(undefined,true);
         },
     });//ajax
-}
+}//function
 
 //This function toggles the visibility of the overlay, and the correct content
 function Toggleoverlay(toggle,content) {
@@ -245,15 +245,18 @@ function Toggleoverlay(toggle,content) {
 //Insert the file into ckeditor
 function InsertFile(path,fileName,type) {
     //Check if file is an image or pdf, and copy
+    /*
+        all Text highlighted in green is to copy the text to your clipboard. The method that is currently being used copies the img/pdf to ckeditor in source code.
+    */
     if (type == "pdf")
-        copyText = '<a href="'+path+'/'+fileName+'" class="pdf-ckeditor-a">'+fileName+'</a>';
-        //CKEDITOR.instances.ckeditor.insertText('<a href="'+path+'/'+fileName+'" class="pdf-ckeditor-a">'+fileName+'</a> <br>');
+        //copyText = '<a href="'+path+'/'+fileName+'" class="pdf-ckeditor-a">'+fileName+'</a>';
+        CKEDITOR.instances.ckeditor.insertHtml('<a href="'+path+'/'+fileName+'" class="pdf-ckeditor-a">'+fileName+'</a> <br>');
     else 
-        copyText = '<img src="'+path+'/'+fileName+'" alt="'+fileName+'" class="images-ckeditor">';
-        //CKEDITOR.instances.ckeditor.insertText('<img src="'+path+'/'+fileName+'" alt="'+fileName+'" class="images-ckeditor"> <br>');
+        //copyText = '<img src="'+path+'/'+fileName+'" alt="'+fileName+'" class="images-ckeditor">';
+        CKEDITOR.instances.ckeditor.insertHtml('<img src="'+path+'/'+fileName+'" alt="'+fileName+'" class="images-ckeditor"> <br>');
     
     //Copy the text to your clipboard
-    var inp =document.createElement('input');
+    /*var inp =document.createElement('input');
     document.body.appendChild(inp)
     inp.value = copyText
     inp.select();
@@ -269,7 +272,9 @@ function InsertFile(path,fileName,type) {
     } catch (err) {
        alert("failed to copy text!")
     }
-    inp.remove();
+    inp.remove();*/
+
+
 }//function Insertfile
 
 
@@ -279,9 +284,24 @@ function InsertFile(path,fileName,type) {
 
 
 /*Functions about categories and subcategories*/
-function ShowSubCategories(level,parent_id) {
-    
-     $.ajax({
+
+
+
+function ShowSubCategories(value) {
+    /*
+        *Onclick event on an option inside a select, does not work with chrome. The solution i used is an onchange event on the select itself.
+        *Using this solution i can only send 1parameter trough value="". Since all the parameters are integers I seperated them with a comma.
+        *And thus I will need to split them
+    */
+    aValue = value.split(',');
+    level = aValue[0];
+    parent_id = aValue[1];
+        
+    //Category has been selected/reselected, so remove the error/succes message.
+    $("#categoriesInfoMessages").remove();
+
+    //Calling ajax
+    $.ajax({
         type: "GET",
         url: "../php/showsubcategories.php",
         data: {
@@ -294,11 +314,8 @@ function ShowSubCategories(level,parent_id) {
 
                 //Clear the data in the class
                 $("#sub-category-level-"+level).empty();
-                //Add new data in the class, timeout is to let user know the subcategory selection has changed
-                setTimeout(function() {
-                    $("#sub-category-level-"+level).append(data); 
-                }, 300);
-                
+                //Add new data in the class
+                $("#sub-category-level-"+level).append(data); 
                 /*
                 This code is unnecessary because there is only 1category and 1level of subcategory. If there should be more then 1sublevel
                 category, just uncomment this code,
@@ -315,8 +332,57 @@ function ShowSubCategories(level,parent_id) {
                 $(".container-subcategories").append("<div class='write-categories-container' id='sub-category-level-"+level+"'>"+data+"</div>");
                 subcatLevels++;
             }//if id exists
-            
         },//succes
     });//ajax
-    
 }//function ShowSubCategories
+
+
+
+
+
+
+/*Functions About the Write page*/
+function SaveArticle() {
+    
+    
+    //Get all values
+    articleTitle = document.getElementById("articleTitle").value;
+    articleSummary = document.getElementById("articleSummary").value;
+    articleBody = CKEDITOR.instances.ckeditor.getData();
+    mArticleCategory = document.getElementById("articleCategory").value;
+    mArticleSubcategory = document.getElementById("articleSubcategory").value;
+    articleSigner = document.getElementById("articleSigner").value;
+    
+    //Values of the category and subcategory ID container 2 values, their ID, and their Parent_ID,
+    //They are separated by a , so we split the value and take the last value (row_id)
+    aArticleCategory = mArticleCategory.split(',');
+    articleCategory = aArticleCategory[1];
+    aArticleSubcategory = mArticleSubcategory.split(',');
+    articleSubcategory = aArticleCategory[1];
+    
+    
+    //Check if al values are set, and are not empty
+    //if (articleTitle == "" || articleSummary == "" || ArticleBody == "" || articleCategory == "" || articleSubcategory == "" || articleSigner == "") {
+    //    alert("Not all values exist");
+    //} else {
+        
+        //Call ajax
+        $.ajax({
+            type: "GET",
+            url: "../php/write-page/savefile.php",
+            data: {
+                articleTitle:articleTitle,
+                articleSummary:articleSummary,
+                articleBody:articleBody,
+                articleCategory:articleCategory,
+                articleSubcategory:articleSubcategory,
+                articleSigner:articleSigner
+            },
+            success: function(data) {
+               alert(data);
+            },
+        });//ajax
+        
+    //} //if values are empty
+    
+}//function
