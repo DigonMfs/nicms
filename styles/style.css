@@ -220,6 +220,58 @@ label {
 
 
 
+
+
+
+/*Category page*/
+
+/*Div with the "add category" button*/
+.categories-admin-div {
+    padding: 0px 0px 25px 0px;
+}
+/*Card container of the category cards*/
+.categories-category-container {
+    align-items: flex-start;
+}
+/*Category card div*/
+.categories-category-card {
+    margin: 15px;
+    text-align: center;
+    min-width: 200px !important;
+    position: relative;
+}
+.categories-category-card:hover .delete-categories-icon {
+    opacity: 1;
+}
+/*Edit icon on cat/subcat hover*/
+.delete-categories-icon {
+    opacity: 0;
+    transition: opacity 300ms ease;
+    position: absolute;
+    right: 10px;
+    font-size: 16px;
+    margin-top: 4px;
+    cursor: pointer;
+}
+.add-subcategory {
+    width: 100px !important;
+    font-size: 13px !important;
+    display: inline-block !important;
+    padding: 0px 4px !important;
+    line-height: 1 !important;
+    margin: 4px 0px 0px 0px !important;
+}
+.fa-check {
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
 /*Media queries*/
 @media (min-width: 768px) {
     /*width for main*/

@@ -5,8 +5,9 @@
         echo "<p class='alert alert-danger' role='alert'>Path is not defined</p>";
         die();
     } else {
-        $path = $_POST["aPath"];
-        $path = str_replace(',', '/', $path);
+        $aPath = $_POST["aPath"];
+        $aPath = str_replace(',', '/', $aPath);
+        $path = "../". $aPath;
     }
 
     //Check if name is empty

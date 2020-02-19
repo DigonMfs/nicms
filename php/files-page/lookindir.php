@@ -6,19 +6,36 @@
     if (isset($_GET["aPath"])) {
         //Construct the path
         $aPath = $_GET["aPath"];
-        $dirPath = "../";
-        $dirPath .= join("/",$aPath);
 
-        //The only reason aPath can be defined and admin not is from the files.php pages, this means admin == true
-        if (isset($_GET["admin"]))
-            $admin = $_GET["admin"];
-        else 
-            $admin = "true";
-        
+        //Check if path starts with "assets"
+        if ($aPath[0] != "assets") {
+            echo "<p class='alert alert-danger' role='alert'>This path is not allowed!!!</p>";
+            die();
+        } else {
+
+            //Construct the path
+            $dirPath = "../../";
+            $dirPathImages = "../";
+            $dirPath .= join("/",$aPath);
+            $dirPathImages .= join("/",$aPath);
+            $dirPathDel = $dirPath;
+
+            //The only reason aPath can be defined and admin not is from the files.php pages, this means admin == true
+            if (isset($_GET["admin"]))
+                $admin = $_GET["admin"];
+            else 
+                $admin = "true";
+
+        }//if == assets
+
     }//if ajax
     else {
+        //$dirpath = ../assets, because function is included in files.php => $dirPath = base directory
         $dirPath = "../assets";
-    }
+        $dirpathImage = $dirPath; 
+        //the path to delete a file is never includes and thus the path has and extra ../
+        $dirPathDel = "../../assets";
+    }//if isset(aPath)
     
     //Check is $dirPath is a directory
     if (is_dir($dirPath)) {
@@ -38,7 +55,7 @@
 
                     //See if admin == true/false
                     if ($admin == "true") 
-                        $text = '<i class="fas fa-trash-alt files-hover-icons files-delete" onclick="AskDelete(\''.$dirPath.'\',\''.$aFiles[$i].'\',\'folder\')"></i>';
+                        $text = '<i class="fas fa-trash-alt files-hover-icons files-delete" onclick="AskDelete(\''.$dirPathDel.'\',\''.$aFiles[$i].'\',\'folder\')"></i>';
                     else 
                         $text = '';
 
@@ -74,7 +91,7 @@
                         $text = '<i class="fas fa-trash-alt files-hover-icons files-delete" onclick="AskDelete(\''.$dirPath.'\',\''.$aFiles[$i].'\',\'file\')"></i>';
                     } else {
                         //type is extension, images need to be inserted as an <img>, pdf files not
-                        $container = '<div class="files-file-container" onclick="InsertFile(\''.$dirPath.'\',\''.$aFiles[$i].'\',\''.$extension.'\')">';
+                        $container = '<div class="files-file-container" onclick="InsertFile(\''.$dirPathImages.'\',\''.$aFiles[$i].'\',\''.$extension.'\')">';
                         $text = '';
                     }//if $admin ==true
 

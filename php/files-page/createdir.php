@@ -1,10 +1,13 @@
 <?php
+    //includes
+    include_once("../functions.php");
+
     //Check if variables have been set
     if(isset($_GET["aPath"]) && isset($_GET["dirName"])) {
 
         //Construct the path
         $aPath = $_GET["aPath"];
-        $dirPath = "../";
+        $dirPath = "../../";
         $dirPath .= join("/",$aPath);
 
         //Get dirname
@@ -16,11 +19,13 @@
             //Check if length is < 50 || > 1
             if (strlen($dirName) < 30 && $dirName != "") {
 
-                //Check if dirname is alphanumeric
-                if (preg_match('/^[a-zA-Z0-9\p{L}\p{N} ]+$/',$dirName)) {
+                //replace spaces with underscores,
+                //Then make new temp var, delete underscores and test for alphanumeric
+                $dirName = str_replace(' ','_',$dirName);
+                $dirNameStrip = str_replace('_','',$dirName);
 
-                    //replace spaces with underscores
-                    $dirName = str_replace(' ','_',$dirName);
+                //Check if dirname is alphanumeric
+                if (IsAlphaNumeric($dirNameStrip)) {
 
                     //Check if filename already exists
                     if (!file_exists($dirPath."/".$dirName)) {

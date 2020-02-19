@@ -12,10 +12,11 @@
         <!--//Link to jquery-->
         <script src="../scripts/jquery.js"></script>
         <!--//Link to functions.js-->
+        <script src="../scripts/script.js"></script>
         <script src="../scripts/functions.js"></script>
         <!--Link To CSS-->
         <link rel="stylesheet" type="text/css" href="../styles/style.css">
-         <!--Link to Font Awesome-->
+        <!--Link to Font Awesome-->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
         <!--Javascript-->
         <script>
@@ -72,7 +73,7 @@
                         the image won't be inserted in ckeditor, on false the image will be inserted into ckeditor and no delete icon
                         will be shown */
                         $admin = "true";
-                        include("../php/lookindir.php");
+                        include("../php/files-page/lookindir.php");
                     ?>
                 </div>
              </div>

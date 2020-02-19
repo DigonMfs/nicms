@@ -12,6 +12,7 @@
         <script src="../scripts/jquery.js"></script>
         <!--//Link to functions.js-->
         <script src="../scripts/functions.js"></script>
+        <script src="../scripts/script.js"></script>
         <!--Link To CSS-->
         <link rel="stylesheet" type="text/css" href="../styles/style.css">
          <!--Link to Font Awesome-->
@@ -115,7 +116,7 @@
                 <div role="tabpanel" class="tab-pane fade" id="tabCategories"> 
                     <div class="container-fluid card card-body bg-light">
                          <div class="container"> 
-                        <h3 class="write-category-title text-primary">Categories</h3>
+                        <h3 class="write-category-title text-primary">Category</h3>
                             <?php 
                                 //Include all categories (not subcategories)
                                 include("../php/showcategories.php");
@@ -141,7 +142,7 @@
                             the image won't be inserted in ckeditor, on false the image will be inserted into ckeditor and no delete icon
                             will be shown */
                             $admin = "false";
-                            include("../php/lookindir.php");
+                            include("../php/files-page/lookindir.php");
                         ?>
                     </div>
                 </div>
