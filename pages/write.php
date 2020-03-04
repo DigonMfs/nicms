@@ -1,8 +1,9 @@
 <?php
-    include_once("../php/dbconn.php");
+    include_once("../includes/autoload.inc.php");
+    $object = new AutoLoad();
 ?>
 <!DOCTYPE html>
-<html lnag="nl">
+<html lang="nl">
     <head>
         <meta charset="UTF-8">
         <title>Digon | Admin | Write</title>
@@ -26,30 +27,31 @@
         </script>
     </head>
     <body>
-        
-        <!-- Navigation bar -->    
-        <nav class="container general-nav">
-            <ul class="nav nav-pills">
-                <li class="nav-item">
-                 <a class="nav-link" href="articles.php">Articles</a>
-                </li>
-                <li class="nav-item">
-                 <a class="nav-link active" href="write.php">Write</a>
-                </li>
-                <li class="nav-item">
-                 <a class="nav-link" href="files.php">Files</a>
-                </li>
-                <li class="nav-item">
-                 <a class="nav-link" href="categories.php">Categories</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="calender.php">Calendar</a>
-                </li>
-             </ul> 
-        </nav>
+        <?php 
+            //Header
+            include_once "../includes/header.inc.php";
+        ?>
         
         <!-- Main-->
         <main class="general-main">
+            
+            <!-- Navigation bar -->    
+            <nav class="container general-nav">
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                     <a class="nav-link active" href="write.php">Write</a>
+                    </li>
+                    <li class="nav-item">
+                     <a class="nav-link" href="files.php">Files</a>
+                    </li>
+                    <li class="nav-item">
+                     <a class="nav-link" href="categories.php">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="calendar.php">Calendar</a>
+                    </li>
+                 </ul> 
+            </nav>
             
             <!-- Title and summary-->
             <div class="card card-body bg-light">
@@ -97,8 +99,9 @@
                             <label class="custom-control-label" for="website">Website</label>
                         </div>
                         <?php
-                            //show all the channels on the screen
-                            include("../php/showpublishmedia.php")
+                            //Show all media channels
+                            $mediaObj = new WriteView();
+                            $mediaObj->showMediaChannels();
                         ?>
                     </div><!--checkbox container--> 
                     <div class="write-publish-row row d-flex flex-row">
@@ -118,8 +121,9 @@
                          <div class="container"> 
                         <h3 class="write-category-title text-primary">Category</h3>
                             <?php 
-                                //Include all categories (not subcategories)
-                                include("../php/showcategories.php");
+                               //Show all categories
+                                $categoryObj = new CategoryView();
+                                $categoryObj->showCategories();
                             ?>
                         </div>
                         <div class="container container-subcategories"></div>
@@ -142,7 +146,8 @@
                             the image won't be inserted in ckeditor, on false the image will be inserted into ckeditor and no delete icon
                             will be shown */
                             $admin = "false";
-                            include("../php/files-page/lookindir.php");
+                            $fileFolderObj = new FileView();
+                            $fileFolderObj->showFilesFolders($admin,null);
                         ?>
                     </div>
                 </div>

@@ -6,7 +6,7 @@
 <html lang="nl">
     <head>
         <meta charset="UTF-8">
-        <title>Digon | Admin | Categories</title>
+        <title>Digon | Admin | Calendar</title>
         <!--//CDN to ckeditor 5-->
         <script src="https://cdn.ckeditor.com/ckeditor5/16.0.0/classic/ckeditor.js"></script>
         <!--//Link to jquery-->
@@ -26,6 +26,7 @@
             include_once "../includes/header.inc.php";
         ?>
         
+        
         <!--Main-->
         <main class="general-main">
             
@@ -39,28 +40,26 @@
                      <a class="nav-link" href="files.php">Files</a>
                     </li>
                     <li class="nav-item">
-                     <a class="nav-link active" href="categories.php">Categories</a>
+                     <a class="nav-link" href="categories.php">Categories</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="calendar.php">Calendar</a>
+                        <a class="nav-link active" href="calendar.php">Calendar</a>
                     </li>
                  </ul> 
-            </nav>
-            
-            <!--Admin actions div-->
-            <div class="admin categories-admin-div">
-                <button class="btn btn-primary" onclick="Toggleoverlay('open',3)">Add Category</button>
+        </nav>
+                 
+            <!--Alert messages-->
+            <div class="calendar-alert-messages">
+                -->Later delete with join on other published media.
+                -->Add to articlechannel table.
             </div>
             
-            <!--Alert messages-->
-            <div class="categories-alert-messages"></div>
-            
             <!--Container of the directory window-->
-            <div class="categories-category-directory-container card card-body bg-light">
-                <div class="categories-category-container d-flex flex-row">
-                    <?php
-                        $CatSubcatObj = new CategoryView();
-                        $CatSubcatObj->showCatsAndSubcats();
+            <div class="calendar-topublish-articles-directory-container">
+                <div class="calendar-topublish-articles-container  d-flex flex-column">
+                    <?php 
+                        $ArticleObj = new ArticleView();
+                        $ArticleObj->showArticle();
                     ?>
                 </div>
             </div>

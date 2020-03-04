@@ -6,7 +6,7 @@
 <html lnag="nl">
     <head>
     <meta charset="UTF-8">
-        <title>Digon | Articles | Home</title>
+        <title>Digon | Article</title>
         <!--//CDN to ckeditor 4-->
         <script src="//cdn.ckeditor.com/4.13.1/full/ckeditor.js"></script>
         <!--//Link to jquery-->
@@ -32,9 +32,11 @@
         <main class="general-main container">
             
             <nav class="container general-nav" aria-label="breadcrumb">
-                <ol class="breadcrumb breadcrumbs-index">
+                <ol class="breadcrumb">
                   <li class="breadcrumb-item">Home</li>
                   <li class="breadcrumb-item active" aria-current="page"><a href="index.php">Category Name</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Subcategory Name</li>
+                  <li class="breadcrumb-item active" aria-current="page">Article Name</li>
                 </ol>
             </nav>
            

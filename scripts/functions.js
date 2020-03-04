@@ -1,95 +1,73 @@
-//Function checks if parameter is alphanumeric
 function IsAlphaNumeric(value) {
     if (! /^[a-zA-Z0-9]+$/.test(value)) {
         return false;
     } else {
         return true;
     }
-}//funcion IsAlpheNummeric
-
+}//Method IsAlpheNummeric.
 
 function StripAlphaNumeric(value) {
     return value.replace(/[\W_]+/g,"");
-}//function StripAlphaNumeric
+}//Method StripAlphaNumeric.
 
 function StripSpaces(value) {
     return value.replace(/ /g,"");
-}//function StripSpaces
+}//Method StripSpaces.
 
 function ValidateLength(value,min,max) {
-    //check if length of the value is correct
     if (value.length < min || value.length > max) {
         return false;
     } else {
         return true;
-    }//if test length
-}//function ValidateLength
+    }
+}//Method ValidateLength.
 
 function IsInteger(value) {
     return Number.isInteger(value);
-}//function IsInteger
+}//Method IsInteger.
 
-
-//This function is called by multiple functions and returns the path of the current dir that is opened
+//Create current path.
 function CreatePath() {
-    //Declare Array
     var aPath = new Array();
-    //Gp through all breadcrumbs data-values and add to array, then afterwards pass to php
-    for (i=0;i<=teller;i++) {
-        //Get all dirs
-        relativePath = document.getElementById("breadcrumbs-"+i).getAttribute('data-value');
 
+    //Go through all breadcrumbs data-values and add to array, then afterwards pass to php.
+    for (i=0;i<=teller;i++) {
+        relativePath = document.getElementById("breadcrumbs-"+i).getAttribute('data-value');
         //Check if first dir == "assets"
         if (i == 0) {
             if (relativePath != "assets") {
                 return false;
-            }//if != assets
-        }//if i == 0
-
-        //Join path to array
+            }
+        }
         aPath.push(relativePath);
+    }//For.
 
-    }//for
     return aPath;
-}//Function CreatePath
+}//Method CreatePath.
 
-function ListCategories() {
-    $.ajax({
-        type: "GET",
-        url: "../php/categories-page/listcategories.php",
-        data: {
-            categoryName:categoryName
-        },
-        success: function(data) {
-            $(".categories-category-container").html(data);
-        },
-    });//ajax
-}
-
-
-//This function toggles the visibility of the overlay, and the correct content
+//Toggle visibility of the overlay, and the correct content.
 function Toggleoverlay(toggle,content) {
-    //check if close or open is clicked
+    //Check if close or open is clicked.
     if (toggle == "close") {
-        //close overlay
+        //Close overlay.
         $(".overlay-wrapper").fadeOut();
         $(".overlay-box").css({
             'margin-top' : '0px'
         });
 
     }else if(toggle == "open") { 
-        //Open overlay
+        //Open overlay.
         $(".overlay-wrapper").fadeIn();
         $(".overlay-box").css({
             'margin-top' : '100px'
         });
 
     } else {
-        alert("Unknown parameter 1");
+        alert("Unknown parameter.");
         return false;
-    }//if val==0
+    }//If val==0.
 
-    //Change content of the overlay
+    //Change content of the overlay.
     switch (content) {
         case 1:
             document.getElementById("overlayBody").innerHTML ='\
@@ -133,11 +111,14 @@ function Toggleoverlay(toggle,content) {
                 </div>\
                 <div class="button-container">\
                     <button class="btn btn-secondary" onclick="Toggleoverlay(\'close\',0)">Close</button>\
-                    <button class="btn btn-primary" onclick="SaveCategory()">Save</button>\
+                    <button class="btn btn-primary" onclick="SaveCategory(0)">Save</button>\
                 </div>\
             ';
             break;
         default:
             break;
-    }//switch
-}//function toggleoverlay
+    }//Switch.
+}//Method toggleoverlay.
+
+
+

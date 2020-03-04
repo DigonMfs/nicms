@@ -1,6 +1,6 @@
 <?php
-    //Include connection with the database
-    include_once("../php/dbconn.php");
+    include_once("../includes/autoload.inc.php");
+    $object = new AutoLoad();
 ?>
 <!DOCTYPE html>
 <html lnag="nl">
@@ -23,30 +23,32 @@
         </script>
     </head>
     <body>
-        
-        <!-- Navigation bar -->
-        <nav class="container general-nav">
-            <ul class="nav nav-pills">
-                <li class="nav-item">
-                 <a class="nav-link" href="articles.php">Articles</a>
-                </li>
-                <li class="nav-item">
-                 <a class="nav-link" href="write.php">Write</a>
-                </li>
-                <li class="nav-item">
-                 <a class="nav-link active" href="files.php">Files</a>
-                </li>
-                <li class="nav-item">
-                 <a class="nav-link" href="categories.php">Categories</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="calender.php">Calendar</a>
-                </li>
-             </ul> 
-        </nav>
+    
+        <?php 
+            //Header
+            include_once "../includes/header.inc.php";
+        ?>
         
         <!-- Main-->
         <main class="general-main">
+            
+             <!-- Navigation bar -->
+            <nav class="container general-nav">
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                     <a class="nav-link" href="write.php">Write</a>
+                    </li>
+                    <li class="nav-item">
+                     <a class="nav-link active" href="files.php">Files</a>
+                    </li>
+                    <li class="nav-item">
+                     <a class="nav-link" href="categories.php">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="calendar.php">Calendar</a>
+                    </li>
+                 </ul> 
+            </nav>
 
              <!--Directory Actions-->
             <div class="admin files-admin-div">
@@ -55,7 +57,12 @@
             </div>
              
             <!--Alert messages-->
-            <div class="files-alert-messages"></div>
+            <div class="files-alert-messages">
+                <?php 
+                    $Object = new Functions();
+                    echo $Object->encrypt('niels');
+                ?>
+            </div>
               
             <!--Container of the directory window-->
             <div class="files-file-directory-container card">
@@ -68,12 +75,10 @@
                 <!--Directory body-->
                 <div class="files-directory-body card-body">
                      <?php
-                        //show folders and files without admin options
-                        /*$admin is true on files.php, if $admin = true, the delete icon will appear on hover, and on click of an image
-                        the image won't be inserted in ckeditor, on false the image will be inserted into ckeditor and no delete icon
-                        will be shown */
                         $admin = "true";
-                        include("../php/files-page/lookindir.php");
+                        $fileFolderObj = new FileView();
+                        $fileFolderObj->showFilesFolders($admin, null);
+                        unset($fileFolderObj);
                     ?>
                 </div>
              </div>

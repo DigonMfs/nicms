@@ -8,7 +8,8 @@
 
 /*nav nav at the top of the admin page*/
 .general-nav {
-    margin-top: 50px;
+    margin: 100px 0px 25px 0px !important;
+    padding: 0px !important;
 }
 .general-main {
     margin-top: 25px !important;
@@ -71,6 +72,110 @@ label {
 }
 .bread-crumb-item:first-child a {
     color: #007bff;
+}
+/*Header*/
+.header {
+    background-color: #222;
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    z-index: 999999;
+    height: 50px;
+    line-height: 50px;
+}
+.inner-header {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.inner-header-logo-image {
+    height: 40px;
+    margin-top: -15px;
+    margin-right: -5px;
+}
+.inner-header-logo-text {
+    color: lightgrey;
+    font-family: sans-serif;
+    font-size: 20px;
+}
+.inner-header-logo-text:hover {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+.inner-header-navbar-container {
+    text-align: right;
+
+}
+.inner-header-navbar-button-login {
+    border: none;
+    background-color: rgba(0,0,0,0);
+    color: lightgrey;
+    font-size: 16px;
+}
+.inner-header-navbar-button-login:hover {
+    color: white;
+}
+
+
+
+
+
+
+
+/*Index page*/
+#loginMessage {
+    margin-top: 15px !important;
+    color: red;
+}
+.form-group-login {
+    margin-bottom: 0 !important;
+}
+.button-container-login {
+    margin-top: 0 !important;
+}
+/*Articles*/
+/*Table*/
+.table-articles-overview { 
+    border-collapse:collapse; 
+    /*border-spacing:0;*/
+    empty-cells:show ; 
+    font-size:130%;
+    width: 100%;
+    border-bottom: 1px solid grey;
+}
+.table-articles-overview td { 
+    vertical-align:top; 
+    border-top: 1px solid grey;
+    padding-top:10px;
+    position: relative;
+    width: 100%;
+}
+/*Table icons*/
+.table-articles-admin-icons {
+    display: inline-block;
+    opacity: 0;
+    transition: opacity 300ms ease;
+    position: absolute;
+    right: 0px;
+}
+.table-articles-overview td:hover .table-articles-admin-icons {
+    opacity: 1;
+    cursor: pointer;
+}
+/*Subcategories on articles page (index).*/
+.list-group-item {
+    cursor: pointer;
+}
+
+/*Subcategory in the breadcrumbs on the indx page*/
+.index-breadcrumb-button {
+    color: dodgerblue !important;
+}
+.index-breadcrumb-button:hover {
+    cursor: pointer;
+    text-decoration: underline !important;
 }
 
 
@@ -211,8 +316,20 @@ label {
     padding: 0px 25px 15px 25px;
     text-align: right;
 }
-
-
+/*insert or copy text on write page in files tab*/
+.files-file-actions-container {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 500ms;
+    margin-top: 3px;  
+}
+.files-file-container:hover .files-file-actions-container {
+    opacity: 1;
+}
+.files-file-actions-buttons {
+    display: block !important;
+    margin: 3px auto;
+}
 
 
 
@@ -269,13 +386,58 @@ label {
 
 
 
+/*Calendar page*/
+.calendar-article-container {
+    margin-bottom: 25px;
+}
+.calendar-admin-div {
+    padding: 0px 0px 25px 0px;
+}
+.calendar-article-header-title {
+    margin: 0 !important;
+}
+.calendar-article-card-body {
+    padding-bottom: 5px !important;
+    max-height: 200px;
+    overflow-y: scroll;
+}
+.calendar-article-card-inner-body {
+    display: grid;
+    grid-template-columns: 1fr 150px;
+    grid-column-gap: 1rem;
+}
+.calendar-article-card-inner-body-text {
+    margin: 0px 0px 10px 0px !important;
+}
+.calendar-article-card-inner-body-text:nth-child(2) {
+    text-align: right;
+}
+.calendar-article-card-footer {
+    margin: 0px !important;
+    padding: 20px 15px !important;
+    position: relative;
+}
+.calendar-article-breadcrumb-category {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.testerr {
+    position: absolute;
+    right: 15px;
+    top: 15px
+}
+.calendar-article-publish-button {
+   margin-left: 8px;
+}
+
+
 
 
 
 /*Media queries*/
 @media (min-width: 768px) {
     /*width for main*/
-    main, .general-nav {
+    main, .general-nav, .inner-header {
         width: 750px;
     }
     /*Fontsize for pdf icon*/
@@ -285,7 +447,7 @@ label {
 }
 @media (min-width: 992px) {
     /*width for main*/
-    main, .general-nav {
+    main, .general-nav, .inner-header {
         width: 970px;
     }
     /*Fontsize for pdf icon*/
@@ -295,7 +457,7 @@ label {
 }
 @media (min-width: 1200px) {
     /*width for main*/
-    main, .general-nav {
+    main, .general-nav, .inner-header {
         width: 1180px;
     }
     /*Fontsize for pdf icon*/

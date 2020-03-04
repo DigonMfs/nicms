@@ -2,6 +2,65 @@
 teller = 0;
 subcatLevels = 0;
 
+
+/*Articles page - Login*/
+function openLogindialog() {
+    //Open overlay
+    $(".overlay-wrapper").fadeIn();
+    $(".overlay-box").css({
+        'margin-top' : '100px'
+    });
+
+    //Put in Correct Content
+    document.getElementById("overlayBody").innerHTML ='\
+        <h2 class="overlay-title">Login</h2>\
+        <i class="fas fa-times close-overlay" onclick="Toggleoverlay(\'close\',0)"></i>\
+        <div class="form-group form-group-login">\
+            <label for="username">Username</label>\
+            <input type="text" class="form-control" id="username" placeholder="Enter Username">\
+            <label for="password">Password</label>\
+            <input type="password" class="form-control" id="password" placeholder="Enter Password">\
+            <small id="loginMessage"></small>\
+        </div>\
+        <div class="button-container button-container-login">\
+            <button class="btn btn-secondary" onclick="Toggleoverlay(\'close\',0)">Close</button>\
+            <button class="btn btn-primary" onclick="login()">Login</button>\
+        </div>\
+    ';
+}
+
+function login() {
+    username = document.getElementById("username").value;
+    password = document.getElementById("password").value;
+    if (username == "" || password == "") {
+        $("#loginMessage").html("Values are empty.");
+        return false;
+    }
+    if (!IsAlphaNumeric(username) || !IsAlphaNumeric(password)) {
+        $("#loginMessage").html("Values are not alphanumeric.");
+        return false;
+    }
+
+    $.ajax({
+        type: "GET",
+        url: "../classes/handler.class.php",
+        data: {
+            username:username,
+            password:password,
+            login:"login"
+        },
+        success: function(data) {
+            //$(".files-directory-body").html(data);
+            alert(data);
+        },
+    });//ajax
+
+}
+
+
+
+
+
 /*All function about the explorer window*/
 
 //This function open is subdir in the dir
@@ -18,8 +77,6 @@ function DirClick(dirName,admin) {
         teller++;
         document.getElementById("breadcrumbs").innerHTML += '<li class="breadcrumb-item bread-crumb-item"><a class="bread-crumb-links" id="breadcrumbs-'+teller+'" data-value="'+escape(dirName)+'" onclick="BaseDir('+teller+','+admin+')">'+dirName+'</a></li>';
     }
-
-    //check if admin is true or false
     
     //Call CreatePath function and get the path from homeDirectory to current dir in an array
     aPath = CreatePath();
@@ -27,10 +84,11 @@ function DirClick(dirName,admin) {
     //Execute Ajax
     $.ajax({
         type: "GET",
-        url: "../php/files-page/lookindir.php",
+        url: "../classes/handler.class.php",
         data: {
             aPath:aPath,
-            admin:admin
+            admin:admin,
+            dirClick:"dirClick"
         },
         success: function(data) {
             $(".files-directory-body").html(data);
@@ -38,6 +96,9 @@ function DirClick(dirName,admin) {
     });//ajax
 
 }//function DirClick
+
+
+
 
 function BaseDir(cur_level,admin) {
     /*Cur_level is the level is subdir you clicked on, teller, is the level of subdir you're in right now.
@@ -53,6 +114,9 @@ function BaseDir(cur_level,admin) {
     DirClick(undefined,admin);
 
 }//Function BaseDir
+
+
+
 
 //Create a directory in folder
 function CreateDir() {
@@ -70,13 +134,16 @@ function CreateDir() {
     
     //Call CreatePath function and get the path from homeDirectory to current dir in an array
     aPath = CreatePath();
+    aPath.join(',');
+
     //Call ajax
     $.ajax({
         type: "GET",
-        url: "../php/files-page/createdir.php",
+        url: "../classes/handler.class.php",
         data: {
             aPath:aPath,
-            dirName:dirName
+            dirName:dirName,
+            createDir:"createDir"
         },
         success: function(data) {
             $(".files-alert-messages").html(data);
@@ -87,6 +154,9 @@ function CreateDir() {
         },
     });//ajax
 }//function CreateDir
+
+
+
 
 //Upload a file function
 function UploadFile() {
@@ -106,8 +176,10 @@ function UploadFile() {
     
     //Check if file is not too big
     var file_size = property.size;
-    if (file_size > 2000000) {
+    if (file_size > 5000000) {
         //file too big
+        $(".files-alert-messages").html("<p class='alert alert-danger' role='alert'>File is too big.</p>");
+        Toggleoverlay('close',0);
         return false;
     }
     
@@ -115,11 +187,12 @@ function UploadFile() {
     form_data.append('file', property);
     //Call CreatePath function and get the path from homeDirectory to current dir in an array
     aPath = CreatePath();
-    aPath.join();
+    aPath.join(',');
     form_data.append('aPath', aPath);
+    form_data.append('uploadFile', aPath);
 
     $.ajax({
-        url: "../php/files-page/uploadfile.php",
+        url: "../classes/handler.class.php",
         method: "POST",
         data: form_data,
         contentType: false,
@@ -135,6 +208,9 @@ function UploadFile() {
         }//succes
     });//ajax
 }//function
+
+
+
 
 function AskDelete(dirPath,fileName,type) {
     //Open overlay
@@ -168,6 +244,9 @@ function AskDelete(dirPath,fileName,type) {
         ';
 }//Function AskDelete
 
+
+
+
 //This function deletes a dir or a file
 function Delete(dirPath,fileName,type) {
 
@@ -189,7 +268,7 @@ function Delete(dirPath,fileName,type) {
     
     //Check if dirpath starts with the folder "assets". The user MAY NOT delete any item anywere alse.
     //Extra validation will also be done in php
-    if (!dirPath.startsWith("../../assets")) {
+    if (!dirPath.startsWith("../assets")) {
         //Give error message on screen
         $(".files-alert-messages").html("<p class='alert alert-danger' role='alert'>This path is not allowed</p>");
         
@@ -200,11 +279,12 @@ function Delete(dirPath,fileName,type) {
     
     $.ajax({
         type: "GET",
-        url: "../php/files-page/deletefolderorfile.php",
+        url: "../classes/handler.class.php",
         data: {
             dirPath:dirPath,
             fileName:fileName,
-            type:type
+            type:type,
+            deleteFileFolder:"deleteFileFolder"
         },
         success: function(data) {
              //Alert messages
@@ -216,6 +296,9 @@ function Delete(dirPath,fileName,type) {
         },
     });//ajax
 }//function
+
+
+
 
 //Insert the file into ckeditor
 function InsertFile(path,fileName,type) {
@@ -229,10 +312,23 @@ function InsertFile(path,fileName,type) {
     else 
         //copyText = '<img src="'+path+'/'+fileName+'" alt="'+fileName+'" class="images-ckeditor">';
         CKEDITOR.instances.ckeditor.insertHtml('<img src="'+path+'/'+fileName+'" alt="'+fileName+'" class="images-ckeditor"> <br>');
-    
+
+}//function Insertfile
+
+
+
+
+function copyFile(path,fileName,type) {
     //Copy the text to your clipboard
-    /*var inp =document.createElement('input');
+    var inp =document.createElement('input');
     document.body.appendChild(inp)
+
+    if (type == "pdf") {
+        copyText = '<a href="'+path+'/'+fileName+'" class="pdf-ckeditor-a">'+fileName+'</a>';
+    } else {
+        copyText = '<img src="'+path+'/'+fileName+'" alt="'+fileName+'" class="images-ckeditor">';
+    }
+
     inp.value = copyText
     inp.select();
     try {
@@ -247,10 +343,8 @@ function InsertFile(path,fileName,type) {
     } catch (err) {
        alert("failed to copy text!")
     }
-    inp.remove();*/
-
-
-}//function Insertfile
+    inp.remove();
+}
 
 
 
@@ -259,7 +353,10 @@ function InsertFile(path,fileName,type) {
 
 /*Functions About the Write page*/
 
-//function show categories on write page
+
+
+
+//function show subcategories on write page
 function ShowSubCategories(value) {
     /*
         *Onclick event on an option inside a select, does not work with chrome. The solution i used is an onchange event on the select itself.
@@ -276,10 +373,11 @@ function ShowSubCategories(value) {
     //Calling ajax
     $.ajax({
         type: "GET",
-        url: "../php/showsubcategories.php",
+        url: "../classes/handler.class.php",
         data: {
             level:level,
-            parent_id:parent_id
+            parent_id:parent_id,
+            showSubcategories:"showSubcategories"
         },
         success: function(data) {
             
@@ -309,35 +407,41 @@ function ShowSubCategories(value) {
     });//ajax
 }//function ShowSubCategories
 
+
+
+
+
+
 //Function save article
 function SaveArticle() {
     
     //Get all values, and escape
-    articleTitle = escape(document.getElementById("articleTitle").value);
-    articleSummary = escape(document.getElementById("articleSummary").value);
-    articleBody = escape(CKEDITOR.instances.ckeditor.getData());
-    mArticleCategory = escape(document.getElementById("articleCategory").value);
-    mArticleSubcategory = escape(document.getElementById("articleSubcategory").value);
-    articleSigner = escape(document.getElementById("articleSigner").value);
+    articleTitle = document.getElementById("articleTitle").value;
+    articleSummary = document.getElementById("articleSummary").value;
+    articleBody = CKEDITOR.instances.ckeditor.getData();
+    mArticleCategory = document.getElementById("articleCategory").value;
+    mArticleSubcategory = document.getElementById("articleSubcategory").value;
+    articleSigner = document.getElementById("articleSigner").value;
     
     //Values of the category and subcategory ID container 2 values, their ID, and their Parent_ID,
     //They are separated by a , so we split the value and take the last value (row_id)
     aArticleCategory = mArticleCategory.split(',');
     articleCategory = aArticleCategory[1];
     aArticleSubcategory = mArticleSubcategory.split(',');
-    articleSubcategory = aArticleCategory[1];
-    
+    articleSubcategory = aArticleSubcategory[1];
+ 
     //Call ajax
     $.ajax({
-        type: "GET",
-        url: "../php/write-page/savefile.php",
+        type: "POST",
+        url: "../classes/handler.class.php",
         data: {
             articleTitle:articleTitle,
             articleSummary:articleSummary,
             articleBody:articleBody,
             articleCategory:articleCategory,
             articleSubcategory:articleSubcategory,
-            articleSigner:articleSigner
+            articleSigner:articleSigner,
+            saveArticle:"saveArticle"
         },
         success: function(data) {
             alert(data);
@@ -346,41 +450,7 @@ function SaveArticle() {
     
 }//function
 
-/*Functions on categories page */
-function SaveCategory() {
-    //Get the value and validate it
-    categoryName = escape(document.getElementById("categoryName").value);
-    
-    if(!IsAlphaNumeric(StripSpaces(categoryName))) {
-        $(".categories-alert-messages").html("<p class='alert alert-danger' role='alert'>The string must be alphanumeric</p>");
-        Toggleoverlay('close',0);
-        return false;
-    }//if alphanumeric
-    
-    //Validate length, min=3;max=30
-    if (!ValidateLength(categoryName,3,30)) {
-        $(".categories-alert-messages").html("<p class='alert alert-danger' role='alert'>The name has to be between 3 and 30 characters long</p>");
-        Toggleoverlay('close',0);
-        return false;
-    }//if length
-    
-    //execute ajax
-    $.ajax({
-        type: "GET",
-        url: "../php/categories-page/addcategory.php",
-        data: {
-            categoryName:categoryName
-        },
-        success: function(data) {
-            $(".categories-alert-messages").html(data);
-            //close Overlay
-            Toggleoverlay('close',0);
-            //reload page, = new category will be displayed
-            ListCategories();
-        },
-    });//ajax
-    
-}//function SaveCategory
+
 
 function AskCategoryDelete(id,catSubcat) {
    
@@ -424,10 +494,11 @@ function DeleteCategory(id,catSubcat) {
     //call ajax
     $.ajax({
         type: "GET",
-        url: "../php/categories-page/deletecategory.php",
+        url: "../classes/handler.class.php",
         data: {
             id:id,
-            catSubcat:catSubcat
+            catSubcat:catSubcat,
+            deleteCatSubcat:catSubcat
         },
         success: function(data) {
             //close Overlay
@@ -441,33 +512,238 @@ function DeleteCategory(id,catSubcat) {
 }//function Delete category
 
 
-function AddSubcategory(id) {
+
+
+function ListCategories() {
+     //call ajax
+     $.ajax({
+        type: "GET",
+        url: "../classes/handler.class.php",
+        data: {
+            listCategories:"listCategories"
+        },
+        success: function(data) {
+            $(".categories-category-container").html(data);
+        },
+    });//ajax
+}//Function ListCategories.
+
+
+
+
+
+
+/*Functions on categories page */
+function SaveCategory(parent_id) {
+    //Get the value and validate it
+    catSubcatName = document.getElementById("categoryName").value;
+    
+    if(!IsAlphaNumeric(StripSpaces(catSubcatName))) {
+        $(".categories-alert-messages").html("<p class='alert alert-danger' role='alert'>The string must be alphanumeric</p>");
+        Toggleoverlay('close',0);
+        return false;
+    }//if alphanumeric
+    
+    //Validate length, min=3;max=30
+    if (!ValidateLength(catSubcatName,3,30)) {
+        $(".categories-alert-messages").html("<p class='alert alert-danger' role='alert'>The name has to be between 3 and 30 characters long</p>");
+        Toggleoverlay('close',0);
+        return false;
+    }//if length
+
+    //execute ajax
+    $.ajax({
+        type: "GET",
+        url: "../classes/handler.class.php",
+        data: {
+            parent_id:parent_id,
+            catSubcatName:catSubcatName,
+            setCatSubcat:"setCatSubcat"
+        },
+        success: function(data) {
+            $(".categories-alert-messages").html(data);
+            //close Overlay
+            Toggleoverlay('close',0);
+            //reload page, = new category will be displayed
+            ListCategories();
+        },
+    });//ajax
+    
+}//function SaveCategory
+
+
+
+function AddSubcategory(parent_id) {
    
     //check if ID exists
-    if (!$('#subcategoryName'+id).length) {
+    if (!$('#subcategoryName'+parent_id).length) {
         $(".categories-alert-messages").html("<p class='alert alert-danger' role='alert'>can't find subcategory name input</p>");
         return false;
     }//if length
     
     //get subcategory name
-    subcategoryName = $("#subcategoryName"+id).val();
+    catSubcatName = $("#subcategoryName"+parent_id).val();
     
     //check if subcategoryname has a value
-    if (!subcategoryName) {
+    if (!catSubcatName) {
         $(".categories-alert-messages").html("<p class='alert alert-danger' role='alert'>The subcategory name is empty</p>");
         return false;
     }//if == ''
     
     //check if name is alphanumeric
-    if (!IsAlphaNumeric(StripSpaces(subcategoryName))) {
+    if (!IsAlphaNumeric(StripSpaces(catSubcatName))) {
         $(".categories-alert-messages").html("<p class='alert alert-danger' role='alert'>The name is not alphanumeric</p>");
         return false;
     }//if IsAlphanumeric
     
     //Check if name is between 3 and 30 characters long
-    if (!ValidateLength(subcategoryName,3,30)) {
+    if (!ValidateLength(catSubcatName,3,30)) {
         $(".categories-alert-messages").html("<p class='alert alert-danger' role='alert'>The subcategory name has to be between 3 and 30 characters long</p>");
         return false;
     }//if length
-    
+
+    //Cal ajax.
+    $.ajax({
+        type: "GET",
+        url: "../classes/handler.class.php",
+        data: {
+            parent_id:parent_id,
+            catSubcatName: catSubcatName,
+            setCatSubcat:"setCatSubcat"
+        },
+        success: function(data) {
+            $(".categories-alert-messages").html(data);
+            ListCategories();
+        },
+    });//ajax
+
 }//function AddSubcategory
+
+
+
+//Show articles to publish
+function showArticlesToPublish() {
+    $.ajax({
+        type: "GET",
+        url: "../classes/handler.class.php",
+        data: {
+            showArticlesToPublish:"showArticlesToPublish"
+        },
+        success: function(data) {
+            $(".calendar-topublish-articles-container").html(data);
+        },
+    });//Ajax.
+}//Function showArticlesToPublish.
+
+
+
+function askPublishArticle(id) {
+    //Open overlay
+    $(".overlay-wrapper").fadeIn();
+    $(".overlay-box").css({
+        'margin-top' : '100px'
+    });
+
+    document.getElementById("overlayBody").innerHTML = '\
+    <h2 class="overlay-title">Publish Article</h2>\
+    <i class="fas fa-times close-overlay" onclick="Toggleoverlay(\'close\',0)"></i>\
+    <div class="form-group">  \
+      <p>Are you sure you want to publish this article?</p>\
+    </div>\
+    <div class="button-container">\
+        <button class="btn btn-secondary" onclick="Toggleoverlay(\'close\',0)">Close</button>\
+        <button class="btn btn-primary" onclick="publishArticle('+id+')">Publish</button>\
+    </div>\
+';
+}//Method askPublishArticle.
+
+
+
+
+//Publish article
+function publishArticle(id) {
+    $.ajax({
+        type: "GET",
+        url: "../classes/handler.class.php",
+        data: {
+            id:id,
+            publishArticle:"publishArticle"
+        },
+        success: function(data) {
+            showArticlesToPublish();
+            $(".calendar-alert-messages").html(data);
+            Toggleoverlay('close',0);
+        },
+    });//Ajax.
+}//Function publishArticle.
+
+
+
+
+function editArticle() {
+    alert("Coming Later.");
+}//Method editArticle.
+
+function askDeleteArticle(id) {
+     //Open overlay
+     $(".overlay-wrapper").fadeIn();
+     $(".overlay-box").css({
+         'margin-top' : '100px'
+     });
+     document.getElementById("overlayBody").innerHTML = '\
+     <h2 class="overlay-title">Delete Article</h2>\
+     <i class="fas fa-times close-overlay" onclick="Toggleoverlay(\'close\',0)"></i>\
+     <div class="form-group">  \
+       <p>Are you sure you want to delete this article?</p>\
+     </div>\
+     <div class="button-container">\
+         <button class="btn btn-secondary" onclick="Toggleoverlay(\'close\',0)">Close</button>\
+         <button class="btn btn-primary" onclick="deleteArticle('+id+')">Delete</button>\
+     </div>\
+ ';
+}
+
+
+function deleteArticle(id) {
+    $.ajax({
+        type: "GET",
+        url: "../classes/handler.class.php",
+        data: {
+            id:id,
+            deleteArticle:"deleteArticle"
+        },
+        success: function(data) {
+            showArticlesToPublish();
+            $(".calendar-alert-messages").html(data);
+            Toggleoverlay('close',0);
+        },
+    });//Ajax.
+}//Method askDeleteArticle.
+
+function showArticlesIndex(id,name) {
+    //Check if parameter is an integer.
+    if(!IsInteger(id)) {
+        $(".categories-alert-messages").html("<p class='alert alert-danger' role='alert'>Unknown parameter.</p>");
+        return false;
+    }//if IsInteger
+    
+    //Add subcategory to the breadcrumbs.
+    if($('#breadcrumbSubcat').length){
+        $("#breadcrumbSubcat").html("<a class='index-breadcrumb-button' onclick='showArticlesIndex("+id+",\""+name+"\")'>"+name+"</a>");
+    } else {
+        $(".breadcrumbs-index").append("<li class='breadcrumb-item active' aria-current='page' id='breadcrumbSubcat'><a class='index-breadcrumb-button' onclick='showArticlesIndex("+id+",\""+name+"\")'>"+name+"</a></li>");
+    }
+    
+    $.ajax({
+        type: "POST",
+        url: "../classes/handler.class.php",
+        data: {
+            id:id,
+            showArticlesIndex:"showArticlesIndex"
+        },
+        success: function(data) {
+            $(".articles-article-overview-container").html(data);
+        },
+    });//Ajax.
+    
+}//Method askDeleteArticle.
