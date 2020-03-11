@@ -1,11 +1,16 @@
 <?php
     include_once("../includes/autoload.inc.php");
     $object = new AutoLoad();
+
+    if(!isset($_SESSION["userID"])) {
+        header("Location: ../index.php");
+    }
 ?>
 <!DOCTYPE html>
 <html lnag="nl">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Digon | Admin | Files</title>
         <!--//CDN to ckeditor 4-->
         <script src="//cdn.ckeditor.com/4.13.1/full/ckeditor.js"></script>
@@ -32,24 +37,6 @@
         <!-- Main-->
         <main class="general-main">
             
-             <!-- Navigation bar -->
-            <nav class="container general-nav">
-                <ul class="nav nav-pills">
-                    <li class="nav-item">
-                     <a class="nav-link" href="write.php">Write</a>
-                    </li>
-                    <li class="nav-item">
-                     <a class="nav-link active" href="files.php">Files</a>
-                    </li>
-                    <li class="nav-item">
-                     <a class="nav-link" href="categories.php">Categories</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="calendar.php">Calendar</a>
-                    </li>
-                 </ul> 
-            </nav>
-
              <!--Directory Actions-->
             <div class="admin files-admin-div">
                 <button type="button" class="btn btn-primary buttons" onclick="Toggleoverlay('open',1)">Create Folder</button>
@@ -59,8 +46,8 @@
             <!--Alert messages-->
             <div class="files-alert-messages">
                 <?php 
-                    $Object = new Functions();
-                    echo $Object->encrypt('niels');
+                    //$Object = new Functions();
+                    //echo $Object->encrypt('admin');
                 ?>
             </div>
               

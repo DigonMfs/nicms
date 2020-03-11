@@ -1,16 +1,12 @@
 <?php  
 
     class ArticleView extends Article {
-
-        //Properties
-        public $visibility;
-
-        public function showArticle() {
+        
+        public function showArticle($keyword,$visibility,$sort) {
             $FunctionsObj = new Functions();
 
             //Output data.
-            $this->visibility = 0;
-            $result = $this->getArticles($this->visibility);
+            $result = $this->getArticles($keyword,$visibility,$sort,undefined);
 
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
@@ -43,41 +39,96 @@
             }//If $result > 0.
         }//Method showArticles.
         
-        public function showArticlesIndex($id) {
+        public function showArticlesIndex($subcat_id) {
             $FunctionsObj = new Functions();
-            if($FunctionsObj->isInteger($id)) {
+            if($FunctionsObj->isInteger($subcat_id)) {
                 echo $FunctionsObj->outcomeMessage("error","Invalid parameters.");
                 return false;
             }//If isInteger.
-            
+
             //Output data.
-            $teller = false;
-            $this->visibility = 1;
-            $result = $this->getArticles($this->visibility);
+            $result = $this->getArticles(1,$subcat_id);
             
             if ($result->num_rows > 0) {
                 echo "<table class='table-articles-overview'> ";
                 
                 while($row = $result->fetch_assoc()) {
-                    if ($row["s_row_id"] == $id) {
-                        echo "<tr>";
-                        echo "<td>";
-                        echo "<a href='article.php?articleId=".$row['a_row_id']."&subcatId=".$row['s_row_id']."'>".$row["a_title"]."</a>";
-                        echo "<div class='table-articles-admin-icons'>";
+                    echo "<tr>";
+                    echo "<td>";
+                    echo "<a href='article.php?articleId=".$row['a_row_id']."&articleTitle=".$row['a_title']."&subcatId=".$row['s_row_id']."&subcat=".$row['s_category']."'>".$row["a_title"]."</a>";
+                    echo "<div class='table-articles-admin-icons'>";
+
+                    //Check if admin is logged in.
+                    if (isset($_SESSION["userID"])) {
                         echo "<i class='far fa-edit text-primary' onclick='editArticle(".$row["a_row_id"].")'></i>";
                         echo "<i class='far fa-trash-alt text-danger' onclick='askDeleteArticle(".$row["a_row_id"].")'></i>";
-                        echo "</div>";
-                        echo "</td>";
-                        echo "</tr>";
-                        $teller = true;
-                    }//If.
+                    }
+
+                    echo "</div>";
+                    echo "</td>";
+                    echo "</tr>";
+                    $teller = true;
                 }//While.
                 echo "</table>";
-                if (!$teller) {
-                    echo $FunctionsObj->outcomeMessage("warning","There are no articles for this subcategory.");
-                }
-            }//If.
+                
+            } else {
+                 echo $FunctionsObj->outcomeMessage("warning","There are no articles for this subcategory.");
+            }
         }//Method showArticlesIndex.
+        
+        public function showRelevantArticles($subcat_id,$articleId) {
+            $FunctionsObj = new Functions();
+            
+            if($FunctionsObj->isInteger($subcat_id)) {
+                echo $FunctionsObj->outcomeMessage("error","Invalid parameters.");
+                return false;
+            }//If isInteger.
+            
+            $result = $this->getArticles(1,$subcat_id);
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    //Check if record is current article. If so highlight it.
+                    if ($articleId == $row["a_row_id"]) {
+                        echo "<a href='article.php?articleId=".$row['a_row_id']."&articleTitle=".$row['a_title']."&subcatId=".$row['s_row_id']."&subcat=".$row['s_category']."' ".$row["a_title"]."' class='list-group-item list-group-item-action list-group-item-secondary'>".$row['a_title']."</a>";
+                    } else {
+                        echo "<a href='article.php?articleId=".$row['a_row_id']."&articleTitle=".$row['a_title']."&subcatId=".$row['s_row_id']."&subcat=".$row['s_category']."' ".$row["a_title"]."' class='list-group-item list-group-item-action'>".$row['a_title']."</a>";
+                    }
+                }
+            } else {
+               echo " <a class='list-group-item list-group-item-action'>No articles found.</a>"; 
+            }
+        }//Method showRelevantArticles.
+        
+        public function showFullArticle($article_id) {
+            $FunctionsObj = new Functions();
+            
+            if($FunctionsObj->isInteger($subcat_id)) {
+                echo $FunctionsObj->outcomeMessage("error","Invalid parameters.");
+                return false;
+            }//If isInteger.
+            
+            $result = $this->getArticle($article_id);
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    echo "<h1 class='articles-article-title'>".$row['a_title']."</h1>";
+                    
+                    /*echo "<article class='articles-article-summary'>";
+                    echo "<strong>".$row["a_abstract"]."</strong>";
+                    echo "</article>";*/
+                    
+                    echo " <article class='articles-article-content'>";
+                    echo $row['a_content'];
+                    echo "</article>";
+                    
+                    echo " <article class='articles-article-info'>";
+                    echo "<p>".$row['a_signed_by']."</p>";
+                    echo "<p>".$row['a_creation_time']."</p>";
+                    echo "</article>";
+                }
+            } else {
+               
+            }
+        }
         
     }//ArticleContr.
 

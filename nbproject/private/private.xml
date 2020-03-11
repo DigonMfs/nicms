@@ -3,14 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/niels/NetBeansProjects/nicms/classes/handler.class.php</file>
-            <file>file:/home/niels/NetBeansProjects/nicms/scripts/script.js</file>
             <file>file:/home/niels/NetBeansProjects/nicms/classes/article.class.php</file>
             <file>file:/home/niels/NetBeansProjects/nicms/index.php</file>
-            <file>file:/home/niels/NetBeansProjects/nicms/article.php</file>
             <file>file:/home/niels/NetBeansProjects/nicms/classes/articleview.class.php</file>
             <file>file:/home/niels/NetBeansProjects/nicms/styles/style.css</file>
-            <file>file:/home/niels/NetBeansProjects/nicms/classes/categoryview.class.php</file>
+            <file>file:/home/niels/NetBeansProjects/nicms/pages/calendar.php</file>
         </group>
     </open-files>
 </project-private>

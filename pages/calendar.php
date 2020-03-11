@@ -1,11 +1,16 @@
 <?php
     include_once("../includes/autoload.inc.php");
     $object = new AutoLoad();
+
+    if(!isset($_SESSION["userID"])) {
+        header("Location: ../index.php");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="nl">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Digon | Admin | Calendar</title>
         <!--//CDN to ckeditor 5-->
         <script src="https://cdn.ckeditor.com/ckeditor5/16.0.0/classic/ckeditor.js"></script>
@@ -26,43 +31,49 @@
             include_once "../includes/header.inc.php";
         ?>
         
-        
         <!--Main-->
         <main class="general-main">
-            
-            <!-- Navigation bar -->  
-            <nav class="container general-nav">
-                <ul class="nav nav-pills">
-                    <li class="nav-item">
-                     <a class="nav-link" href="write.php">Write</a>
-                    </li>
-                    <li class="nav-item">
-                     <a class="nav-link" href="files.php">Files</a>
-                    </li>
-                    <li class="nav-item">
-                     <a class="nav-link" href="categories.php">Categories</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="calendar.php">Calendar</a>
-                    </li>
-                 </ul> 
-        </nav>
-                 
+                  
             <!--Alert messages-->
-            <div class="calendar-alert-messages">
-                -->Later delete with join on other published media.
-                -->Add to articlechannel table.
-            </div>
+            <div class="calendar-alert-messages"></div>
             
-            <!--Container of the directory window-->
-            <div class="calendar-topublish-articles-directory-container">
-                <div class="calendar-topublish-articles-container  d-flex flex-column">
+            <div class="row">
+                
+                <!--Sidebar container-->
+                <div class="col-md-3 col-lg-3">
+                     <div class='list-group'>
+                        <a class='list-group-item list-group-item-action active disabled list-group-items-header'>Filter & sort articles</a>
+                        <a class='list-group-item list-group-item-action'>Search articles</a>
+                        <a class='list-group-item list-group-item-action list-group-item-light'>
+                              <input type="text" name="searchArticles" placeholder="Enter keyword..">
+                        </a>
+                        <a class='list-group-item list-group-item-action'>Show articles</a>
+                        <a class='list-group-item list-group-item-action list-group-item-light'>
+                            <select name="selectShowArticles" id="selectSortArticles">
+                                <option value="all">All</option>
+                                <option value="published">Published</option>
+                                <option value="saved">Saved</option>
+                            </select>
+                        </a>
+                        <a class='list-group-item list-group-item-action'>Sort articles</a>
+                        <a class='list-group-item list-group-item-action list-group-item-light'>
+                            <select name="selectSortArticles" id="selectSortArticles">
+                                <option value="DATEDESC">DATE ASC</option>
+                                <option value="DATEASC">DATE DESC</option>
+                            </select>
+                        </a>
+                    </div>
+                </div>
+
+                <!--Articles container-->
+                <div class="col-md-9 col-lg-9 articles-article-overview-container">
                     <?php 
                         $ArticleObj = new ArticleView();
-                        $ArticleObj->showArticle();
+                        $ArticleObj->showArticle(undefined,all,DATEASC);
                     ?>
-                </div>
-            </div>
+                </div><!-- Articles container-->   
+                
+            </div><!--Row-->
             
         </main>
 

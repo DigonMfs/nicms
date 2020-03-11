@@ -1,4 +1,5 @@
 <?php 
+    session_start();
 
     interface AutoloadInterface {
         public function __construct();
@@ -22,8 +23,12 @@
             }
            
             include_once($this->path."dbh.class.php");
-            include_once($this->path."handler.class.php");
+            //include_once($this->path."handler.class.php");
             include_once($this->path."functions.class.php");
+
+            include_once($this->path."user.class.php");
+            include_once($this->path."usercontr.class.php");
+            include_once($this->path."userview.class.php");
 
             include_once($this->path."write.class.php");
             include_once($this->path."writecontr.class.php");

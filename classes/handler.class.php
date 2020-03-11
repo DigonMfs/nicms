@@ -1,11 +1,19 @@
-<?php 
+<?php
     include_once("../includes/autoload.inc.php");
     $object = new AutoLoad();
-
+    
     //Ajax called from login.
-    if(isset($_GET["login"])) {
-       echo "test";
+    if(isset($_POST["login"])) {
+       $UserContrObj = new UserContr();
+       $UserContrObj->loginContr($_POST["username"],$_POST["password"]);
+       unset($UserContrObj);
     }//If.
+
+    if(isset($_POST["logout"])) {
+        $UserContrObj = new UserContr();
+        $UserContrObj->logout();
+        unset($UserContrObj);
+     }//If.
 
     //Ajax called from DirClick.
     if(isset($_GET["dirClick"])) {

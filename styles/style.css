@@ -13,7 +13,7 @@
 }
 .general-main {
     margin-top: 25px !important;
-    margin: 0px auto 350px auto;
+    margin: 100px auto 100px auto !important;
 }
 
 /*Style of the overlay box*/
@@ -25,6 +25,7 @@
     height: 100%;
     width: 100%;
     display: none;
+    z-index: 999999999999;
 }
 .overlay-box {
     background-color: white;
@@ -111,13 +112,26 @@ label {
 .inner-header-navbar-button-login {
     border: none;
     background-color: rgba(0,0,0,0);
-    color: lightgrey;
+    background-color: crimson;
+    color: white;
+    padding: 0px 16px;
     font-size: 16px;
 }
-.inner-header-navbar-button-login:hover {
-    color: white;
+.inner-header-navbar-button-login:hover, .inner-header-navbar-link:hover {
+    color: white !important;
+    text-decoration: none;
+}
+.inner-header-navbar-link {
+    color: lightgrey !important;
+    padding: 0px 16px;
+    font-size: 16px !important;
 }
 
+/*Overlay no scroll*/
+.stop-scrolling {
+    height: 100%;
+    overflow: hidden;
+  }
 
 
 
@@ -177,6 +191,64 @@ label {
     cursor: pointer;
     text-decoration: underline !important;
 }
+
+
+
+
+
+
+
+
+/*Article page*/
+
+/*Position Fixed*/
+.articles-article-breadcrumbs {
+    position: fixed;
+    top: 0px;
+    z-index: 100;
+    margin-top: 50px !important;
+    padding-top: 50px !important;
+    background-color: white;
+}
+.articles-main {
+    padding: 0px !important;
+    margin-top: 0px !important;
+}
+.articles-article-container {
+    padding-top: 175px;
+}
+.articles-sidebar-container {
+    position: relative;
+}
+.articles-list-group-relevant-articles {
+    position: fixed;
+}
+
+.articles-article-summary {
+    text-transform: uppercase;
+    text-align: justify;
+    margin-bottom: 15px;
+}
+.articles-article-content p {
+    display: inline-block !important;
+}
+.articles-article-img {
+    display: inline-block;
+    max-width: 100%;
+    border-radius: 5px;
+}
+.articles-article-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.articles-article-info p {
+    color: grey;
+}
+.articles-article-info p:nth-child(2) {
+    text-align: right;
+}
+
+
 
 
 
@@ -429,6 +501,30 @@ label {
 .calendar-article-publish-button {
    margin-left: 8px;
 }
+
+
+
+
+
+
+
+
+/*Account page*/
+.form-group {
+    margin-bottom: 0px !important;
+}
+.account-settings-title {
+    font-size: 28px;
+}
+.account-settings-subtitle {
+    font-size: 18px;
+    color: #595959;
+}
+.account-settings-label {
+   font-size: 16px;
+}
+
+
 
 
 

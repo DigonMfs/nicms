@@ -42,23 +42,39 @@ function login() {
     }
 
     $.ajax({
-        type: "GET",
-        url: "../classes/handler.class.php",
+        type: "POST",
+        url: "classes/handler.class.php",
         data: {
             username:username,
             password:password,
             login:"login"
         },
         success: function(data) {
-            //$(".files-directory-body").html(data);
-            alert(data);
+            //$(".index-alert-messages").html(data);
+            location.reload();
+            Toggleoverlay('close',0);
         },
     });//ajax
+}//Method login.
 
-}
-
-
-
+function logout() {
+    url = window.location.href;
+    if (url.includes('pages')) {
+        ajaxUrl = "../classes/";
+    } else {
+        ajaxUrl = "classes/"
+    }
+    $.ajax({
+        type: "POST",
+        url: ajaxUrl+"handler.class.php",
+        data: {
+            logout:"logout"
+        },
+        success: function(data) {
+           location.reload();
+        },
+    });//ajax
+}//Method logout.
 
 
 /*All function about the explorer window*/
@@ -213,11 +229,8 @@ function UploadFile() {
 
 
 function AskDelete(dirPath,fileName,type) {
-    //Open overlay
-    $(".overlay-wrapper").fadeIn();
-    $(".overlay-box").css({
-        'margin-top' : '100px'
-    });
+     //Open overlay.
+     Toggleoverlay('open',0);
 
     //Personalise message.
     if (type == 'file') {
@@ -311,7 +324,7 @@ function InsertFile(path,fileName,type) {
         CKEDITOR.instances.ckeditor.insertHtml('<a href="'+path+'/'+fileName+'" class="pdf-ckeditor-a">'+fileName+'</a> <br>');
     else 
         //copyText = '<img src="'+path+'/'+fileName+'" alt="'+fileName+'" class="images-ckeditor">';
-        CKEDITOR.instances.ckeditor.insertHtml('<img src="'+path+'/'+fileName+'" alt="'+fileName+'" class="images-ckeditor"> <br>');
+        CKEDITOR.instances.ckeditor.insertHtml('<img class="articles-article-img" src="'+path+'/'+fileName+'" alt="'+fileName+'" class="images-ckeditor"> <br>');
 
 }//function Insertfile
 
@@ -326,7 +339,7 @@ function copyFile(path,fileName,type) {
     if (type == "pdf") {
         copyText = '<a href="'+path+'/'+fileName+'" class="pdf-ckeditor-a">'+fileName+'</a>';
     } else {
-        copyText = '<img src="'+path+'/'+fileName+'" alt="'+fileName+'" class="images-ckeditor">';
+        copyText = '<img class="articles-article-img" src="'+path+'/'+fileName+'" alt="'+fileName+'" class="images-ckeditor">';
     }
 
     inp.value = copyText
@@ -453,12 +466,8 @@ function SaveArticle() {
 
 
 function AskCategoryDelete(id,catSubcat) {
-   
-    //Open overlay
-    $(".overlay-wrapper").fadeIn();
-    $(".overlay-box").css({
-        'margin-top' : '100px'
-    });
+    //Open overlay.
+    Toggleoverlay('open',0);
 
     //Personalise message.
     if (catSubcat == 0)
@@ -498,7 +507,7 @@ function DeleteCategory(id,catSubcat) {
         data: {
             id:id,
             catSubcat:catSubcat,
-            deleteCatSubcat:catSubcat
+            deleteCatSubcat:"deleteCatSubcat"
         },
         success: function(data) {
             //close Overlay
@@ -638,11 +647,8 @@ function showArticlesToPublish() {
 
 
 function askPublishArticle(id) {
-    //Open overlay
-    $(".overlay-wrapper").fadeIn();
-    $(".overlay-box").css({
-        'margin-top' : '100px'
-    });
+    //toggle overlay
+    Toggleoverlay('open',0);
 
     document.getElementById("overlayBody").innerHTML = '\
     <h2 class="overlay-title">Publish Article</h2>\
@@ -685,11 +691,9 @@ function editArticle() {
 }//Method editArticle.
 
 function askDeleteArticle(id) {
-     //Open overlay
-     $(".overlay-wrapper").fadeIn();
-     $(".overlay-box").css({
-         'margin-top' : '100px'
-     });
+    Toggleoverlay('open',0);
+
+    $('body').bind('touchmove', function(e){e.preventDefault()});
      document.getElementById("overlayBody").innerHTML = '\
      <h2 class="overlay-title">Delete Article</h2>\
      <i class="fas fa-times close-overlay" onclick="Toggleoverlay(\'close\',0)"></i>\
@@ -736,7 +740,7 @@ function showArticlesIndex(id,name) {
     
     $.ajax({
         type: "POST",
-        url: "../classes/handler.class.php",
+        url: "classes/handler.class.php",
         data: {
             id:id,
             showArticlesIndex:"showArticlesIndex"

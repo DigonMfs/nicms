@@ -1,6 +1,10 @@
 <?php
     include_once("includes/autoload.inc.php");
     $object = new AutoLoad();
+
+    if(isset($_SESSION["userID"])) {
+        //header("Location: pages/write.php");
+    }
 ?>
 <!DOCTYPE html>
 <html lnag="nl">
@@ -26,38 +30,42 @@
         <?php 
             //Header
             include_once "./includes/header.inc.php";
+            
+            $ObjectTest = new Functions();
+            echo $ObjectTest->encrypt(admin);
         ?>
         
        
         <main class="general-main container">
-            
+
+            <!--Breadcrumbs-->
             <nav class="container general-nav" aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumbs-index">
                   <li class="breadcrumb-item">Home</li>
                   <li class="breadcrumb-item active" aria-current="page"><a href="index.php">Category Name</a></li>
                 </ol>
             </nav>
+
+             <!--Alert messages-->
+             <div class="index-alert-messages">
+            </div>
            
             <!--Sidebar container-->
             <div class="row">
                 <div class="col-md-3 col-lg-3">
-                
-                <!--Sidebar-->
-                <?php 
-                    $CategoryViewObj = new CategoryView();
-                    $CategoryViewObj->ArticlesShowSubcats(2);
-                ?>
-                
-                </div><!--Sidebar container-->
+                    <!--Sidebar-->
+                    <?php
+                        $CategoryViewObj = new CategoryView();
+                        $CategoryViewObj->ArticlesShowSubcats(2);
+                    ?>
+                </div>
 
                 <!--Article titles container-->
                 <div class="col-md-9 col-lg-9 articles-article-overview-container">
                     <p class="alert alert-warning" role="alert">Click on a subcategory to view the articles.</p>
-                </div><!-- Article title container-->
-                
+                </div><!-- Article title container-->   
             </div><!--Row-->
-            
-            
+              
         </main>
       
         

@@ -40,7 +40,7 @@
                     $result = $WriteCheckCatSubcatObj->checkSubcatIsSubcat($id);
                     break;
                 default:
-                    die($FunctionsObj->outcomeMessage("error","Parameter should be a boolean."));
+                    echo $FunctionsObj->outcomeMessage("error","Parameter should be a boolean.");
                     break;
             }//Switch.
 
@@ -48,6 +48,13 @@
                 echo $FunctionsObj->outcomeMessage("error","Category/subcategory is not a catagory/subcategory..");
                 return false;
             }//If $result == false.
+
+            //Check if cat has subcat
+            $result = $this->getSubcatsFromParentCat($id);
+            if ($result->num_rows > 0) {
+                echo $FunctionsObj->outcomeMessage("error","Category has subcategories, first delete all subcategories.");
+                return false;
+            }
 
             if ($this->unsetCatSubcat($id)) {
                 echo $FunctionsObj->outcomeMessage("success","Record has succesfully been deleted.");
@@ -60,4 +67,5 @@
 
       
     }//CategoryContr.
+
 ?>

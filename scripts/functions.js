@@ -54,6 +54,10 @@ function Toggleoverlay(toggle,content) {
         $(".overlay-box").css({
             'margin-top' : '0px'
         });
+        //Enable scroll.
+        $("body").removeClass("stop-scrolling");
+        //For mobile.
+        $('body').unbind('touchmove')
 
     }else if(toggle == "open") { 
         //Open overlay.
@@ -61,6 +65,10 @@ function Toggleoverlay(toggle,content) {
         $(".overlay-box").css({
             'margin-top' : '100px'
         });
+        //Disable scroll.
+        $('body').addClass('stop-scrolling');
+        //for mobile.
+        $('body').bind('touchmove', function(e){e.preventDefault()});
 
     } else {
         alert("Unknown parameter.");

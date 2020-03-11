@@ -1,11 +1,16 @@
 <?php
     include_once("../includes/autoload.inc.php");
     $object = new AutoLoad();
+
+    if(!isset($_SESSION["userID"])) {
+        header("Location: ../index.php");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="nl">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Digon | Admin | Write</title>
         <!--//CDN to ckeditor 4-->
         <script src="//cdn.ckeditor.com/4.13.1/full/ckeditor.js"></script>
@@ -34,24 +39,6 @@
         
         <!-- Main-->
         <main class="general-main">
-            
-            <!-- Navigation bar -->    
-            <nav class="container general-nav">
-                <ul class="nav nav-pills">
-                    <li class="nav-item">
-                     <a class="nav-link active" href="write.php">Write</a>
-                    </li>
-                    <li class="nav-item">
-                     <a class="nav-link" href="files.php">Files</a>
-                    </li>
-                    <li class="nav-item">
-                     <a class="nav-link" href="categories.php">Categories</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="calendar.php">Calendar</a>
-                    </li>
-                 </ul> 
-            </nav>
             
             <!-- Title and summary-->
             <div class="card card-body bg-light">
