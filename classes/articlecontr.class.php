@@ -4,7 +4,22 @@
 
         //Publish a saved article.
         public function publishArticle($id) {
-            $ArticleObj = new Article();
+            $FunctionsObj = new Functions();
+
+            if ($FunctionsObj->isInteger($id)) {
+                echo $FunctionsObj->outcomeMessage("error","Invalid parameters.");
+                return false;
+            }
+            
+            $result = $this->reSetArticle($id,1);
+            if ($result) {
+                echo $FunctionsObj->outcomeMessage("success","The article has successfully been published.");
+            } else {
+                echo $FunctionsObj->outcomeMessage("error","Failed to publish the article.");
+            }//If $result.
+        }//Method publishArticle.
+
+        public function unpublishArticle($id) {
             $FunctionsObj = new Functions();
 
             if ($FunctionsObj->isInteger($id)) {
@@ -12,13 +27,13 @@
                 return false;
             }
 
-            $result = $ArticleObj->reSetArticle($id);
+            $result = $this->reSetArticle($id,0);
             if ($result) {
-                echo $FunctionsObj->outcomeMessage("success","The article has successfully been published.");
+                echo $FunctionsObj->outcomeMessage("success","The article has successfully been unpublished.");
             } else {
-                echo $FunctionsObj->outcomeMessage("error","Failed to publish the article.");
+                echo $FunctionsObj->outcomeMessage("error","Failed to unpublish the article.");
             }//If $result.
-        }//Method publishArticle.
+        }//Method unpublishArticle.
         
         //Delete Article.
         public function deleteArticle($id) {
@@ -36,7 +51,8 @@
                 echo $FunctionsObj->outcomeMessage("error","Failed to delete article.");
             }
         }//Method deleteArticle.
-    
+
     }//ArticleContr.
+
 
 ?>

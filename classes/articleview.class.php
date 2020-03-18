@@ -2,11 +2,11 @@
 
     class ArticleView extends Article {
         
-        public function showArticle($keyword,$visibility,$sort) {
+        public function showArticle($visibility,$sort,$limit) {
             $FunctionsObj = new Functions();
 
             //Output data.
-            $result = $this->getArticles($keyword,$visibility,$sort,undefined);
+            $result = $this->getArticles($visibility,$sort,$limit);
 
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
@@ -26,16 +26,24 @@
                     echo '<li class="breadcrumb-item">'.$row["c_category"].'</li>';
                     echo '<li class="breadcrumb-item text-secondary">'.$row["s_category"].'</li>';
                     echo '<div class="testerr">';
-                    echo '<button class="btn btn-danger calendar-article-publish-button" onclick="askDeleteArticle('.$row["a_row_id"].')" type="button">Delete</button>';
-                    echo '<button class="btn btn-secondary calendar-article-publish-button" onclick="editArticle('.$row["a_row_id"].')" type="button">Edit</button>';
-                    echo '<button class="btn btn-primary calendar-article-publish-button" onclick="askPublishArticle('.$row["a_row_id"].')" type="button">Publish</button>';
+                    if ($row["a_deleted"] == 0) {
+                        echo '<button class="btn btn-danger calendar-article-publish-button" onclick="askDeleteArticle('.$row["a_row_id"].')" type="button">Delete</button>';
+                        echo '<button class="btn btn-secondary calendar-article-publish-button" onclick="editArticle('.$row["a_row_id"].')" type="button">Edit</button>';
+                        if ($row["a_published"] == 0) {
+                            echo '<button class="btn btn-primary calendar-article-publish-button" onclick="askPublishArticle('.$row["a_row_id"].')" type="button">Publish</button>';
+                        } else {
+                            echo '<button class="btn btn-primary calendar-article-publish-button" onclick="askUnpublishArticle('.$row["a_row_id"].')" type="button">Unpublish</button>';   
+                        }  
+                    } else {
+                        echo '<button class="btn btn-danger calendar-article-publish-button" type="button" disabled>Deleted</button>'; 
+                    }
                     echo '</div>';
                     echo '</ol>';
                     echo '</div>';
                     echo '</div>';
                 }
             } else {
-                echo $FunctionsObj->outcomeMessage("warning","No articles to publish.");
+                echo $FunctionsObj->outcomeMessage("warning","No articles were found.");
             }//If $result > 0.
         }//Method showArticles.
         
@@ -47,7 +55,7 @@
             }//If isInteger.
 
             //Output data.
-            $result = $this->getArticles(1,$subcat_id);
+            $result = $this->getArticleFromSubcat($subcat_id);
             
             if ($result->num_rows > 0) {
                 echo "<table class='table-articles-overview'> ";
@@ -55,7 +63,7 @@
                 while($row = $result->fetch_assoc()) {
                     echo "<tr>";
                     echo "<td>";
-                    echo "<a href='article.php?articleId=".$row['a_row_id']."&articleTitle=".$row['a_title']."&subcatId=".$row['s_row_id']."&subcat=".$row['s_category']."'>".$row["a_title"]."</a>";
+                    echo "<a href='pages/article.php?articleId=".$row['a_row_id']."&articleTitle=".$row['a_title']."&subcatId=".$row['s_row_id']."&subcat=".$row['s_category']."'>".$row["a_title"]."</a>";
                     echo "<div class='table-articles-admin-icons'>";
 
                     //Check if admin is logged in.
@@ -84,7 +92,7 @@
                 return false;
             }//If isInteger.
             
-            $result = $this->getArticles(1,$subcat_id);
+            $result = $this->getArticleFromSubcat($subcat_id);
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
                     //Check if record is current article. If so highlight it.
@@ -102,7 +110,7 @@
         public function showFullArticle($article_id) {
             $FunctionsObj = new Functions();
             
-            if($FunctionsObj->isInteger($subcat_id)) {
+            if($FunctionsObj->isInteger($article_id)) {
                 echo $FunctionsObj->outcomeMessage("error","Invalid parameters.");
                 return false;
             }//If isInteger.
@@ -110,6 +118,12 @@
             $result = $this->getArticle($article_id);
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
+
+                    //Check if article has been deleted.
+                    if ($row["a_deleted"] == 1) {
+                        $FunctionsObj->outcomeMessage('error',"Article has been deleted.");
+                        return false;
+                    }
                     echo "<h1 class='articles-article-title'>".$row['a_title']."</h1>";
                     
                     /*echo "<article class='articles-article-summary'>";

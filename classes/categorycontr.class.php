@@ -26,8 +26,9 @@
         public function deleteCatSubcat($id,$catSubcat) {
             $FunctionsObj = new Functions();
 
-            if ($FunctionsObj->isInteger($id) && $FunctionsObj->isInteger($catSubcat)) {
+            if ($FunctionsObj->isInteger($id) || $FunctionsObj->isInteger($catSubcat)) {
                 echo $FunctionsObj->outcomeMessage("error","Parameters aren't integers.");
+                return false;
             }//If isInteger.
 
             //Check if cat is cat or subcat is subcat; 0=cat;1=subcat.
@@ -65,7 +66,6 @@
             }//If unsetCatSubcat == true
         }//Method deleteCategory
 
-      
     }//CategoryContr.
 
 ?>

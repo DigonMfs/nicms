@@ -81,7 +81,7 @@
     //Ajax called from showArticlesToPublish.
     if(isset($_GET["showArticlesToPublish"])) {
         $ShowArticlesToPublishObj = new ArticleView();
-        $ShowArticlesToPublishObj->showArticle();
+        $ShowArticlesToPublishObj->showArticle('undefined','undefined');
         unset($ShowArticlesToPublishObj);
     }//If.
 
@@ -90,6 +90,13 @@
         $publishArticleObj = new ArticleContr();
         $publishArticleObj->publishArticle($_GET["id"]);
         unset($publishArticleObj);
+    }//If.
+
+    //Ajax called from publishArticle.
+    if(isset($_GET["unpublishArticle"])) {
+        $unpublishArticleObj = new ArticleContr();
+        $unpublishArticleObj->unpublishArticle($_GET["id"]);
+        unset($unpublishArticleObj);
     }//If.
 
     //Ajax called from askDeleteArticle.
@@ -104,6 +111,48 @@
         $showArticlesIndexObj = new ArticleView();
         $showArticlesIndexObj->showArticlesIndex($_POST["id"]);
         unset($showArticlesIndexObj);
+    }//If.
+
+    //Ajax called from filterArticles.
+    if(isset($_POST["filterArticles"])) {
+        $filterArticlesObj = new ArticleView();
+        $filterArticlesObj->showArticle($_POST["visibility"],$_POST["sort"],10);
+        unset($filterArticlesObj);
+    }//If.
+
+     //Ajax called from change password form.
+     if(isset($_GET["changePassword"])) {
+        $UserObj = new UserContr();
+        $UserObj->changePassword($_POST["changePasswordOld"],$_POST["changePasswordNew"],$_POST["changePasswordNewConfirm"]);
+        unset($UserObj);
+    }//If.
+
+      //Ajax called from change username form.
+      if(isset($_GET["changeUsername"])) {
+        $UserObj = new UserContr();
+        $UserObj->changeUsername($_GET["changeUsername"]);
+        unset($UserObj);
+    }//If.
+
+     //Ajax called from change displayname form.
+     if(isset($_GET["changeDisplayname"])) {
+        $UserObj = new UserContr();
+        $UserObj->changeDisplayname($_GET["changeDisplayname"]);
+        unset($UserObj);
+    }//If.
+
+    //Ajax called from change add an account form.
+    if(isset($_GET["addAccount"])) {
+        $UserObj = new UserContr();
+        $UserObj->addUser($_POST["chooseUsername"],$_POST["chooseDisplayname"],$_POST["choosePassword"],$_POST["choosePasswordConfirm"]);
+        unset($UserObj);
+    }//If.
+
+    //Ajax called from load more articles on calendar page.
+    if(isset($_POST["calendarLoadMoreArt"])) {
+        $ArticleObj = new ArticleView();
+        $ArticleObj->showArticle($_POST["visibility"],$_POST["sort"],$_POST["amount"]);
+        unset($ArticleObj);
     }//If.
 
 ?>
