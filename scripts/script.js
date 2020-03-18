@@ -1,10 +1,16 @@
 //Global variables
 teller = 0;
 subcatLevels = 0;
+amount = 0; //limit of calendar page.
 
 
 /*Articles page - Login*/
 function openLogindialog() {
+    url = window.location.href;
+    if (!url.includes("?login")) {
+        return false;
+    }
+
     //Open overlay
     $(".overlay-wrapper").fadeIn();
     $(".overlay-box").css({
@@ -51,7 +57,8 @@ function login() {
         },
         success: function(data) {
             //$(".index-alert-messages").html(data);
-            location.reload();
+            newURL = url.replace("login", "");
+            document.location.href = newURL;
             Toggleoverlay('close',0);
         },
     });//ajax
@@ -334,7 +341,7 @@ function InsertFile(path,fileName,type) {
 function copyFile(path,fileName,type) {
     //Copy the text to your clipboard
     var inp =document.createElement('input');
-    document.body.appendChild(inp)
+    document.body.appendChild(inp);
 
     if (type == "pdf") {
         copyText = '<a href="'+path+'/'+fileName+'" class="pdf-ckeditor-a">'+fileName+'</a>';
@@ -644,6 +651,25 @@ function showArticlesToPublish() {
     });//Ajax.
 }//Function showArticlesToPublish.
 
+//Refreshes filters on calendar page.
+function filterArticles() {
+    visibility = $("#selectSortArticles").val();
+    sort = $("#selectFilterArticles").val();
+
+    $.ajax({
+        type: "POST",
+        url: "../classes/handler.class.php",
+        data: {
+            visibility:visibility,
+            sort:sort,
+            filterArticles:"filterArticles"
+        },
+        success: function(data) {
+            $("#calendarArticlesContainer").html(data);
+        },
+    });//Ajax.
+}
+
 
 
 function askPublishArticle(id) {
@@ -663,9 +689,6 @@ function askPublishArticle(id) {
 ';
 }//Method askPublishArticle.
 
-
-
-
 //Publish article
 function publishArticle(id) {
     $.ajax({
@@ -679,9 +702,52 @@ function publishArticle(id) {
             showArticlesToPublish();
             $(".calendar-alert-messages").html(data);
             Toggleoverlay('close',0);
+            filterArticles();
         },
     });//Ajax.
 }//Function publishArticle.
+
+
+
+
+
+
+
+function askUnpublishArticle(id) {
+    //toggle overlay
+    Toggleoverlay('open',0);
+
+    document.getElementById("overlayBody").innerHTML = '\
+    <h2 class="overlay-title">Unpublish Article</h2>\
+    <i class="fas fa-times close-overlay" onclick="Toggleoverlay(\'close\',0)"></i>\
+    <div class="form-group">  \
+      <p>Are you sure you want to unpublish this article?</p>\
+    </div>\
+    <div class="button-container">\
+        <button class="btn btn-secondary" onclick="Toggleoverlay(\'close\',0)">Close</button>\
+        <button class="btn btn-primary" onclick="unpublishArticle('+id+')">Unpublish</button>\
+    </div>\
+';
+}//Method askPublishArticle.
+
+function unpublishArticle(id) {
+    $.ajax({
+        type: "GET",
+        url: "../classes/handler.class.php",
+        data: {
+            id:id,
+            unpublishArticle:"unpublishArticle"
+        },
+        success: function(data) {
+            showArticlesToPublish();
+            $(".calendar-alert-messages").html(data);
+            Toggleoverlay('close',0);
+            filterArticles();
+        },
+    });//Ajax.
+}//Function publishArticle.
+
+
 
 
 
@@ -720,9 +786,35 @@ function deleteArticle(id) {
             showArticlesToPublish();
             $(".calendar-alert-messages").html(data);
             Toggleoverlay('close',0);
+            filterArticles();
         },
     });//Ajax.
 }//Method askDeleteArticle.
+
+
+function calendarLoadMoreArt() {
+    //Make sure filters are the same on load more articles.
+    visibility = $("#selectSortArticles").val();
+    sort = $("#selectFilterArticles").val();
+    amount = amount + 10;
+
+    $.ajax({
+        type: "POST",
+        url: "../classes/handler.class.php",
+        data: {
+            amount:amount,
+            visibility:visibility,
+            sort:sort,
+            calendarLoadMoreArt:"calendarLoadMoreArt"
+        },
+        success: function(data) {
+            $("#calendarArticlesContainer").html(data);
+        },
+    });//Ajax.
+}
+
+
+
 
 function showArticlesIndex(id,name) {
     //Check if parameter is an integer.
@@ -751,3 +843,11 @@ function showArticlesIndex(id,name) {
     });//Ajax.
     
 }//Method askDeleteArticle.
+
+function toggleAdminNav() {
+    if ($('.admin-nav-item').css('display') == 'none') {
+        $(".admin-nav-item").slideDown();
+    } else {
+        $(".admin-nav-item").slideUp();
+    }
+}
