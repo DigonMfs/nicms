@@ -19,7 +19,7 @@
 /*Style of the overlay box*/
 .overlay-wrapper {
     background-color: rgba(0,0,0,0.75);
-    position: absolute;
+    position: fixed;
     top: 0px;
     left: 0px;
     height: 100%;
@@ -33,7 +33,7 @@
     margin: 0 auto;
     border-radius: 5px;
     position: relative;
-    transition: margin-top 500ms;
+    transition: margin-top 500ms ease;
 }
 .overlay-title {
     font-size: 20px;
@@ -109,7 +109,7 @@ label {
     text-align: right;
 
 }
-.inner-header-navbar-button-login {
+/*.inner-header-navbar-button-login {
     border: none;
     background-color: rgba(0,0,0,0);
     background-color: crimson;
@@ -120,7 +120,7 @@ label {
 .inner-header-navbar-button-login:hover, .inner-header-navbar-link:hover {
     color: white !important;
     text-decoration: none;
-}
+}*/
 .inner-header-navbar-link {
     color: lightgrey !important;
     padding: 0px 16px;
@@ -133,12 +133,58 @@ label {
     overflow: hidden;
   }
 
+/*Navbar that is visible whne logged in as admin*/
+.admin-navbar {
+    background-color: #222;
+    border-radius: 0.25rem;
+    margin-bottom: 25px !important;
+}
+.admin-navbar-header {
+    background-color: crimson;
+    height: 50px;
+    line-height: 50px;
+    padding: 0px 15px !important;
+    color: white;
+}
+.nav-link-admin {
+    color: white;
+    line-height: 50px;
+    margin: 0px !important;
+    padding: 0px 10px !important;
+}
+.button-logout {
+    height: 100%;
+    border: none;
+    background-color: rgba(0,0,0,0);
+    color: white;
+    margin-left: 10px;
+}
+.nav-link-admin:hover, .button-logout:hover {
+    color: crimson;
+}
+.admin-burger-menu {
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 
 /*Index page*/
+.nav-index {
+    margin-top: 25px !important;
+}
 #loginMessage {
     margin-top: 15px !important;
     color: red;
@@ -149,7 +195,6 @@ label {
 .button-container-login {
     margin-top: 0 !important;
 }
-/*Articles*/
 /*Table*/
 .table-articles-overview { 
     border-collapse:collapse; 
@@ -234,7 +279,7 @@ label {
 }
 .articles-article-img {
     display: inline-block;
-    max-width: 100%;
+    max-width: 100% !important;
     border-radius: 5px;
 }
 .articles-article-info {
@@ -502,10 +547,40 @@ label {
    margin-left: 8px;
 }
 
+/*Show amount of entries buttons
+.calendar-showentries-div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-size: 0px !important;
+    padding-bottom: 15px;
+}
+.calendar-showentries-div p:first-child {
+    font-size: 16px !important;
+    margin: 0px !important;
+}
+.calendar-showentries-div p:last-child {
+    text-align: right;
+}
+.calendar-entries-prev-button {
+    margin-right: 0px !important;
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+}
+.calendar-entries-curr-button {
+    margin: 0px !important;
+    border-radius: 0px !important;
+}
+.calendar-entries-next-button {
+    margin-left: 0px !important;
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+}*/
 
-
-
-
+.calendar-load-more {
+    text-align: right;
+    width: 100%;
+    margin-right: 15px;
+}
 
 
 
@@ -523,25 +598,16 @@ label {
 .account-settings-label {
    font-size: 16px;
 }
-
-
-
-
-
-
-
-/*Media queries*/
-@media (min-width: 768px) {
-    /*width for main*/
-    main, .general-nav, .inner-header {
-        width: 750px;
-    }
-    /*Fontsize for pdf icon*/
-    .pdf-icon {
-        font-size: 85px;
-    }
+.account-accounts-table-container {
+    padding: 0px 25px 0px 40px !important;
 }
-@media (min-width: 992px) {
+
+
+
+
+
+
+@media (min-width: 1200px) { 
     /*width for main*/
     main, .general-nav, .inner-header {
         width: 970px;
@@ -551,6 +617,41 @@ label {
         font-size: 75px;
     }
 }
+/*Media queries*/
+@media (max-width: 992px) { 
+    /*width for main*/
+    main, .general-nav, .inner-header {
+        width: 750px;
+    }
+    /*Fontsize for pdf icon*/
+    .pdf-icon {
+        font-size: 85px;
+    }
+}
+
+@media (max-width: 768px) {
+    /*Admin navbar media query*/
+    .admin-navbar {
+        display: block !important;
+    }
+    .admin-navbar-header {
+        padding: 0px 15px !important
+    }
+    .admin-nav-item {
+        display: none;
+    }
+    .admin-burger-menu {
+        display: inline-block;
+    }
+    .button-logout {
+        padding-bottom: 10px;
+        margin-top: 15px;
+    }
+}
+
+
+
+
 @media (min-width: 1200px) {
     /*width for main*/
     main, .general-nav, .inner-header {
