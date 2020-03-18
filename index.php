@@ -9,7 +9,8 @@
 <!DOCTYPE html>
 <html lnag="nl">
     <head>
-    <meta charset="UTF-8">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Digon | Articles | Home</title>
         <!--//CDN to ckeditor 4-->
         <script src="//cdn.ckeditor.com/4.13.1/full/ckeditor.js"></script>
@@ -26,20 +27,24 @@
         <script>
         </script>
     </head>
-    <body>
+    <body onload="openLogindialog()">
         <?php 
             //Header
-            include_once "./includes/header.inc.php";
-            
-            $ObjectTest = new Functions();
-            echo $ObjectTest->encrypt(admin);
+            include_once "includes/header.inc.php";
         ?>
         
        
         <main class="general-main container">
 
+            <!--Navbar for admin pages-->
+            <ul class='nav nav-pills admin-navbar'>
+                <?php 
+                    include_once "includes/navbar.inc.php";
+                ?>
+            </ul>
+
             <!--Breadcrumbs-->
-            <nav class="container general-nav" aria-label="breadcrumb">
+            <nav class="container general-nav nav-index" aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumbs-index">
                   <li class="breadcrumb-item">Home</li>
                   <li class="breadcrumb-item active" aria-current="page"><a href="index.php">Category Name</a></li>
@@ -56,7 +61,7 @@
                     <!--Sidebar-->
                     <?php
                         $CategoryViewObj = new CategoryView();
-                        $CategoryViewObj->ArticlesShowSubcats(2);
+                        $CategoryViewObj->ArticlesShowSubcats(1);
                     ?>
                 </div>
 
