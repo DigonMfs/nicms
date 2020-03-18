@@ -1,15 +1,15 @@
 <?php
     $imgLink = "/websites/nicms/images/logo.png";
-    //$indexPath = "/websites/nicms/index.php";
+    $indexPath = "/websites/nicms/index.php";
     
     //Get url.
     $url = $_SERVER["HTTP_HOST"] . $_SERVER['REQUEST_URI'];
     
-    if (!strpos($url,'pages') == TRUE) {
+    /*if (!strpos($url,'pages') == TRUE) {
        $indexPath = "index.php";
     } else {
         $indexPath = "../index.php";
-    }
+    }*/
     
 ?>
 
@@ -22,9 +22,9 @@
         <div class="inner-header-navbar-container">
             <?php
                 //Check if user is logged in (only admin can log in).
-                if (!isset($_SESSION["userID"])) {
+                /*if (!isset($_SESSION["userID"])) {
                     //No, place login button.
-                    echo '<button class="inner-header-navbar-button-login" type="button" onclick="openLogindialog()">Login</button>';
+                    //echo '<button class="inner-header-navbar-button-login" type="button" onclick="openLogindialog()">Login</button>';
                 } else {
                     //check directory path to create the links. And check if user (admin) is logged in.
                     if (!strpos($url,'pages') == TRUE) {    
@@ -42,7 +42,7 @@
                     }
                     //Show logout button.
                     echo '<button class="inner-header-navbar-button-login" type="button" onclick="logout()">Logout</button>';
-                } 
+                } */
             ?>
         </div>
     </div>
