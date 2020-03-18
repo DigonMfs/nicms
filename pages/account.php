@@ -33,9 +33,90 @@
         
         <!--Main.-->
         <main class="general-main">
+
+            <!--Navbar for admin pages-->
+            <ul class='nav nav-pills admin-navbar'>
+                <?php 
+                    include_once "../includes/navbar.inc.php";
+                ?>
+            </ul>
                  
             <!--Alert messages.-->
-            <div class="account-alert-messages"></div>
+            <div class="account-alert-messages">
+                <?php 
+                    $FunctionsObj = new Functions();
+
+                    //Check if alert message needs to be shown.
+                    if(isset($_GET["fail"])) {
+
+                        switch ($_GET["fail"]) {
+                            //password.
+                            case 'password-alphanumeric':
+                                echo $FunctionsObj->outcomeMessage("error","Password is not alphanumeric, or is too long/short.");
+                                break;
+                            case 'password-no-match':
+                                echo $FunctionsObj->outcomeMessage("error","New password does not match.");
+                                break;
+                            case 'pass-wrong':
+                                echo $FunctionsObj->outcomeMessage("error","Old password is not correct.");
+                                break;
+                            case 'newpass-same':
+                                echo $FunctionsObj->outcomeMessage("error","New password is the same as the old.");
+                                break;
+                            case 'password-fail':
+                                echo $FunctionsObj->outcomeMessage("error","Failed to change password.");
+                                break;
+                            //Username.
+                            case 'username-alphanumeric':
+                                echo $FunctionsObj->outcomeMessage("error","New username is not alphanumeric or is too long/short.");
+                                break;
+                            case 'username-fail':
+                                echo $FunctionsObj->outcomeMessage("error","Failed to change the username.");
+                                break;
+                            //Displayname
+                            case 'displayname-alphanumeric':
+                                echo $FunctionsObj->outcomeMessage("error","New displayname is not alphanumeric or is too long/short.");
+                                break;
+                            case 'displayname-fail':
+                                echo $FunctionsObj->outcomeMessage("error","Failed to change the displayname.");
+                                break;
+                            //Add account.
+                            case 'addAccount-length':
+                                echo $FunctionsObj->outcomeMessage("error","Values are too long/short.");
+                                break;
+                            case 'addAccount-alphanumeric':
+                                echo $FunctionsObj->outcomeMessage("error","Values are not alphanumeric.");
+                                break;
+                            case 'addAccount-password':
+                                echo $FunctionsObj->outcomeMessage("error","Passwords do not match.");
+                                break;
+                            case 'addAccount-fail':
+                                echo $FunctionsObj->outcomeMessage("error","Failed to add account.");
+                                break;
+                        }
+
+                    } else if (isset($_GET["success"])) {
+                        switch ($_GET["success"]) {
+                            //Pasword.
+                            case 'pass-change':
+                                echo $FunctionsObj->outcomeMessage("success","Password has succesfully been changed.");
+                                break;
+                            //Username.
+                            case 'username-change':
+                                echo $FunctionsObj->outcomeMessage("success","Username has succesfully been changed.");
+                                break;
+                            //Displayname.
+                            case 'displayname-change':
+                                echo $FunctionsObj->outcomeMessage("success","Displayname has succesfully been changed.");
+                                break;
+                            //Add account.
+                            case 'addAccount':
+                                echo $FunctionsObj->outcomeMessage("success","Account has succesfully been added.");
+                                break;
+                        }
+                    }
+                ?>
+            </div>
             
 
             <!--Change account settings.-->
@@ -47,20 +128,20 @@
 
                 <!--Change password.-->
                 <div class="col-lg-6 col-md-12 col-sm-12">
-                    <form>
+                    <form action="../classes/handler.class.php?changePassword" method="POST">
                         <h4 class="account-settings-subtitle">Change password</h4>
                         <hr class="account-settings-subtitle-underline">
                         <div class="form-group">
                             <label for="changePasswordOld" class="account-settings-label text-primary">Old password</label>
-                            <input type="password" class="form-control" id="changePasswordOld" placeholder="Enter old password..">
+                            <input type="password" class="form-control" id="changePasswordOld" name="changePasswordOld" placeholder="Enter old password..">
                         </div>
                         <div class="form-group">
                             <label for="changePasswordNew" class="account-settings-label text-primary">New password</label>
-                            <input type="password" class="form-control" id="changePasswordNew" placeholder="Enter new password..">
+                            <input type="password" class="form-control" id="changePasswordNew" name="changePasswordNew" placeholder="Enter new password..">
                         </div>
                         <div class="form-group">
                             <label for="changePasswordNewConfirm" class="account-settings-label text-primary">Confirm new password</label>
-                            <input type="password" class="form-control" id="changePasswordNewConfirm" placeholder="Confirm new password..">
+                            <input type="password" class="form-control" id="changePasswordNewConfirm" name="changePasswordNewConfirm" placeholder="Confirm new password..">
                         </div>
                         <div class="form-group">
                             <button type="submit" class="account-settings-button btn btn-primary btn-sm">Save</button>
@@ -70,23 +151,23 @@
 
                 <!--Change username and displayname-->
                 <div class="col-lg-6 col-md-12 col-sm-12">
-                    <form>
+                    <form action="../classes/handler.class.php?changeUsername" method="GET">
                         <h4 class="account-settings-subtitle">Change username</h4>
                         <hr class="account-settings-subtitle-underline">
                         <div class="form-group">
                             <label for="changeUsername" class="account-settings-label text-primary">Username</label>
-                            <input type="text" class="form-control" id="changeUsername" placeholder="Enter Username..">
+                            <input type="text" class="form-control" id="changeUsername" name="changeUsername" placeholder="Enter Username..">
                         </div>
                         <div class="form-group">
                             <button type="submit" class="account-settings-button btn btn-primary btn-sm">Save</button>
                         </div>
                     </form>
-                    <form>
+                    <form action="../classes/handler.class.php?changeDisplayname" method="GET">
                         <h4 class="account-settings-subtitle">Change displayname</h4>
                         <hr class="account-settings-subtitle-underline">
                         <div class="form-group">
                             <label for="changeDisplayname" class="account-settings-label text-primary">Displayname</label>
-                            <input type="text" class="form-control" id="changeDisplayname" placeholder="Enter Displayname..">
+                            <input type="text" class="form-control" id="changeDisplayname" name="changeDisplayname" placeholder="Enter Displayname..">
                         </div>
                         <div class="form-group">
                             <button type="submit" class="account-settings-button btn btn-primary btn-sm">Save</button>
@@ -104,8 +185,8 @@
                 </div>
                 
                 <!--Table with all accounts.-->
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <table class="table table-bordered table-striped">
+                <div class="col-lg-12 col-md-12 col-sm-12 account-accounts-table-container">
+                    <table class="table table-bordered table-striped account-accounts-table">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
@@ -116,25 +197,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>admin</td>
-                                <td>admin</td>
-                                <td> 
-                                    *****
-                                </td>
-                                <td><span class="badge-danger badge">Admin</span></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>moderator</td>
-                                <td>moderator</td>
-                                <td> 
-                                    <input type="text"> 
-                                    <i class='fas fa-check text-success'></i>
-                                </td>
-                                <td><span class="badge-success badge">moderator</span></td>
-                            </tr>
+                            <?php
+                                //Display all users.
+                                $UserViewObj = new UserView();
+                                $UserViewObj->showUsers();
+
+                            ?>
                         </tbody>
                     </table>
                 </div><!--Row.-->
@@ -151,35 +219,33 @@
 
                  <!--Change password.-->
                  <div class="col-lg-6 col-md-12 col-sm-12">
-                    <form>
+                    <form action="../classes/handler.class.php?addAccount" method="POST">
                         <div class="form-group">
                             <label for="chooseUsername" class="account-settings-label text-primary">Username</label>
-                            <input type="text" class="form-control" id="chooseUsername" placeholder="Enter username..">
+                            <input type="text" class="form-control" id="chooseUsername" name="chooseUsername" placeholder="Enter username..">
                         </div>
                         <div class="form-group">
                             <label for="chooseDisplayname" class="account-settings-label text-primary">Displayname</label>
-                            <input type="text" class="form-control" id="chooseDisplayname" placeholder="Enter displayname..">
+                            <input type="text" class="form-control" id="chooseDisplayname" name="chooseDisplayname" placeholder="Enter displayname..">
                         </div>
-                    </form>
                 </div>
 
                 <div class="col-lg-6 col-md-12 col-sm-12">
-                    <form>
                         <div class="form-group">
                             <label for="choosePassword" class="account-settings-label text-primary">Password</label>
-                            <input type="password" class="form-control" id="choosePassword" placeholder="Enter password..">
+                            <input type="password" class="form-control" id="choosePassword" name="choosePassword" placeholder="Enter password..">
                         </div>
                         <div class="form-group">
                             <label for="choosePasswordConfirm" class="account-settings-label text-primary">Confirm password</label>
-                            <input type="password" class="form-control" id="choosePasswordConfirm" placeholder="Confirm password..">
+                            <input type="password" class="form-control" id="choosePasswordConfirm" name="choosePasswordConfirm" placeholder="Confirm password..">
                         </div>
-                    </form>
                 </div>
 
                 <div class="col-lg-12 col-md-12 col-sm-12">
-                    <div class="form-group">
-                        <button type="submit" class="account-settings-button btn btn-primary btn-sm">Save</button>
-                    </div>
+                        <div class="form-group">
+                            <button type="submit" class="account-settings-button btn btn-primary btn-sm">Save</button>
+                        </div>
+                    </form>
                 </div>
 
             </div>

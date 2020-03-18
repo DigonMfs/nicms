@@ -36,6 +36,13 @@
         
         <!-- Main-->
         <main class="general-main">
+
+            <!--Navbar for admin pages-->
+            <ul class='nav nav-pills admin-navbar'>
+                <?php 
+                    include_once "../includes/navbar.inc.php";
+                ?>
+            </ul>
             
              <!--Directory Actions-->
             <div class="admin files-admin-div">

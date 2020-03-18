@@ -39,6 +39,13 @@
         
         <!-- Main-->
         <main class="general-main">
+
+            <!--Navbar for admin pages-->
+            <ul class='nav nav-pills admin-navbar'>
+                <?php 
+                    include_once "../includes/navbar.inc.php";
+                ?>
+            </ul>
             
             <!-- Title and summary-->
             <div class="card card-body bg-light">

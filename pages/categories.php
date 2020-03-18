@@ -33,25 +33,14 @@
         
         <!--Main-->
         <main class="general-main">
-            
-            <!-- Navigation bar  
-            <nav class="container general-nav">
-                <ul class="nav nav-pills">
-                    <li class="nav-item">
-                     <a class="nav-link" href="write.php">Write</a>
-                    </li>
-                    <li class="nav-item">
-                     <a class="nav-link" href="files.php">Files</a>
-                    </li>
-                    <li class="nav-item">
-                     <a class="nav-link active" href="categories.php">Categories</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="calendar.php">Calendar</a>
-                    </li>
-                 </ul> 
-            </nav>--> 
-            
+
+            <!--Navbar for admin pages-->
+            <ul class='nav nav-pills admin-navbar'>
+                <?php 
+                    include_once "../includes/navbar.inc.php";
+                ?>
+            </ul>
+             
             <!--Admin actions div-->
             <div class="admin categories-admin-div">
                 <button class="btn btn-primary" onclick="Toggleoverlay('open',3)">Add Category</button>
