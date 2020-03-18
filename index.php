@@ -1,5 +1,5 @@
 <?php
-    include_once("includes/autoload.inc.php");
+    include_once("includes/autoload.inc.php"); //Test
     $object = new AutoLoad();
 
     if(isset($_SESSION["userID"])) {
