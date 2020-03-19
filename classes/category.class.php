@@ -8,6 +8,12 @@
             return $result;
         }//Method getCategories.
 
+        protected function getCategory($categoryID) {
+            $sql = "SELECT * FROM category WHERE row_id=$categoryID";
+            $result = $this->connect()->query($sql);
+            return $result;
+        }//Method getCategory.
+
         protected function getSubcatsFromParentCat($parent_id) {
             $sql = "SELECT * FROM category WHERE parent_id= $parent_id";
             $result = $this->connect()->query($sql);

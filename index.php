@@ -1,10 +1,19 @@
 <?php
     include_once("includes/autoload.inc.php"); 
     $object = new AutoLoad();
+    $CategoryViewObj = new CategoryView();
 
     if(isset($_SESSION["userID"])) {
         //header("Location: pages/write.php");
     }
+
+    //Make sure cat_id exists.
+    if (isset($_GET["catID"])) {
+        $cat_id = $_GET["catID"];
+    } else {
+        $cat_id = 1;
+    }
+    
 ?>
 <!DOCTYPE html>
 <html lnag="nl">
@@ -47,7 +56,7 @@
             <nav class="container general-nav nav-index" aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumbs-index">
                   <li class="breadcrumb-item">Home</li>
-                  <li class="breadcrumb-item active" aria-current="page"><a href="index.php">Category Name</a></li>
+                  <li class="breadcrumb-item active" aria-current="page"><a href="index.php"><?php echo $CategoryViewObj->showCategory($cat_id) ?></a></li>
                 </ol>
             </nav>
 
@@ -61,14 +70,7 @@
                     <!--Sidebar-->
                     <?php
                         //show subcategories.
-                        $CategoryViewObj = new CategoryView();
-
-                        //Check if subcatID isset (should normally always be so)
-                        if (isset($_GET["subcatID"])) {
-                            $CategoryViewObj->ArticlesShowSubcats($_GET["subcatID"]);
-                        } else {
-                            $CategoryViewObj->ArticlesShowSubcats(1);
-                        }
+                        $CategoryViewObj->ArticlesShowSubcats($cat_id);
                     ?>
                 </div>
 

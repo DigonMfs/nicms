@@ -63,7 +63,7 @@
                 while($row = $result->fetch_assoc()) {
                     echo "<tr>";
                     echo "<td>";
-                    echo "<a href='pages/article.php?articleId=".$row['a_row_id']."&articleTitle=".$row['a_title']."&subcatId=".$row['s_row_id']."&subcat=".$row['s_category']."'>".$row["a_title"]."</a>";
+                    echo "<a href='pages/article.php?articleId=".$row['a_row_id']."&articleTitle=".$row['a_title']."&catID=".$row["c_row_id"]."&subcatId=".$row['s_row_id']."&subcat=".$row['s_category']."'>".$row["a_title"]."</a>";
                     echo "<div class='table-articles-admin-icons'>";
 
                     //Check if admin is logged in.
@@ -97,9 +97,9 @@
                 while($row = $result->fetch_assoc()) {
                     //Check if record is current article. If so highlight it.
                     if ($articleId == $row["a_row_id"]) {
-                        echo "<a href='article.php?articleId=".$row['a_row_id']."&articleTitle=".$row['a_title']."&subcatId=".$row['s_row_id']."&subcat=".$row['s_category']."' ".$row["a_title"]."' class='list-group-item list-group-item-action list-group-item-secondary'>".$row['a_title']."</a>";
+                        echo "<a href='article.php?articleId=".$row['a_row_id']."&articleTitle=".$row['a_title']."&catID=".$row["c_row_id"]."&subcatId=".$row['s_row_id']."&subcat=".$row['s_category']."' ".$row["a_title"]."' class='list-group-item list-group-item-action list-group-item-secondary'>".$row['a_title']."</a>";
                     } else {
-                        echo "<a href='article.php?articleId=".$row['a_row_id']."&articleTitle=".$row['a_title']."&subcatId=".$row['s_row_id']."&subcat=".$row['s_category']."' ".$row["a_title"]."' class='list-group-item list-group-item-action'>".$row['a_title']."</a>";
+                        echo "<a href='article.php?articleId=".$row['a_row_id']."&articleTitle=".$row['a_title']."&catID=".$row["c_row_id"]."&subcatId=".$row['s_row_id']."&subcat=".$row['s_category']."' ".$row["a_title"]."' class='list-group-item list-group-item-action'>".$row['a_title']."</a>";
                     }
                 }
             } else {

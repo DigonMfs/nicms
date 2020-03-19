@@ -53,7 +53,7 @@
     //Ajax called from SaveCategory.
     if(isset($_POST["saveArticle"])) {
         $SaveArticleObj = new WriteContr();
-        $SaveArticleObj->createArticle($_POST["articleTitle"], $_POST["articleSummary"],$_POST["articleBody"], $_POST["articleCategory"], $_POST["articleSubcategory"], $_POST["articleSigner"]);
+        $SaveArticleObj->createArticle($_POST["articleTitle"], $_POST["articleSummary"],$_POST["articleBody"], $_POST["articleCategory"], $_POST["articleSubcategory"],$_POST["articleSigner"],$_POST["articleURL"]);
         unset($SaveArticleObj);
     }//If.
 

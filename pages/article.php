@@ -2,7 +2,9 @@
     //Includes.
     include_once("../includes/autoload.inc.php");
     $object = new AutoLoad();
+    $CategoryViewObj = new CategoryView();
     $ArticelViewObj = new ArticleView();
+
 ?>
 <!DOCTYPE html>
 <html lnag="nl">
@@ -36,7 +38,7 @@
             <nav class="container general-nav articles-article-breadcrumbs" aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item">Home</li>
-                  <li class="breadcrumb-item active" aria-current="page"><a href="../index.php">Category Name</a></li>
+                  <li class="breadcrumb-item active" aria-current="page"><a href="../index.php"><?php echo $CategoryViewObj->showCategory($_GET["catID"]) ?></a></li>
                   <li class="breadcrumb-item active" aria-current="page"><a href="../index.php"><?php echo $_GET['subcat'] ?></a></li>
                   <li class="breadcrumb-item active" aria-current="page"><?php echo $_GET['articleTitle'] ?></li>
                 </ol>

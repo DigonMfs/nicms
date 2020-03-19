@@ -86,7 +86,7 @@ function logout() {
 
 /*All function about the explorer window*/
 
-//This function open is subdir in the dir
+//This function opens a subdir in a dir.
 function DirClick(dirName,admin) {
 
     //Check if createpath is valid
@@ -442,7 +442,8 @@ function SaveArticle() {
     mArticleCategory = document.getElementById("articleCategory").value;
     mArticleSubcategory = document.getElementById("articleSubcategory").value;
     articleSigner = document.getElementById("articleSigner").value;
-    
+    articleURL = document.getElementById("articleURL").value;
+
     //Values of the category and subcategory ID container 2 values, their ID, and their Parent_ID,
     //They are separated by a , so we split the value and take the last value (row_id)
     aArticleCategory = mArticleCategory.split(',');
@@ -461,6 +462,7 @@ function SaveArticle() {
             articleCategory:articleCategory,
             articleSubcategory:articleSubcategory,
             articleSigner:articleSigner,
+            articleURL:articleURL,
             saveArticle:"saveArticle"
         },
         success: function(data) {

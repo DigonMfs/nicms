@@ -5,12 +5,12 @@
         //Properties
         public $date;
 
-        public function createArticle($articleTitle,$articleSummary,$articleBody, $articleCategory, $articleSubcategory, $articleSigner) {
+        public function createArticle($articleTitle,$articleSummary,$articleBody, $articleCategory, $articleSubcategory, $articleSigner, $articleURL) {
             $FunctionsObj = new Functions();
             $this->date = date('Y-m-d H:i:s');
 
             //Validation
-            if (empty($articleTitle) || empty($articleSummary) || empty($articleBody) || empty($articleCategory) || empty($articleSubcategory) || empty($articleSigner)) {
+            if (empty($articleTitle) || empty($articleSummary) || empty($articleBody) || empty($articleCategory) || empty($articleSubcategory) || empty($articleSigner || empty($articleURL))) {
                 echo $FunctionsObj->outcomeMessage("error","Not all variables contain a value.");
                 return false;
             }//If empty.
@@ -29,13 +29,18 @@
                 return false;
             }//If subcat is a subcat.
 
+            //Remove spaces, check if alphanumeric
+            if (!$FunctionsObj->isAlphanumeric($FunctionsObj->stripSpaces($articleURL))) {
+                echo $FunctionsObj->outcomeMessage("error","URL is not alphanumeric.");
+                return false;
+            }
+
             //Article saved.
-            if($this->setArticle($articleTitle,$this->date,$articleSummary,$articleBody, $articleCategory, $articleSubcategory, $articleSigner)) {
+            if($this->setArticle($articleTitle,$this->date,$articleSummary,$articleBody, $articleCategory, $articleSubcategory, $articleSigner, $FunctionsObj->stripSpaces($articleURL))) {
                 echo "succes";
             } else {
                 echo "fail";
             }
-
         }//Method createArticle.
 
     }//Class WriteContr.
