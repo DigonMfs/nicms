@@ -1,5 +1,5 @@
 <?php
-    include_once("includes/autoload.inc.php"); //Test
+    include_once("includes/autoload.inc.php"); 
     $object = new AutoLoad();
 
     if(isset($_SESSION["userID"])) {
@@ -60,8 +60,15 @@
                 <div class="col-md-3 col-lg-3">
                     <!--Sidebar-->
                     <?php
+                        //show subcategories.
                         $CategoryViewObj = new CategoryView();
-                        $CategoryViewObj->ArticlesShowSubcats(1);
+
+                        //Check if subcatID isset (should normally always be so)
+                        if (isset($_GET["subcatID"])) {
+                            $CategoryViewObj->ArticlesShowSubcats($_GET["subcatID"]);
+                        } else {
+                            $CategoryViewObj->ArticlesShowSubcats(1);
+                        }
                     ?>
                 </div>
 
