@@ -1,0 +1,11 @@
+     <div class="card card-body bg-light write-publish-checkbox-container">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="website" checked disabled>
+                            <label class="custom-control-label" for="website">Website</label>
+                        </div>
+                        <?php
+                            //Show all media channels
+                            $mediaObj = new WriteView();
+                            $mediaObj->showMediaChannels();
+                        ?>
+                    </div><!--checkbox container--> 
