@@ -1,4 +1,5 @@
 //Global variables
+linkUrl = "//localhost/Websites/nicms/";
 teller = 0;
 subcatLevels = 0;
 amount = 0; //limit of calendar page.
@@ -73,7 +74,7 @@ function logout() {
     }
     $.ajax({
         type: "POST",
-        url: ajaxUrl+"handler.class.php",
+        url: linkUrl+"classes/handler.class.php",
         data: {
             logout:"logout"
         },
@@ -107,7 +108,7 @@ function DirClick(dirName,admin) {
     //Execute Ajax
     $.ajax({
         type: "GET",
-        url: "../classes/handler.class.php",
+        url: linkUrl+"classes/handler.class.php",
         data: {
             aPath:aPath,
             admin:admin,
@@ -162,7 +163,7 @@ function CreateDir() {
     //Call ajax
     $.ajax({
         type: "GET",
-        url: "../classes/handler.class.php",
+        url: linkUrl+"classes/handler.class.php",
         data: {
             aPath:aPath,
             dirName:dirName,
@@ -215,7 +216,7 @@ function UploadFile() {
     form_data.append('uploadFile', aPath);
 
     $.ajax({
-        url: "../classes/handler.class.php",
+        url: linkUrl+"classes/handler.class.php",
         method: "POST",
         data: form_data,
         contentType: false,
@@ -299,7 +300,7 @@ function Delete(dirPath,fileName,type) {
     
     $.ajax({
         type: "GET",
-        url: "../classes/handler.class.php",
+        url: linkUrl+"classes/handler.class.php",
         data: {
             dirPath:dirPath,
             fileName:fileName,
@@ -393,7 +394,7 @@ function ShowSubCategories(value) {
     //Calling ajax
     $.ajax({
         type: "GET",
-        url: "../classes/handler.class.php",
+        url: linkUrl+"classes/handler.class.php",
         data: {
             level:level,
             parent_id:parent_id,
@@ -454,7 +455,7 @@ function SaveArticle() {
     //Call ajax
     $.ajax({
         type: "POST",
-        url: "../classes/handler.class.php",
+        url: linkUrl+"classes/handler.class.php",
         data: {
             articleTitle:articleTitle,
             articleSummary:articleSummary,
@@ -466,7 +467,11 @@ function SaveArticle() {
             saveArticle:"saveArticle"
         },
         success: function(data) {
-            alert(data);
+            $(".write-alert-messages").html(data);
+            window.scrollTo(0,0);
+            setTimeout(function() {
+              location.reload();
+            }, 3000);
         },
     });//ajax
     
@@ -512,7 +517,7 @@ function DeleteCategory(id,catSubcat) {
     //call ajax
     $.ajax({
         type: "GET",
-        url: "../classes/handler.class.php",
+        url: linkUrl+"classes/handler.class.php",
         data: {
             id:id,
             catSubcat:catSubcat,
@@ -536,7 +541,7 @@ function ListCategories() {
      //call ajax
      $.ajax({
         type: "GET",
-        url: "../classes/handler.class.php",
+        url: linkUrl+"classes/handler.class.php",
         data: {
             listCategories:"listCategories"
         },
@@ -572,7 +577,7 @@ function SaveCategory(parent_id) {
     //execute ajax
     $.ajax({
         type: "GET",
-        url: "../classes/handler.class.php",
+        url: linkUrl+"classes/handler.class.php",
         data: {
             parent_id:parent_id,
             catSubcatName:catSubcatName,
@@ -623,7 +628,7 @@ function AddSubcategory(parent_id) {
     //Cal ajax.
     $.ajax({
         type: "GET",
-        url: "../classes/handler.class.php",
+        url: linkUrl+"classes/handler.class.php",
         data: {
             parent_id:parent_id,
             catSubcatName: catSubcatName,
@@ -660,7 +665,7 @@ function filterArticles() {
 
     $.ajax({
         type: "POST",
-        url: "../classes/handler.class.php",
+        url: linkUrl+"classes/handler.class.php",
         data: {
             visibility:visibility,
             sort:sort,
@@ -695,7 +700,7 @@ function askPublishArticle(id) {
 function publishArticle(id) {
     $.ajax({
         type: "GET",
-        url: "../classes/handler.class.php",
+        url: linkUrl+"classes/handler.class.php",
         data: {
             id:id,
             publishArticle:"publishArticle"
@@ -735,7 +740,7 @@ function askUnpublishArticle(id) {
 function unpublishArticle(id) {
     $.ajax({
         type: "GET",
-        url: "../classes/handler.class.php",
+        url: linkUrl+"classes/handler.class.php",
         data: {
             id:id,
             unpublishArticle:"unpublishArticle"
@@ -779,7 +784,7 @@ function askDeleteArticle(id) {
 function deleteArticle(id) {
     $.ajax({
         type: "GET",
-        url: "../classes/handler.class.php",
+        url: linkUrl+"classes/handler.class.php",
         data: {
             id:id,
             deleteArticle:"deleteArticle"
@@ -802,7 +807,7 @@ function calendarLoadMoreArt() {
 
     $.ajax({
         type: "POST",
-        url: "../classes/handler.class.php",
+        url: linkUrl+"classes/handler.class.php",
         data: {
             amount:amount,
             visibility:visibility,
@@ -834,7 +839,7 @@ function showArticlesIndex(id,name) {
     
     $.ajax({
         type: "POST",
-        url: "classes/handler.class.php",
+        url: linkUrl+"classes/handler.class.php",
         data: {
             id:id,
             showArticlesIndex:"showArticlesIndex"

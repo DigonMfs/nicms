@@ -36,10 +36,10 @@
             }
 
             //Article saved.
-            if($this->setArticle($articleTitle,$this->date,$articleSummary,$articleBody, $articleCategory, $articleSubcategory, $articleSigner, $FunctionsObj->stripSpaces($articleURL))) {
-                echo "succes";
+            if($this->setArticle($articleTitle,$this->date,$articleSummary,$articleBody, $articleCategory, $articleSubcategory, $articleSigner, $FunctionsObj->replaceSpaces($articleURL))) {
+                echo $FunctionsObj->outcomeMessage("success","Article has successfully been saved.");
             } else {
-                echo "fail";
+                echo $FunctionsObj->outcomeMessage("success","Failed to save article.");
             }
         }//Method createArticle.
 

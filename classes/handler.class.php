@@ -17,7 +17,7 @@
 
     //Ajax called from DirClick.
     if(isset($_GET["dirClick"])) {
-        $FileFolderObj = new FileView();
+        $FileFolderObj = new FileView($linkUrl);
         $FileFolderObj->showFilesFolders($_GET["admin"],$_GET["aPath"]);
         unset($FileFolderObj);
     }//If.
@@ -80,7 +80,7 @@
 
     //Ajax called from showArticlesToPublish.
     if(isset($_GET["showArticlesToPublish"])) {
-        $ShowArticlesToPublishObj = new ArticleView();
+        $ShowArticlesToPublishObj = new ArticleView($linkUrl);
         $ShowArticlesToPublishObj->showArticle('undefined','undefined');
         unset($ShowArticlesToPublishObj);
     }//If.
@@ -108,14 +108,14 @@
     
     //Ajax called from showArticlesIndex.
     if(isset($_POST["showArticlesIndex"])) {
-        $showArticlesIndexObj = new ArticleView();
+        $showArticlesIndexObj = new ArticleView($linkUrl);
         $showArticlesIndexObj->showArticlesIndex($_POST["id"]);
         unset($showArticlesIndexObj);
     }//If.
 
     //Ajax called from filterArticles.
     if(isset($_POST["filterArticles"])) {
-        $filterArticlesObj = new ArticleView();
+        $filterArticlesObj = new ArticleView($linkUrl);
         $filterArticlesObj->showArticle($_POST["visibility"],$_POST["sort"],10);
         unset($filterArticlesObj);
     }//If.

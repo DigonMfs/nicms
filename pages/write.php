@@ -36,6 +36,9 @@
                     include_once "../includes/navbar.inc.php";
                 ?>
             </ul>
+
+            <!--Alert messages-->
+            <div class="write-alert-messages"></div>
             
             <!-- Title and summary.-->
             <div class="card card-body bg-light">
@@ -118,7 +121,7 @@
                             the image won't be inserted in ckeditor, on false the image will be inserted into ckeditor and no delete icon
                             will be shown. */
                             $admin = "false";
-                            $fileFolderObj = new FileView();
+                            $fileFolderObj = new FileView($linkUrl);
                             $fileFolderObj->showFilesFolders($admin,null);
                         ?>
                     </div>

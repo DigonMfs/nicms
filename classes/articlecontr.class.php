@@ -52,6 +52,34 @@
             }
         }//Method deleteArticle.
 
+
+        public function getArticleTitle($articleID) {
+            $result = $this->getArticle($articleID);
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    return $row["a_title"];
+                }
+            }
+        }//Method getArticleTitle.
+
+        public function getArticleCatID($articleID) {
+            $result = $this->getArticle($articleID);
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    return $row["c_row_id"];
+                }
+            }
+        }//Method getArticleCatID.
+
+        public function getArticleSubcatID($articleID) {
+            $result = $this->getArticle($articleID);
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    return $row["s_row_id"];
+                }
+            }
+        }//Method getARticleSubcat.
+
     }//ArticleContr.
 
 

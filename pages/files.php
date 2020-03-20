@@ -58,7 +58,7 @@
                 <div class="files-directory-body card-body">
                      <?php
                         $admin = "true";
-                        $fileFolderObj = new FileView();
+                        $fileFolderObj = new FileView($linkUrl);
                         $fileFolderObj->showFilesFolders($admin, null);
                         unset($fileFolderObj);
                     ?>

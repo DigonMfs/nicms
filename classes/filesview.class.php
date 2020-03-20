@@ -2,13 +2,22 @@
     //FileView class.
     class FileView {
 
-        public function showFilesFolders($admin,$aPath) {
-            $FileFolderObj = new FileView();
+         //Make variable $linkUrl accessible in FileView.
+         protected $linkUrl = '';
+         public function __construct($linkUrl) {
+             $this->linkUrl = $linkUrl;
+         }
 
-            if ($aPath === null) 
+        public function showFilesFolders($admin,$aPath) {
+            
+            if ($aPath === null) {
                 $dirPath = "../assets";
-            else 
+                $dirPathFiles = "assets/";
+            } else {
                 $dirPath = "../" . join("/",$aPath);
+                $dirPathFiles = $this->linkUrl . join("/",$aPath);
+            }
+               
 
             if (is_dir($dirPath)) {
                 $aFiles = scandir($dirPath);
@@ -16,9 +25,9 @@
                     
                     //File or Folder?
                     if (is_dir($dirPath . '/' . $aFiles[$i]))
-                        $FileFolderObj->showFolder($admin, $aFiles[$i], $dirPath); 
+                        $this->showFolder($admin, $aFiles[$i], $dirPath, $dirPathFiles); 
                     else 
-                        $FileFolderObj->showFile($admin, $aFiles[$i], $dirPath);
+                        $this->showFile($admin, $aFiles[$i], $dirPath, $dirPathFiles);
 
                 }//For.
             }//if.
@@ -43,7 +52,7 @@
             }//Else.
         }//Method showFolder.
 
-        public function ShowFile(string $admin, string $file, string $dirPath) {
+        public function ShowFile(string $admin, string $file, string $dirPath, string $dirPathImg) {
             //Get filename and extension.
             $files = pathinfo($file);
             $extension = $files['extension'];
@@ -66,8 +75,8 @@
                     $container = '
                         <div class="files-file-container">
                         <div class="files-file-actions-container">
-                            <button class="files-file-actions-buttons btn btn-secondary btn-sm" onclick="copyFile(\''.$dirPath.'\',\''.$file.'\',\''.$extension.'\')">Copy</button>
-                            <button class="files-file-actions-buttons btn btn-secondary btn-sm" onclick="InsertFile(\''.$dirPath.'\',\''.$file.'\',\''.$extension.'\')">Insert</button>
+                            <button class="files-file-actions-buttons btn btn-secondary btn-sm" onclick="copyFile(\''.$dirPathImg.'\',\''.$file.'\',\''.$extension.'\')">Copy</button>
+                            <button class="files-file-actions-buttons btn btn-secondary btn-sm" onclick="InsertFile(\''.$dirPathImg.'\',\''.$file.'\',\''.$extension.'\')">Insert</button>
                         </div>
                     ';
                     $text = '';

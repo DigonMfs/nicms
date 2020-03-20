@@ -47,7 +47,7 @@
             <nav class="container general-nav nav-index" aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumbs-index">
                   <li class="breadcrumb-item">Home</li>
-                  <li class="breadcrumb-item active" aria-current="page"><a href="index.php"><?php echo $CategoryViewObj->showCategory($cat_id) ?></a></li>
+                  <li class="breadcrumb-item active" aria-current="page"><a href="<?php echo $linkUrl; ?>index"><?php echo $CategoryViewObj->showCategory($cat_id) ?></a></li>
                 </ol>
             </nav>
 

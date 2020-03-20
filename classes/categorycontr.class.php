@@ -50,7 +50,7 @@
                 return false;
             }//If $result == false.
 
-            //Check if cat has subcat
+            //Check if cat has subcat.
             $result = $this->getSubcatsFromParentCat($id);
             if ($result->num_rows > 0) {
                 echo $FunctionsObj->outcomeMessage("error","Category has subcategories, first delete all subcategories.");
@@ -63,8 +63,17 @@
             } else {
                 echo $FunctionsObj->outcomeMessage("error","Failed to delete record.");
                 return false;
-            }//If unsetCatSubcat == true
-        }//Method deleteCategory
+            }//If unsetCatSubcat == true.
+        }//Method deleteCategory.
+
+        public function getSubcat($subcatID) {
+            $result = $this->getCategory($subcatID);
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    return $row["category"];
+                }
+            }
+        }
 
     }//CategoryContr.
 

@@ -17,13 +17,21 @@
         public function __construct() {
             $this->url = $_SERVER["HTTP_HOST"] . $_SERVER['REQUEST_URI'];
 
-            if (strpos($this->url,'classes') == TRUE) {
+            //Relative paths.
+            /*if (strpos($this->url,'classes') == TRUE) {
                 $this->path = "";
             } else if (strpos($this->url,'pages') == TRUE) {
                 $this->path = "../classes/";
             } else {
                 $this->path = "classes/";
+            }*/
+
+            if (strpos($this->url,'index') == TRUE) {
+                $this->path = "classes/";
+            } else {
+                $this->path = "../classes/";
             }
+            
 
             include_once($this->path."dbh.class.php");
             //include_once($this->path."handler.class.php");

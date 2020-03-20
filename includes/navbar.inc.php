@@ -5,54 +5,37 @@
     //Check if user is logged in (only admin can log in).
     if (isset($_SESSION["userID"])) {
 
-        //check directory path to create the links. And check if user (admin) is logged in.
+        //Check if user (admin) is logged in.
         if ($_SESSION["userFunction"] == 1) 
             $text = "Admin";
         else 
             $text = "Moderator";
 
         echo "<li class='nav-link admin-navbar-header'><span class='admin-burger-menu' onclick='toggleAdminNav()'>&#9776;</span>".$text."</li>";
+        echo "<li class='nav-item admin-nav-item'>"; 
+        echo "<a class='nav-link nav-link-admin' href='".$linkUrl."index'>Index</a>";
+        echo "</li>";
         echo "<li class='nav-item admin-nav-item'>";
-        if (!strpos($url,'pages') == TRUE) {    
-            echo "<a class='nav-link nav-link-admin' href='".$linkUrl."index.php'>Index</a>";
-            echo "</li>";
-            echo "<li class='nav-item admin-nav-item'>";
-            echo "<a class='nav-link nav-link-admin' href='".$linkUrl."pages/write.php'>Write</a>";
-            echo "</li>";
-            echo "<li class='nav-item admin-nav-item'>";
-            echo "<a class='nav-link nav-link-admin' href='".$linkUrl."pages/files.php'>Files</a>";
-            echo "</li>";
-            echo "<li class='nav-item admin-nav-item'>";
-            echo "<a class='nav-link nav-link-admin' href='".$linkUrl."pages/categories.php'>Categories</a>";
-            echo "</li>";
-            echo "<li class='nav-item admin-nav-item'>";
-            echo "<a class='nav-link nav-link-admin' href='".$linkUrl."pages/calendar.php'>Calendar</a>";
-            echo "</li>";
-            echo "<li class='nav-item admin-nav-item'>";
-            echo "<a class='nav-link nav-link-admin' href='".$linkUrl."pages/account.php'>Account</a>";
-            echo "</li>";
-            echo "<li class='nav-item admin-nav-item'>";
-        } else {
-            echo "<a class='nav-link nav-link-admin' href='".$linkUrl."index.php'>Index</a>";
-            echo "</li>";
-            echo "<li class='nav-item admin-nav-item'>";
-            echo "<a class='nav-link nav-link-admin' href='".$linkUrl."pages/write.php'>Write</a>";
-            echo "</li>";
-            echo "<li class='nav-item admin-nav-item'>";
-            echo "<a class='nav-link nav-link-admin' href='".$linkUrl."pages/files.php'>Files</a>";
-            echo "</li>";
-            echo "<li class='nav-item admin-nav-item'>";
-            echo "<a class='nav-link nav-link-admin' href='".$linkUrl."pages/categories.php'>Categories</a>";
-            echo "</li>";
-            echo "<li class='nav-item admin-nav-item'>";
-            echo "<a class='nav-link nav-link-admin' href='".$linkUrl."pages/calendar.php'>Calendar</a>";
-            echo "</li>";
-            echo "<li class='nav-item admin-nav-item'>";
-            echo "<a class='nav-link nav-link-admin' href='".$linkUrl."pages/account.php'>Account</a>";
-            echo "</li>";
-            echo "<li class='nav-item admin-nav-item'>";
-        }
+        echo "<a class='nav-link nav-link-admin' href='".$linkUrl."write'>Write</a>";
+        echo "</li>";
+        echo "<li class='nav-item admin-nav-item'>";
+        echo "<a class='nav-link nav-link-admin' href='".$linkUrl."files'>Files</a>";
+        echo "</li>";
+        echo "<li class='nav-item admin-nav-item'>";
+        echo "<a class='nav-link nav-link-admin' href='".$linkUrl."categories'>Categories</a>";
+        echo "</li>";
+        echo "<li class='nav-item admin-nav-item'>";
+        echo "<a class='nav-link nav-link-admin' href='".$linkUrl."calendar'>Calendar</a>";
+        echo "</li>";
+        echo "<li class='nav-item admin-nav-item'>";
+        echo "<a class='nav-link nav-link-admin' href='".$linkUrl."account'>Account</a>";
+        echo "</li>";
+        echo "<li class='nav-item admin-nav-item'>";
         echo "<button class='button-logout' type='button' onclick='logout()'>Logout</button>";
         echo "</li>";
+
+        //With relative paths.
+        //if (!strpos($url,'pages') == TRUE) {   }
+        //else {}
     } 
 ?>

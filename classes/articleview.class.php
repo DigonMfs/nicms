@@ -1,7 +1,14 @@
 <?php  
 
+
     class ArticleView extends Article {
-        
+
+        //Make variable $linkUrl accessible in ArticleView.
+        protected $linkUrl = '';
+        public function __construct($linkUrl) {
+            $this->linkUrl = $linkUrl;
+        }
+
         public function showArticle($visibility,$sort,$limit) {
             $FunctionsObj = new Functions();
 
@@ -63,7 +70,8 @@
                 while($row = $result->fetch_assoc()) {
                     echo "<tr>";
                     echo "<td>";
-                    echo "<a href='pages/article.php?articleId=".$row['a_row_id']."&articleTitle=".$row['a_title']."&catID=".$row["c_row_id"]."&subcatId=".$row['s_row_id']."&subcat=".$row['s_category']."'>".$row["a_title"]."</a>";
+                    //echo "<a href='".$this->linkUrl."article/".$row['a_row_id']."/".$row['a_title']."/".$row["c_row_id"]."/".$row['s_row_id']."/".$row['s_category']."'>".$row["a_title"]."</a>";
+                    echo "<a href='".$this->linkUrl."article/".$row['a_link']."/".$row['a_row_id']."'>".$row["a_title"]."</a>";
                     echo "<div class='table-articles-admin-icons'>";
 
                     //Check if admin is logged in.
@@ -97,9 +105,9 @@
                 while($row = $result->fetch_assoc()) {
                     //Check if record is current article. If so highlight it.
                     if ($articleId == $row["a_row_id"]) {
-                        echo "<a href='article.php?articleId=".$row['a_row_id']."&articleTitle=".$row['a_title']."&catID=".$row["c_row_id"]."&subcatId=".$row['s_row_id']."&subcat=".$row['s_category']."' ".$row["a_title"]."' class='list-group-item list-group-item-action list-group-item-secondary'>".$row['a_title']."</a>";
+                        echo "<a href='".$this->linkUrl."article/".$row['a_link']."/".$row['a_row_id']."' class='list-group-item list-group-item-action list-group-item-secondary'>".$row['a_title']."</a>";
                     } else {
-                        echo "<a href='article.php?articleId=".$row['a_row_id']."&articleTitle=".$row['a_title']."&catID=".$row["c_row_id"]."&subcatId=".$row['s_row_id']."&subcat=".$row['s_category']."' ".$row["a_title"]."' class='list-group-item list-group-item-action'>".$row['a_title']."</a>";
+                        echo "<a href='".$this->linkUrl."article/".$row['a_link']."/".$row['a_row_id']."' class='list-group-item list-group-item-action'>".$row['a_title']."</a>";
                     }
                 }
             } else {

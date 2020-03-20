@@ -30,7 +30,7 @@
             </ul>
                   
             <!--Alert messages-->
-            <div class="calendar-alert-messages"> -->join on table articlechannel<br></div>
+            <div class="calendar-alert-messages"></div>
 
             <div class="row">
                 
@@ -71,7 +71,7 @@
 
                     <!--Show all articles-->
                     <?php 
-                        $ArticleObj = new ArticleView();
+                        $ArticleObj = new ArticleView($linkUrl);
                         $ArticleObj->showArticle('all','DATEASC',10);
                     ?>
                 </div><!-- Articles container-->   

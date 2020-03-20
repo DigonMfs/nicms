@@ -10,8 +10,9 @@
         }//GetMediaChannels.
 
         protected function setArticle($articleTitle,$date,$articleSummary,$articleBody, $articleCategory, $articleSubcategory, $articleSigner, $articleURL) {
-            $sql = "INSERT INTO article (author_id, creation_time, published, title, content, abstract, category_id, subcategory_id, signed_by, link)
-            VALUES ('1', '$date', '0','$articleTitle','$articleBody','$articleSummary','$articleCategory','$articleSubcategory','$articleSigner','$articleURL')";
+            $user = $_SESSION["userID"];
+            $sql = "INSERT INTO article (author_id, creation_time, published, deleted, title, content, abstract, category_id, subcategory_id, signed_by, link)
+            VALUES ('$user', '$date', '0','0','$articleTitle','$articleBody','$articleSummary','$articleCategory','$articleSubcategory','$articleSigner','$articleURL')";
             return $this->connect()->query($sql);
         }//Method setArticle.
 

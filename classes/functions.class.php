@@ -14,6 +14,10 @@
             return str_replace(' ', '', $value);
         }//Method stripSpaces.
 
+        public function replaceSpaces($value) {
+            return str_replace(' ', '_', $value);
+        }//Method replaceSpaces.
+
         public function stripUnderscores($value) {
             return str_replace('_', '', $value);
         }//Method stripUnderscores.

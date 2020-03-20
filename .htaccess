@@ -1,15 +1,58 @@
+#General
 RewriteEngine on
+Options -Indexes
 
-
+#index page
 RewriteCond %(REQUEST_FILENAME) !-f
 RewriteCond %(REQUEST_FILENAME) !-d
-RewriteRule ^index/([0-9+])$ index.php?catID=$1 [L]
+RewriteRule ^index/([0-9+]+)$ index.php?catID=$1 [L]
+RewriteRule ^index?$ index.php [L]
 
-#RewriteCond %(REQUEST_FILENAME) !-f
-#RewriteCond %(REQUEST_FILENAME) !-d
-#RewriteRule ^write/([0-9+])$ write.php?test=$2 [L]
+#Write page.
+RewriteRule ^write?$ ./pages/write.php
+
+#Files page.
+RewriteRule ^files?$ ./pages/files.php
+
+#Categories page.
+RewriteRule ^categories?$ ./pages/categories.php
+
+#calendar page.
+RewriteRule ^calendar?$ ./pages/calendar.php
+
+#Account page.
+RewriteRule ^account/([\w-\s]+)?$ ./pages/account.php?message=$1
+RewriteRule ^account?$ ./pages/account.php
+
+#article page.
+#RewriteRule ^article/([0-9+]+)/([\w-\s]+)/([0-9+]+)/([0-9+]+)/([\w-\s]+)?$ ./pages/article.php?articleId=$1&articleTitle=$2&catID=$3&subcatId=$4&subcat=$5 [NC]
+RewriteRule ^article/([\w-\s]+)/([0-9+]+)?$ ./pages/article.php?link=$1&articleID=$2 [NC]
+RewriteRule ^article?$ ./pages/article.php
 
 
-#NC = non-case sensitive
-#L = last rule
-#N = new rule (more rules can follow)
+
+
+#[NC] = non-case sensitive (convert uppercase to lowercase in url)
+#[L] = Last rule
+#[N] = New rule
+# ([\w-\s]+) is the same as ([0-9a-zA-Z_-]+) + with spaces
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#[NC] = non-case sensitive (automatically convert url to lower case)
+#[L] = last rule
+#[N] = new rule
