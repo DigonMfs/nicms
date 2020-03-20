@@ -1,0 +1,15 @@
+RewriteEngine on
+
+
+RewriteCond %(REQUEST_FILENAME) !-f
+RewriteCond %(REQUEST_FILENAME) !-d
+RewriteRule ^index/([0-9+])$ index.php?catID=$1 [L]
+
+#RewriteCond %(REQUEST_FILENAME) !-f
+#RewriteCond %(REQUEST_FILENAME) !-d
+#RewriteRule ^write/([0-9+])$ write.php?test=$2 [L]
+
+
+#NC = non-case sensitive
+#L = last rule
+#N = new rule (more rules can follow)

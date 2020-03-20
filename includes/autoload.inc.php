@@ -24,7 +24,7 @@
             } else {
                 $this->path = "classes/";
             }
-           
+
             include_once($this->path."dbh.class.php");
             //include_once($this->path."handler.class.php");
             include_once($this->path."functions.class.php");
