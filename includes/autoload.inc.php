@@ -1,5 +1,8 @@
 <?php 
     session_start();
+    
+    //Variable containing the entire path to the website.
+    $linkUrl = "//localhost/Websites/nicms/";
 
     interface AutoloadInterface {
         public function __construct();
