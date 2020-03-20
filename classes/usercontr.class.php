@@ -1,6 +1,12 @@
 <?php 
 class UserContr extends User {
 
+     //Make variable $linkUrl accessible in ArticleView.
+     protected $linkUrl = '';
+     public function __construct($linkUrl) {
+         $this->linkUrl = $linkUrl;
+     }
+
     public function loginContr($username,$password) {
         $FunctionsObj = new Functions();
 
@@ -42,14 +48,14 @@ class UserContr extends User {
         //Check if alphanumeric, and between 3 and 30char long.
         if (!$FunctionsObj->validateLength($newPassword,3,30) || !$FunctionsObj->isAlphanumeric($newPassword)) {
             //echo $FunctionsObj->outcomeMessage("error","Password is not alphanumeric, or is too long/short.");
-            header("Location: ../pages/account.php?fail=password-alphanumeric");
+            header("Location: ".$this->linkUrl."account/password-alphanumeric");
             return false;
         }
 
         //Check if new password and confirm new password are the same.
         if ($newPassword != $confirmNewPassword) {
             //echo $FunctionsObj->outcomeMessage("error","New password does not match.");
-            header("Location: ../pages/account.php?fail=password-no-match");
+            header("Location: ".$this->linkUrl."account/password-no-match");
             return false;
         }
 
@@ -57,14 +63,14 @@ class UserContr extends User {
         $result = $this->getCurUser($FunctionsObj->encrypt($oldPassword));
         if ($result->num_rows <= 0) {
             //echo $FunctionsObj->outcomeMessage("error","Old password is not correct.");
-            header("Location: ../pages/account.php?fail=pass-wrong");
+            header("Location: ".$this->linkUrl."account/pass-wrong");
             return false;
         }
 
         //Checkf if new password is the same as the old.
         if ($oldPassword == $newPassword) {
             //echo $FunctionsObj->outcomeMessage("error","New password is the same as the old.");
-            header("Location: ../pages/account.php?fail=newpass-same");
+            header("Location: ".$this->linkUrl."account/newpass-same");
             return false;
         }
 
@@ -73,10 +79,10 @@ class UserContr extends User {
         $result = $this->reSetPassword($FunctionsObj->encrypt($newPassword),$id);
         if ($result === TRUE) {
             //echo $FunctionsObj->outcomeMessage("success","Password has succesfully been changed.");
-            header("Location: ../pages/account.php?success=pass-change");
+            header("Location: ".$this->linkUrl."account/pass-change");
         } else {
             //echo $FunctionsObj->outcomeMessage("error","Failed to change password.");
-            header("Location: ../pages/account.php?fail=password-fail");
+            header("Location: ".$this->linkUrl."account/password-fail");
         }
     }
 
@@ -86,7 +92,7 @@ class UserContr extends User {
         //Check if username is alphanumeric and is between 3 and 30 chars long.
         if (!$FunctionsObj->validateLength($newUsername,3,30) || !$FunctionsObj->isAlphanumeric($newUsername)) {
             //echo $FunctionsObj->outcomeMessage("error","The new username is not alphanumeric, or is too long/short.");
-            header("Location: ../pages/account.php?fail=username-alphanumeric");
+            header("Location: ".$this->linkUrl."account/username-alphanumeric");
             return false;
         }
 
@@ -94,10 +100,10 @@ class UserContr extends User {
         $result = $this->reSetUSername($newUsername,$_SESSION["userID"]);
         if ($result === TRUE) {
             //echo $FunctionsObj->outcomeMessage("success","Username has succesfully been changed.");
-            header("Location: ../pages/account.php?success=username-change");
+            header("Location: ".$this->linkUrl."account/username-change");
         } else {
             //echo $FunctionsObj->outcomeMessage("error","Failed to change username.");
-            header("Location: ../pages/account.php?fail=username-fail");
+            header("Location: ".$this->linkUrl."account/username-fail");
         }
     }//Method changeUsername.
 
@@ -107,7 +113,7 @@ class UserContr extends User {
         //Check if displayname is alphanumeric and is between 3 and 30 chars long.
         if (!$FunctionsObj->validateLength($newDisplayname,3,30) || !$FunctionsObj->isAlphanumeric($newDisplayname)) {
             //echo $FunctionsObj->outcomeMessage("error","The new displayname is not alphanumeric, or is too long/short.");
-            header("Location: ../pages/account.php?fail=displayname-alphanumeric");
+            header("Location: ".$this->linkUrl."account/displayname-alphanumeric");
             return false;
         }
 
@@ -115,10 +121,10 @@ class UserContr extends User {
         $result = $this->reSetDisplayname($newDisplayname,$_SESSION["userID"]);
         if ($result === TRUE) {
             //echo $FunctionsObj->outcomeMessage("success","Displayname has succesfully been changed.");
-            header("Location: ../pages/account.php?success=displayname-change");
+            header("Location: ".$this->linkUrl."account/displayname-change");
         } else {
             //echo $FunctionsObj->outcomeMessage("error","Failed to change displayname.");
-            header("Location: ../pages/account.php?fail=displayname-fail");
+            header("Location: ".$this->linkUrl."account/displayname-fail");
         }
     }//Method changeUsername.
 
@@ -128,21 +134,21 @@ class UserContr extends User {
         //Check if all values have a correct length and have a value.
         if (!$FunctionsObj->validateLength($username,3,30) || !$FunctionsObj->validateLength($displayname,3,30) || !$FunctionsObj->validateLength($password,3,30) || !$FunctionsObj->validateLength($confirmPassword,3,30)) {
             //echo $FunctionsObj->outcomeMessage("error","Values are too long/short.");
-            header("Location: ../pages/account.php?fail=addAccount-length");
+            header("Location: ".$this->linkUrl."account/addAccount-length");
             return false;
         }
 
         //Checkf if all values are alphanumeric.
         if (!$FunctionsObj->isAlphanumeric($username) || !$FunctionsObj->isAlphanumeric($displayname) || !$FunctionsObj->isAlphanumeric($password) || !$FunctionsObj->isAlphanumeric($confirmPassword)) {
             //echo $FunctionsObj->outcomeMessage("error","Not all values are alphanumeric.");
-            header("Location: ../pages/account.php?fail=addAccount-alphanumeric");
+            header("Location: ".$this->linkUrl."account/addAccount-alphanumeric");
             return false;
         }
 
         //Check if both passwords are the same.
         if($password != $confirmPassword) {
              //echo $FunctionsObj->outcomeMessage("error","Passwords are not the same.");
-             header("Location: ../pages/account.php?fail=addAccount-password");
+             header("Location: ".$this->linkUrl."account/addAccount-password");
              return false;
         }
 
@@ -150,11 +156,11 @@ class UserContr extends User {
         $result = $this->insertUser($username,$displayname,$FunctionsObj->encrypt($password));
         if ($result === TRUE) {
            //echo $FunctionsObj->outcomeMessage("error","Account has successfully been added.");
-           header("Location: ../pages/account.php?success=addAccount");
+           header("Location: ".$this->linkUrl."account/addAccount");
            return false;
         } else {
             //echo $FunctionsObj->outcomeMessage("error","Failed to add account.");
-            header("Location: ../pages/account.php?fail=addAccount-fail");
+            header("Location: ".$this->linkUrl."account/addAccount-fail");
             return false;
         }
 

@@ -8,7 +8,7 @@ amount = 0; //limit of calendar page.
 /*Articles page - Login*/
 function openLogindialog() {
     url = window.location.href;
-    if (!url.includes("?login")) {
+    if (!url.includes("login")) {
         return false;
     }
 
@@ -50,7 +50,7 @@ function login() {
 
     $.ajax({
         type: "POST",
-        url: "classes/handler.class.php",
+        url: linkUrl+"classes/handler.class.php",
         data: {
             username:username,
             password:password,
@@ -58,7 +58,8 @@ function login() {
         },
         success: function(data) {
             //$(".index-alert-messages").html(data);
-            newURL = url.replace("login", "");
+            newURL = url.replace("?login", "");
+            newURL = newURL.replace("/login", "");
             document.location.href = newURL;
             Toggleoverlay('close',0);
         },

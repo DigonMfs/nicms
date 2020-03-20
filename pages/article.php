@@ -28,7 +28,7 @@
 <html lnag="nl">
     <head>
     <meta charset="UTF-8">
-        <title>Digon | Article | <?php echo $_GET["subcat"]?></title>
+        <title>Digon | Article | <?php echo $articleTitle; ?></title>
         <?php 
             //Head tags.
             include "../includes/head.inc.php";

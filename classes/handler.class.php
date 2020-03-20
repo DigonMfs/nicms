@@ -4,13 +4,13 @@
     
     //Ajax called from login.
     if(isset($_POST["login"])) {
-       $UserContrObj = new UserContr();
+       $UserContrObj = new UserContr($linkUrl);
        $UserContrObj->loginContr($_POST["username"],$_POST["password"]);
        unset($UserContrObj);
     }//If.
 
     if(isset($_POST["logout"])) {
-        $UserContrObj = new UserContr();
+        $UserContrObj = new UserContr($linkUrl);
         $UserContrObj->logout();
         unset($UserContrObj);
      }//If.
@@ -122,35 +122,35 @@
 
      //Ajax called from change password form.
      if(isset($_GET["changePassword"])) {
-        $UserObj = new UserContr();
+        $UserObj = new UserContr($linkUrl);
         $UserObj->changePassword($_POST["changePasswordOld"],$_POST["changePasswordNew"],$_POST["changePasswordNewConfirm"]);
         unset($UserObj);
     }//If.
 
       //Ajax called from change username form.
       if(isset($_GET["changeUsername"])) {
-        $UserObj = new UserContr();
+        $UserObj = new UserContr($linkUrl);
         $UserObj->changeUsername($_GET["changeUsername"]);
         unset($UserObj);
     }//If.
 
      //Ajax called from change displayname form.
      if(isset($_GET["changeDisplayname"])) {
-        $UserObj = new UserContr();
+        $UserObj = new UserContr($linkUrl);
         $UserObj->changeDisplayname($_GET["changeDisplayname"]);
         unset($UserObj);
     }//If.
 
     //Ajax called from change add an account form.
     if(isset($_GET["addAccount"])) {
-        $UserObj = new UserContr();
+        $UserObj = new UserContr($linkUrl);
         $UserObj->addUser($_POST["chooseUsername"],$_POST["chooseDisplayname"],$_POST["choosePassword"],$_POST["choosePasswordConfirm"]);
         unset($UserObj);
     }//If.
 
     //Ajax called from load more articles on calendar page.
     if(isset($_POST["calendarLoadMoreArt"])) {
-        $ArticleObj = new ArticleView();
+        $ArticleObj = new ArticleView($linkUrl);
         $ArticleObj->showArticle($_POST["visibility"],$_POST["sort"],$_POST["amount"]);
         unset($ArticleObj);
     }//If.

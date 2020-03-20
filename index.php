@@ -6,9 +6,9 @@
     $object = new AutoLoad();
     $CategoryViewObj = new CategoryView();
 
-    if(isset($_SESSION["userID"])) {
-        //header("Location: pages/write.php");
-    }
+    /*if(isset($_SESSION["userID"])) {
+        header("Location: pages/write.php");
+    }*/
 
     //Make sure cat_id exists.
     if (isset($_GET["catID"])) {

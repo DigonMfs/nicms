@@ -2,11 +2,13 @@
 RewriteEngine on
 Options -Indexes
 
-#index page
-RewriteCond %(REQUEST_FILENAME) !-f
-RewriteCond %(REQUEST_FILENAME) !-d
-RewriteRule ^index/([0-9+]+)$ index.php?catID=$1 [L]
-RewriteRule ^index?$ index.php [L]
+#index page.
+    #index with parameter.
+    RewriteRule ^index/([0-9+]+)$ index.php?catID=$1 [L]
+    #index without parameter
+    RewriteRule ^index?$ index.php [L]
+    #Index with /login
+    RewriteRule ^index/login?$ index.php [L]
 
 #Write page.
 RewriteRule ^write?$ ./pages/write.php
