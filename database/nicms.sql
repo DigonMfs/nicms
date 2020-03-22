@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 28, 2020 at 07:33 PM
+-- Generation Time: Mar 22, 2020 at 07:01 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.1.32
 
@@ -33,23 +33,26 @@ CREATE TABLE `article` (
   `author_id` int(11) NOT NULL,
   `creation_time` date NOT NULL,
   `published` tinyint(1) NOT NULL,
+  `deleted` int(1) NOT NULL DEFAULT 0,
   `title` varchar(50) NOT NULL,
   `content` text NOT NULL,
   `abstract` text NOT NULL,
-  `date_to_publish` date NOT NULL
+  `category_id` varchar(11) NOT NULL,
+  `subcategory_id` varchar(11) NOT NULL,
+  `signed_by` varchar(50) NOT NULL,
+  `link` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `articlecategory`
+-- Dumping data for table `article`
 --
 
-CREATE TABLE `articlecategory` (
-  `row_id` int(11) NOT NULL,
-  `article_id` int(11) NOT NULL,
-  `category_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `article` (`row_id`, `author_id`, `creation_time`, `published`, `deleted`, `title`, `content`, `abstract`, `category_id`, `subcategory_id`, `signed_by`, `link`) VALUES
+(8, 1, '2020-03-11', 1, 0, 'Lorum Ipsum', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&nbsp;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\n\n<p><img alt=\"image2.jpg\" class=\"articles-article-img\" src=\"../assets/images/image2.jpg\" /><br />\n&nbsp;</p>\n\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&nbsp;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\n\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&nbsp;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\n\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&nbsp;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\n', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '1', '3', 'Niels Van Steen', 'lorum_ipsum'),
+(9, 1, '2020-03-11', 0, 1, 'dsa', '<p><img alt=\"image2.jpg\" class=\"articles-article-img\" src=\"../assets/images/image2.jpg\" /><br />\n&nbsp;</p>\n', 'sadf', '1', '4', 'sdaf', 'dsa'),
+(10, 1, '2020-03-15', 1, 0, 'More Lorum Ipsum', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\n\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\n\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\n', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '1', '3', 'Niels Van Steen', 'more_lorum_ipsum'),
+(12, 1, '2020-03-19', 0, 1, 'tsad', '<p>afa</p>\n', 'af', '1', '3', 'asdfa', 'tsad'),
+(16, 1, '2020-03-20', 1, 0, 'Images and files now working', '<p>This is a test&nbsp;<a class=\"pdf-ckeditor-a\" href=\"//localhost/Websites/nicms/assets/pdf/andere.pdf\">andere.pdf</a><br />\n<img alt=\"image3.jpg\" class=\"articles-article-img\" src=\"//localhost/Websites/nicms/assets/images/image3.jpg\" /></p>\n', 'All paths to images and other files should now be working', '1', '3', 'da', 'images_and_files_working');
 
 -- --------------------------------------------------------
 
@@ -73,8 +76,21 @@ CREATE TABLE `articlechannel` (
 
 CREATE TABLE `category` (
   `row_id` int(11) NOT NULL,
-  `category` varchar(50) NOT NULL
+  `category` varchar(50) NOT NULL,
+  `parent_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`row_id`, `category`, `parent_id`) VALUES
+(1, 'Knowledge Base', 0),
+(2, 'Blogs', 0),
+(3, 'MFS', 1),
+(4, 'Nieuws', 1),
+(5, 'Nieuws', 2),
+(6, 'Blogs', 2);
 
 -- --------------------------------------------------------
 
@@ -105,11 +121,19 @@ INSERT INTO `channel` (`row_id`, `name`, `can_unpublish`) VALUES
 
 CREATE TABLE `user` (
   `row_id` int(11) NOT NULL,
-  `username` int(50) NOT NULL,
-  `password` int(25) NOT NULL,
-  `displayname` int(50) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(25) NOT NULL,
+  `display_name` varchar(50) NOT NULL,
   `function` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`row_id`, `username`, `password`, `display_name`, `function`) VALUES
+(1, 'admin', 'ndpuv', 'admin', '1'),
+(2, 'moderator', 'darhvrthf', 'moderator', '0');
 
 --
 -- Indexes for dumped tables
@@ -121,14 +145,6 @@ CREATE TABLE `user` (
 ALTER TABLE `article`
   ADD PRIMARY KEY (`row_id`),
   ADD KEY `author_id` (`author_id`);
-
---
--- Indexes for table `articlecategory`
---
-ALTER TABLE `articlecategory`
-  ADD PRIMARY KEY (`row_id`),
-  ADD KEY `article_id` (`article_id`),
-  ADD KEY `category_id` (`category_id`);
 
 --
 -- Indexes for table `articlechannel`
@@ -164,13 +180,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `article`
 --
 ALTER TABLE `article`
-  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `articlecategory`
---
-ALTER TABLE `articlecategory`
-  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `articlechannel`
@@ -182,7 +192,7 @@ ALTER TABLE `articlechannel`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `channel`
@@ -194,7 +204,7 @@ ALTER TABLE `channel`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
@@ -205,13 +215,6 @@ ALTER TABLE `user`
 --
 ALTER TABLE `article`
   ADD CONSTRAINT `article_ibfk_1` FOREIGN KEY (`author_id`) REFERENCES `user` (`row_id`);
-
---
--- Constraints for table `articlecategory`
---
-ALTER TABLE `articlecategory`
-  ADD CONSTRAINT `articlecategory_ibfk_1` FOREIGN KEY (`article_id`) REFERENCES `article` (`row_id`),
-  ADD CONSTRAINT `articlecategory_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `category` (`row_id`);
 
 --
 -- Constraints for table `articlechannel`
