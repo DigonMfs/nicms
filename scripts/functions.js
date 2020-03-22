@@ -1,32 +1,37 @@
+//Check if alphanumeric.
 function IsAlphaNumeric(value) {
     if (! /^[a-zA-Z0-9]+$/.test(value)) {
         return false;
     } else {
         return true;
     }
-}//Method IsAlpheNummeric.
+}//Function IsAlpheNummeric.
 
+//Remove all non alphanumeric characters.
 function StripAlphaNumeric(value) {
     return value.replace(/[\W_]+/g,"");
-}//Method StripAlphaNumeric.
+}//Function StripAlphaNumeric.
 
+//Remove all spaces.
 function StripSpaces(value) {
     return value.replace(/ /g,"");
-}//Method StripSpaces.
+}//Function StripSpaces.
 
+//Validate the length.
 function ValidateLength(value,min,max) {
     if (value.length < min || value.length > max) {
         return false;
     } else {
         return true;
     }
-}//Method ValidateLength.
+}//Function ValidateLength.
 
+//Check if integer.
 function IsInteger(value) {
     return Number.isInteger(value);
-}//Method IsInteger.
+}//Function IsInteger.
 
-//Create current path.
+//Create current path in array format.
 function CreatePath() {
     var aPath = new Array();
 
@@ -43,7 +48,16 @@ function CreatePath() {
     }//For.
 
     return aPath;
-}//Method CreatePath.
+}//Function CreatePath.
+
+//Toggle the admin navigation bar on small screens.
+function toggleAdminNav() {
+    if ($('.admin-nav-item').css('display') == 'none') {
+        $(".admin-nav-item").slideDown();
+    } else {
+        $(".admin-nav-item").slideUp();
+    }
+}//Function toggleAdminNav.
 
 //Toggle visibility of the overlay, and the correct content.
 function Toggleoverlay(toggle,content) {
@@ -126,7 +140,7 @@ function Toggleoverlay(toggle,content) {
         default:
             break;
     }//Switch.
-}//Method toggleoverlay.
+}//Function toggleoverlay.
 
 
 

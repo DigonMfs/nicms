@@ -2,6 +2,11 @@
     include_once("../includes/autoload.inc.php");
     $object = new AutoLoad();
 
+    //Check if user is logged in.
+    if(!isset($_SESSION["userID"])) {
+        header("Location: ".$linkUrl."index");
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -13,14 +18,13 @@
         ?>
     </head>
     <body>
-
         <?php 
             //Header
             include_once "../includes/header.inc.php";
         ?>
         
         <!--Main-->
-        <main class="general-main">
+        <main class="general-main container">
 
             <!--Navbar for admin pages-->
             <ul class='nav nav-pills admin-navbar'>
@@ -35,8 +39,8 @@
             <div class="row">
                 
                 <!--Sidebar container-->
-                <div class="col-md-3 col-lg-3">
-                     <div class='list-group'>
+                <div class="col-lg-3 col-md-12 col-sm-12">
+                     <div class='list-group calendar-list-group'>
                         <a class='list-group-item list-group-item-action active disabled list-group-items-header'>Filter & sort articles</a>
                         <a class='list-group-item list-group-item-action'>Show articles</a>
                         <a class='list-group-item list-group-item-action list-group-item-light' onchange="filterArticles()">
@@ -58,17 +62,7 @@
                 </div>
 
                 <!--Articles container-->
-                <div class="col-md-9 col-lg-9 articles-article-overview-container" id="calendarArticlesContainer">
-
-                    <!--Show amount of entries.
-                    <div class="calendar-showentries-div">
-                        <p>Showing 1 to 10 of 10 entries</p>
-                        <p>
-                            <button class="btn btn-light calendar-show-entries-buttons calendar-entries-prev-button" disabled>Prev</button>
-                            <button class="btn btn-primary calendar-show-entries-buttons calendar-entries-curr-button" disabled>1</button>
-                            <button class="btn btn-light calendar-show-entries-buttons calendar-entries-next-button">Next</button></p>
-                    </div>-->
-
+                <div class="col-lg-9 col-md-12 col-sm-12 articles-article-overview-container" id="calendarArticlesContainer">
                     <!--Show all articles-->
                     <?php 
                         $ArticleObj = new ArticleView($linkUrl);

@@ -2,8 +2,9 @@
     include_once("../includes/autoload.inc.php");
     $object = new AutoLoad();
 
+    //Check if user is logged in.
     if(!isset($_SESSION["userID"])) {
-        header("Location: ../index.php");
+        header("Location: ".$linkUrl."index");
     }
 ?>
 <!DOCTYPE html>
@@ -28,7 +29,7 @@
         ?>
         
         <!-- Main.-->
-        <main class="general-main">
+        <main class="general-main container">
 
             <!--Navbar for admin pages.-->
             <ul class='nav nav-pills admin-navbar'>

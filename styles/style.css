@@ -105,27 +105,6 @@ label {
     text-decoration: none;
     cursor: pointer;
 }
-.inner-header-navbar-container {
-    text-align: right;
-
-}
-/*.inner-header-navbar-button-login {
-    border: none;
-    background-color: rgba(0,0,0,0);
-    background-color: crimson;
-    color: white;
-    padding: 0px 16px;
-    font-size: 16px;
-}
-.inner-header-navbar-button-login:hover, .inner-header-navbar-link:hover {
-    color: white !important;
-    text-decoration: none;
-}*/
-.inner-header-navbar-link {
-    color: lightgrey !important;
-    padding: 0px 16px;
-    font-size: 16px !important;
-}
 
 /*Overlay no scroll*/
 .stop-scrolling {
@@ -194,6 +173,10 @@ label {
 }
 .button-container-login {
     margin-top: 0 !important;
+}
+/*Sidebar with the subcategories.*/
+.index-subcategories-listgroup {
+    margin-bottom: 25px !important;
 }
 /*Table*/
 .table-articles-overview { 
@@ -269,11 +252,7 @@ label {
     position: fixed;
 }
 
-.articles-article-summary {
-    text-transform: uppercase;
-    text-align: justify;
-    margin-bottom: 15px;
-}
+
 .articles-article-content p {
     display: inline-block !important;
 }
@@ -542,42 +521,16 @@ label {
 .calendar-article-publish-button {
    margin-left: 8px;
 }
-
-/*Show amount of entries buttons
-.calendar-showentries-div {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    font-size: 0px !important;
-    padding-bottom: 15px;
-}
-.calendar-showentries-div p:first-child {
-    font-size: 16px !important;
-    margin: 0px !important;
-}
-.calendar-showentries-div p:last-child {
-    text-align: right;
-}
-.calendar-entries-prev-button {
-    margin-right: 0px !important;
-    border-top-right-radius: 0px !important;
-    border-bottom-right-radius: 0px !important;
-}
-.calendar-entries-curr-button {
-    margin: 0px !important;
-    border-radius: 0px !important;
-}
-.calendar-entries-next-button {
-    margin-left: 0px !important;
-    border-top-left-radius: 0px !important;
-    border-bottom-left-radius: 0px !important;
-}*/
-
+/*Load more articles button.*/
 .calendar-load-more {
     text-align: right;
     width: 100%;
     margin-right: 15px;
 }
-
+/*Sidebar showing the filter options.*/
+.calendar-list-group {
+    margin-bottom: 25px !important;
+}
 
 
 /*Account page*/
@@ -596,6 +549,7 @@ label {
 }
 .account-accounts-table-container {
     padding: 0px 25px 0px 40px !important;
+    overflow-x: scroll;
 }
 
 
@@ -622,6 +576,13 @@ label {
     /*Fontsize for pdf icon*/
     .pdf-icon {
         font-size: 85px;
+    }
+
+    /*Media query articles page.*/
+    /*Position fixed elements*/
+    .articles-list-group-relevant-articles {
+        position: relative;
+        margin-bottom: 25px !important;
     }
 }
 

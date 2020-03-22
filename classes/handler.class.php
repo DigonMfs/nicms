@@ -120,22 +120,22 @@
         unset($filterArticlesObj);
     }//If.
 
-     //Ajax called from change password form.
-     if(isset($_GET["changePassword"])) {
+    //Ajax called from change password form.
+    if(isset($_GET["changePassword"])) {
         $UserObj = new UserContr($linkUrl);
         $UserObj->changePassword($_POST["changePasswordOld"],$_POST["changePasswordNew"],$_POST["changePasswordNewConfirm"]);
         unset($UserObj);
     }//If.
 
-      //Ajax called from change username form.
-      if(isset($_GET["changeUsername"])) {
+    //Ajax called from change username form.
+    if(isset($_GET["changeUsername"])) {
         $UserObj = new UserContr($linkUrl);
         $UserObj->changeUsername($_GET["changeUsername"]);
         unset($UserObj);
     }//If.
 
-     //Ajax called from change displayname form.
-     if(isset($_GET["changeDisplayname"])) {
+    //Ajax called from change displayname form.
+    if(isset($_GET["changeDisplayname"])) {
         $UserObj = new UserContr($linkUrl);
         $UserObj->changeDisplayname($_GET["changeDisplayname"]);
         unset($UserObj);

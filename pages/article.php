@@ -19,10 +19,6 @@
     } else {
         header("Location: ".$linkUrl."/index");
     }
-   
-
-
-
 ?>
 <!DOCTYPE html>
 <html lnag="nl">
@@ -36,14 +32,12 @@
     </head>
     <body>
         <?php 
-            //Header
+            //Header.
             include_once "../includes/header.inc.php";
         ?>
         
         <main class="general-main articles-main container">
-
-       
-            
+ 
             <!--Breadcrumbs.-->
             <nav class="container general-nav articles-article-breadcrumbs" aria-label="breadcrumb">
                 <ol class="breadcrumb">
@@ -56,27 +50,25 @@
    
             <div class="row articles-article-container">
                 <!--Sidebar container-->
-                <div class="col-md-3 col-lg-3 articles-sidebar-container">
+                <div class="col-lg-3 col-md-12 col-sm-12 articles-sidebar-container">
                     
                     <!--Sidebar-->
                     <div class='list-group articles-list-group-relevant-articles'>
-                        <a class='list-group-item list-group-item-action active disabled list-group-items-header'>Relevant articles</a>
+                        <a class='list-group-item list-group-item-action active disabled list-group-items-header'><span  onclick="testtt()">&#9776;</span> Relevant articles</a>
                         <?php 
                             $ArticelViewObj->showRelevantArticles($articleSubcatID,$articleID);
                         ?>
                     </div>
-                
                 </div><!--Sidebar container-->
 
                 <!--Article container-->
-                <div class="col-md-9 col-lg-9 articles-article-overview-container">
+                <div class="col-lg-9 col-md-12 col-sm-12 articles-article-overview-container">
                     <?php 
                         $ArticelViewObj->showFullArticle($articleID);
                     ?>
                 </div><!-- Article title container-->
                 
             </div><!--Row-->
-            
             
         </main>
       

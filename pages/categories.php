@@ -2,8 +2,9 @@
     include_once("../includes/autoload.inc.php");
     $object = new AutoLoad();
 
+    //Check if user is logged in.
     if(!isset($_SESSION["userID"])) {
-        header("Location: ../index.php");
+        header("Location: ".$linkUrl."index");
     }
 ?>
 <!DOCTYPE html>
@@ -23,7 +24,7 @@
         ?>
         
         <!--Main-->
-        <main class="general-main">
+        <main class="general-main container">
 
             <!--Navbar for admin pages-->
             <ul class='nav nav-pills admin-navbar'>
@@ -42,7 +43,7 @@
             
             <!--Container of the directory window-->
             <div class="categories-category-directory-container card card-body bg-light">
-                <div class="categories-category-container d-flex flex-row">
+                <div class="categories-category-container d-flex flex-row flex-wrap">
                     <?php
                         $CatSubcatObj = new CategoryView();
                         $CatSubcatObj->showCatsAndSubcats();
