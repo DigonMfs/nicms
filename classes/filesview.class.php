@@ -39,7 +39,7 @@
             else {
                 //See if admin == true/false.
                 if ($admin == "true") 
-                    $text = '<i class="fas fa-trash-alt files-hover-icons files-delete" onclick="AskDelete(\''.$dirPath.'\',\''.$file.'\',\'folder\')"></i>';
+                    $text = '<i class="fas fa-trash-alt files-hover-icons files-delete" onclick="askDeleteFileFolder(\''.$dirPath.'\',\''.$file.'\',\'folder\')"></i>';
                 else 
                     $text = '';
                 echo '
@@ -69,7 +69,7 @@
                 //Look if admin function should be enabled.
                 if ($admin == "true") {
                     $container = '<div class="files-file-container">';
-                    $text = '<i class="fas fa-trash-alt files-hover-icons files-delete" onclick="AskDelete(\''.$dirPath.'\',\''.$file.'\',\'file\')"></i>';
+                    $text = '<i class="fas fa-trash-alt files-hover-icons files-delete" onclick="askDeleteFileFolder(\''.$dirPath.'\',\''.$file.'\',\'file\')"></i>';
                 } else {
                     //Type is extension, images need to be inserted as an <img>, pdf files not.
                     $container = '

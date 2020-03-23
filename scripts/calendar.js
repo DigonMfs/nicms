@@ -36,19 +36,14 @@ function filterArticles() {
 
 //Ask to publish the article.
 function askPublishArticle(id) {
+    //Open the overlay.
     Toggleoverlay('open',0);
 
-    document.getElementById("overlayBody").innerHTML = '\
-    <h2 class="overlay-title">Publish Article</h2>\
-    <i class="fas fa-times close-overlay" onclick="Toggleoverlay(\'close\',0)"></i>\
-    <div class="form-group">  \
-      <p>Are you sure you want to publish this article?</p>\
-    </div>\
-    <div class="button-container">\
-        <button class="btn btn-secondary" onclick="Toggleoverlay(\'close\',0)">Close</button>\
-        <button class="btn btn-primary" onclick="publishArticle('+id+')">Publish</button>\
-    </div>\
-';
+    //Set the correct content in the dialog.
+    heading = "Publish Article";
+    body = "<p>Are you sure you want to publish this article?</p>";
+    button = " <button class='btn btn-primary' onclick='publishArticle('+id+')'>Publish</button>";
+    openDialog(heading,body,button);
 }//Function askPublishArticle.
 
 //Publish article.
@@ -72,19 +67,14 @@ function publishArticle(id) {
 
 //Ask to unpublish article.
 function askUnpublishArticle(id) {
+    //Open the overlay.
     Toggleoverlay('open',0);
 
-    document.getElementById("overlayBody").innerHTML = '\
-    <h2 class="overlay-title">Unpublish Article</h2>\
-    <i class="fas fa-times close-overlay" onclick="Toggleoverlay(\'close\',0)"></i>\
-    <div class="form-group">  \
-      <p>Are you sure you want to unpublish this article?</p>\
-    </div>\
-    <div class="button-container">\
-        <button class="btn btn-secondary" onclick="Toggleoverlay(\'close\',0)">Close</button>\
-        <button class="btn btn-primary" onclick="unpublishArticle('+id+')">Unpublish</button>\
-    </div>\
-';
+    //Set the correct content in the dialog.
+    heading = "Unpublish Article";
+    body = "<p>Are you sure you want to unpublish this article?</p>";
+    button = "<button class='btn btn-primary' onclick='unpublishArticle('+id+')'>Unpublish</button>";
+    openDialog(heading,body,button);
 }//Function askPublishArticle.
 
 //Unpublish te article.
@@ -113,20 +103,14 @@ function editArticle() {
 
 //Ask to delete article.
 function askDeleteArticle(id) {
+    //Open the overlay.
     Toggleoverlay('open',0);
 
-    $('body').bind('touchmove', function(e){e.preventDefault()});
-     document.getElementById("overlayBody").innerHTML = '\
-     <h2 class="overlay-title">Delete Article</h2>\
-     <i class="fas fa-times close-overlay" onclick="Toggleoverlay(\'close\',0)"></i>\
-     <div class="form-group">  \
-       <p>Are you sure you want to delete this article?</p>\
-     </div>\
-     <div class="button-container">\
-         <button class="btn btn-secondary" onclick="Toggleoverlay(\'close\',0)">Close</button>\
-         <button class="btn btn-primary" onclick="deleteArticle('+id+')">Delete</button>\
-     </div>\
- ';
+    //Set the correct content in the dialog.
+    heading = "Delete Article";
+    body = "<p>Are you sure you want to delete this article?</p>";
+    button = "<button class='btn btn-primary' onclick='deleteArticle('+id+')'>Delete</button>";
+    openDialog(heading,body,button);
 }//Function askDeleteArticle.
 
 //Delete the article.

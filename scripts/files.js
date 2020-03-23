@@ -1,7 +1,6 @@
 
 //This function opens a subdir in a dir.
 function DirClick(dirName,admin) {
-
     //Check if createpath is valid.
     if (!CreatePath()) {
         $(".files-alert-messages").html("<p class='alert alert-danger' role='alert'>This path is not allowed!</p>");
@@ -31,8 +30,6 @@ function DirClick(dirName,admin) {
         },
     });
 }//Function DirClick.
-
-
 
 //Go back in subdirectories.
 function BaseDir(cur_level,admin) {
@@ -130,38 +127,29 @@ function UploadFile() {
 
 
 //Ask to delete the file or folder.
-function AskDelete(dirPath,fileName,type) {
+function askDeleteFileFolder(dirPath,fileName,type) {
      //Open overlay.
      Toggleoverlay('open',0);
 
     //Personalise message.
     if (type == 'file') {
         file_folder = "File";
-        message = 'Are you sure you want to delete this '+file_folder+'?';
     }
     else {
         file_folder = "Folder";
-        message = 'Are you sure you want to delete this '+file_folder+'? This folder will be deleted recursively!';
     }
+
+    //Set the correct content in the dialog.
+    heading = "Delete "+file_folder;
+    body = "<p>Are you sure you want to delete this "+file_folder+"?</p>";
+    button = '<button class="btn btn-primary" onclick="deleteFileFolder(\''+dirPath+'\',\''+fileName+'\',\''+type+'\')">Yes, Delete</button>';
+    openDialog(heading,body,button);
         
-    //Put in Correct Content.
-    document.getElementById("overlayBody").innerHTML ='\
-            <h2 class="overlay-title">Delete '+file_folder+'</h2>\
-            <i class="fas fa-times close-overlay" onclick="Toggleoverlay(\'close\',0)"></i>\
-            <div class="form-group">\
-               <p class="overlay-text"></p>\
-               <small id="overlaySmall" class="overlay-small">'+message+'</small?\
-            </div>\
-            <div class="button-container">\
-                <button class="btn btn-secondary" onclick="Toggleoverlay(\'close\',0)">Close</button>\
-                <button class="btn btn-primary" onclick="Delete(\''+dirPath+'\',\''+fileName+'\',\''+type+'\')">Yes, Delete</button>\
-            </div>\
-        ';
 }//Function AskDelete.
 
 
 //This function deletes a dir or a file.
-function Delete(dirPath,fileName,type) {
+function deleteFileFolder(dirPath,fileName,type) {
 
     //Check if al parameters exist.
     if (!dirPath || !fileName || !type) {

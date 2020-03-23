@@ -1,5 +1,6 @@
 //Ask to delete a category.
 function AskCategoryDelete(id,catSubcat) {
+    //Open the overlay.
     Toggleoverlay('open',0);
 
     //Personalise message.
@@ -7,25 +8,16 @@ function AskCategoryDelete(id,catSubcat) {
         cat = "category";
     else
         cat = "subcategory";
- 
-    //Put in Correct Content.
-    document.getElementById("overlayBody").innerHTML ='\
-            <h2 class="overlay-title">Delete '+cat+'</h2>\
-            <i class="fas fa-times close-overlay" onclick="Toggleoverlay(\'close\',0)"></i>\
-            <div class="form-group">\
-               <p class="overlay-text"></p>\
-               <small id="overlaySmall" class="overlay-small">Are you sure you want to delete this '+cat+'?</small?\
-            </div>\
-            <div class="button-container">\
-                <button class="btn btn-secondary" onclick="Toggleoverlay(\'close\',0)">Close</button>\
-                <button class="btn btn-primary" onclick="DeleteCategory(\''+id+'\',\''+catSubcat+'\')">Yes, Delete</button>\
-            </div>\
-        ';
+
+    //Set the correct content in the dialog.
+    heading = "Delete "+cat;
+    body = "<p>Are you sure you want to delete this "+cat+"?</p>";
+    button = '<button class="btn btn-primary" onclick="DeleteCategory(\''+id+'\',\''+catSubcat+'\')">Yes, Delete</button>';
+    openDialog(heading,body,button);
 }//Function AskCategoryDelete.
 
 //Delete a category.
 function DeleteCategory(id,catSubcat) {
-
     //Check if both parametes are integers.
     if(IsInteger(id) && IsInteger(catSubcat)) {
         $(".categories-alert-messages").html("<p class='alert alert-danger' role='alert'>Unknown parameters</p>");

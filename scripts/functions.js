@@ -143,4 +143,17 @@ function Toggleoverlay(toggle,content) {
 }//Function toggleoverlay.
 
 
-
+//Opens the dialog box.
+function openDialog(heading,body,button) {
+    document.getElementById("overlayBody").innerHTML = '\
+    <h2 class="overlay-title">'+heading+'</h2>\
+    <i class="fas fa-times close-overlay" onclick="Toggleoverlay(\'close\',0)"></i>\
+    <div class="form-group">  \
+        '+body+'\
+    </div>\
+    <div class="button-container">\
+        <button class="btn btn-secondary" onclick="Toggleoverlay(\'close\',0)">Close</button>\
+        '+button+'\
+    </div>\
+';
+}
