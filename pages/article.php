@@ -7,10 +7,16 @@
     $articleContrObj = new ArticleContr();
     $CategoryContrObj = new CategoryContr();
     
-    //Check if articleID isset.
+    //Check if link isset.
     if (isset($_GET["link"])) {
         //Get article link.
         $articleLink = $_GET["link"];
+
+        //Check if article exists.
+        if(!$articleContrObj->getArticleID($articleLink)) {
+            header("Location: ".$linkUrl."index");
+        }
+        //Get other article elements.
         $articleID = $articleContrObj->getArticleID($articleLink);
         $articleTitle = $articleContrObj->getArticleTitle($articleLink);
         $articleCatID = $articleContrObj->getArticleCatID($articleLink);
@@ -18,7 +24,7 @@
         $articleSubcat = $CategoryContrObj->getSubcat($articleSubcatID);
 
     } else {
-        header("Location: ".$linkUrl."/index");
+        header("Location: ".$linkUrl."index");
     }
 ?>
 <!DOCTYPE html>

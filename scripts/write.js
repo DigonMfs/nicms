@@ -72,9 +72,6 @@ function SaveArticle() {
         success: function(data) {
             $(".write-alert-messages").html(data);
             window.scrollTo(0,0);
-            setTimeout(function() {
-              location.reload();
-            }, 3000);
         },
     });
 }//Function saveArticle.
@@ -123,9 +120,6 @@ function saveEditArticle(link) {
         success: function(data) {
             $(".write-alert-messages").html(data);
             window.scrollTo(0,0);
-            setTimeout(function() {
-              location.reload();
-            }, 3000);
         },
     });
 }//Function saveEditArticle.

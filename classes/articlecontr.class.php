@@ -6,11 +6,19 @@
         public function publishArticle($id) {
             $FunctionsObj = new Functions();
 
+            //Check if user logged in, and thus allowed to execute this method.
+            $FunctionsObj->checkUserLoggedIn();
+
+            //Validation.
             if ($FunctionsObj->isInteger($id)) {
                 echo $FunctionsObj->outcomeMessage("error","Invalid parameters.");
                 return false;
             }
+
+            //Real escape string.
+            $id = $this->connect()->real_escape_string($id);
             
+            //Execute sql.
             $result = $this->reSetArticle($id,1);
             if ($result) {
                 echo $FunctionsObj->outcomeMessage("success","The article has successfully been published.");
@@ -22,11 +30,19 @@
         public function unpublishArticle($id) {
             $FunctionsObj = new Functions();
 
+            //Check if user logged in, and thus allowed to execute this method.
+            $FunctionsObj->checkUserLoggedIn();
+
+            //Validation.
             if ($FunctionsObj->isInteger($id)) {
                 echo $FunctionsObj->outcomeMessage("error","Invalid parameters.");
                 return false;
             }
 
+            //Real escape string.
+            $id = $this->connect()->real_escape_string($id);
+
+            //Execute sql.
             $result = $this->reSetArticle($id,0);
             if ($result) {
                 echo $FunctionsObj->outcomeMessage("success","The article has successfully been unpublished.");
@@ -39,11 +55,19 @@
         public function deleteArticle($id) {
             $FunctionsObj = new Functions();
 
+            //Check if user logged in, and thus allowed to execute this method.
+            $FunctionsObj->checkUserLoggedIn();
+
+            //Validation.
             if ($FunctionsObj->isInteger($id)) {
                 echo $FunctionsObj->outcomeMessage("error","Invalid parameter, is not an integer.".$id);
                 return false;
             }
 
+            //Real escape string.
+            $id = $this->connect()->real_escape_string($id);
+
+            //Execute sql.
             $result = $this->unSetArticle($id);
             if ($result) {
                 echo $FunctionsObj->outcomeMessage("success","Article has successfully been deleted.");

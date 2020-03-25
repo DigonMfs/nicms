@@ -10,17 +10,21 @@ class UserContr extends User {
     public function loginContr($username,$password) {
         $FunctionsObj = new Functions();
 
-        //Check if values are alphanumeric.
+        //Validation.
         if(!$FunctionsObj->validateLength($username,3,30) || !$FunctionsObj->validateLength($password,3,30)) {
             echo $FunctionsObj->outcomeMessage("error","The length is too long/short.");
             return false;
-        }//If validateLength.
+        }
         if(!$FunctionsObj->isAlphanumeric(str_replace(' ','',$username)) || !$FunctionsObj->isAlphanumeric(str_replace(' ','',$password))) {
             echo $FunctionsObj->outcomeMessage("error","Username and or password are not alphanumeric.");
             return false;
-        }//If alphanumeric.
+        }
 
-        //Login.
+        //Real escape string.
+        $username = $this->connect()->real_escape_string($username);
+        $password = $this->connect()->real_escape_string($password);
+
+        //Execute sql.
         $result = $this->login($username,$FunctionsObj->encrypt($password));
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
@@ -39,26 +43,26 @@ class UserContr extends User {
 
     public function changePassword($oldPassword,$newPassword,$confirmNewPassword) {
         $FunctionsObj = new Functions();
+
+        //Check if user logged in, and thus allowed to execute this method.
+        $FunctionsObj->checkUserLoggedIn();
         
-        //Escape the strings to prevent SQL injection.
+        //Real escape string.
         $oldPassword = $this->connect()->real_escape_string($oldPassword);
         $newPassword = $this->connect()->real_escape_string($newPassword);
         $confirmNewPassword = $this->connect()->real_escape_string($confirmNewPassword);
         
-        //Check if alphanumeric, and between 3 and 30char long.
+        //Valiation
         if (!$FunctionsObj->validateLength($newPassword,3,30) || !$FunctionsObj->isAlphanumeric($newPassword)) {
             //echo $FunctionsObj->outcomeMessage("error","Password is not alphanumeric, or is too long/short.");
             header("Location: ".$this->linkUrl."account/password-alphanumeric");
             return false;
         }
-
-        //Check if new password and confirm new password are the same.
         if ($newPassword != $confirmNewPassword) {
             //echo $FunctionsObj->outcomeMessage("error","New password does not match.");
             header("Location: ".$this->linkUrl."account/password-no-match");
             return false;
         }
-
         //Check if old password is correct.
         $result = $this->getCurUser($FunctionsObj->encrypt($oldPassword));
         if ($result->num_rows <= 0) {
@@ -66,15 +70,13 @@ class UserContr extends User {
             header("Location: ".$this->linkUrl."account/pass-wrong");
             return false;
         }
-
-        //Checkf if new password is the same as the old.
         if ($oldPassword == $newPassword) {
             //echo $FunctionsObj->outcomeMessage("error","New password is the same as the old.");
             header("Location: ".$this->linkUrl."account/newpass-same");
             return false;
         }
 
-        //Change the password
+        //Execute sql.
         $id = $_SESSION["userID"];
         $result = $this->reSetPassword($FunctionsObj->encrypt($newPassword),$id);
         if ($result === TRUE) {
@@ -84,17 +86,23 @@ class UserContr extends User {
             //echo $FunctionsObj->outcomeMessage("error","Failed to change password.");
             header("Location: ".$this->linkUrl."account/password-fail");
         }
-    }
+    }//Method changePassword.
 
     public function changeUsername($newUsername) {
         $FunctionsObj = new Functions();
 
-        //Check if username is alphanumeric and is between 3 and 30 chars long.
+        //Check if user logged in, and thus allowed to execute this method.
+        $FunctionsObj->checkUserLoggedIn();
+
+        //Validation.
         if (!$FunctionsObj->validateLength($newUsername,3,30) || !$FunctionsObj->isAlphanumeric($newUsername)) {
             //echo $FunctionsObj->outcomeMessage("error","The new username is not alphanumeric, or is too long/short.");
             header("Location: ".$this->linkUrl."account/username-alphanumeric");
             return false;
         }
+
+        //Real escape string.
+        $newUsername = $this->connect()->real_escape_string($newUsername);
 
         //Change username.
         $result = $this->reSetUSername($newUsername,$_SESSION["userID"]);
@@ -110,14 +118,20 @@ class UserContr extends User {
     public function changeDisplayname($newDisplayname) {
         $FunctionsObj = new Functions();
 
-        //Check if displayname is alphanumeric and is between 3 and 30 chars long.
+        //Check if user logged in, and thus allowed to execute this method.
+        $FunctionsObj->checkUserLoggedIn();
+
+        //Validation.
         if (!$FunctionsObj->validateLength($newDisplayname,3,30) || !$FunctionsObj->isAlphanumeric($newDisplayname)) {
             //echo $FunctionsObj->outcomeMessage("error","The new displayname is not alphanumeric, or is too long/short.");
             header("Location: ".$this->linkUrl."account/displayname-alphanumeric");
             return false;
         }
 
-        //Change displayname.
+        //Real escape string.
+        $newDisplayname = $this->connect()->real_escape_string($newDisplayname);
+
+        //Execute sql.
         $result = $this->reSetDisplayname($newDisplayname,$_SESSION["userID"]);
         if ($result === TRUE) {
             //echo $FunctionsObj->outcomeMessage("success","Displayname has succesfully been changed.");
@@ -131,28 +145,34 @@ class UserContr extends User {
     public function addUser($username,$displayname,$password,$confirmPassword) {
         $FunctionsObj = new Functions();
 
-        //Check if all values have a correct length and have a value.
+        //Check if user logged in, and thus allowed to execute this method.
+        $FunctionsObj->checkUserLoggedIn();
+
+        //Validation.
         if (!$FunctionsObj->validateLength($username,3,30) || !$FunctionsObj->validateLength($displayname,3,30) || !$FunctionsObj->validateLength($password,3,30) || !$FunctionsObj->validateLength($confirmPassword,3,30)) {
             //echo $FunctionsObj->outcomeMessage("error","Values are too long/short.");
             header("Location: ".$this->linkUrl."account/addAccount-length");
             return false;
         }
-
-        //Checkf if all values are alphanumeric.
         if (!$FunctionsObj->isAlphanumeric($username) || !$FunctionsObj->isAlphanumeric($displayname) || !$FunctionsObj->isAlphanumeric($password) || !$FunctionsObj->isAlphanumeric($confirmPassword)) {
             //echo $FunctionsObj->outcomeMessage("error","Not all values are alphanumeric.");
             header("Location: ".$this->linkUrl."account/addAccount-alphanumeric");
             return false;
         }
-
         //Check if both passwords are the same.
         if($password != $confirmPassword) {
-             //echo $FunctionsObj->outcomeMessage("error","Passwords are not the same.");
-             header("Location: ".$this->linkUrl."account/addAccount-password");
-             return false;
+            //echo $FunctionsObj->outcomeMessage("error","Passwords are not the same.");
+            header("Location: ".$this->linkUrl."account/addAccount-password");
+            return false;
         }
 
-        //Add the account.
+        //Real escape string.
+        $username = $this->connect()->real_escape_string($username);
+        $displayname = $this->connect()->real_escape_string($displayname);
+        $password = $this->connect()->real_escape_string($password);
+        $confirmPassword = $this->connect()->real_escape_string($confirmPassword);
+
+        //Execute sql.
         $result = $this->insertUser($username,$displayname,$FunctionsObj->encrypt($password));
         if ($result === TRUE) {
            //echo $FunctionsObj->outcomeMessage("error","Account has successfully been added.");
@@ -163,7 +183,6 @@ class UserContr extends User {
             header("Location: ".$this->linkUrl."account/addAccount-fail");
             return false;
         }
-
     }//Method addAccount.
     
 }//UserContr.

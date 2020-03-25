@@ -48,6 +48,14 @@
             }
         }//Method outcomeMessage.
 
+        public function checkUserLoggedIn() {
+            if (isset($_SESSION["userID"])) {
+                return true;
+            } else {
+                die($this->outcomeMessage("error","You are not authorized the execute this command."));
+            }
+        }//Method checkUserLoggedIn.
+
         public function encrypt($password) {
             $passwordEncrypt = '';
 

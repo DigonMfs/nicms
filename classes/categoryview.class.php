@@ -3,8 +3,8 @@
     class CategoryView extends Category {
 
         public function showCategories() {
+            //Execute sql.
             $result = $this->getCategories();
-
             if ($result->num_rows > 0) {
                 echo '<select class="custom-select write-sub-categories-container" id="articleCategory" onchange="ShowSubCategories(this.value)">';
                 echo '<option option="undefined" value="undefined" selected disabled>Choose a category</option>';
@@ -17,35 +17,42 @@
             }//If.
         }//Method showCategories.
 
-        public function showSubcatFromParentCat($level,$parent_id) {
+        public function showSubcatFromParentCat($level,$parentID) {
             $FunctionsObj = new Functions();
-            $result = $this->getSubcatsFromParentCat($parent_id);
-
-            if($FunctionsObj->isInteger($level) || $FunctionsObj->isInteger($parent_id)) {
+            
+            //Validation.
+            if($FunctionsObj->isInteger($level) || $FunctionsObj->isInteger($parentID)) {
                 echo $FunctionsObj->outcomeMessage("error","Invalid parameters.");
                 return false;
-            }//If isInteger.
-            if ($result->num_rows <= 0) {
+            }
+
+            //Real escape string.
+            $level = $this->connect()->real_escape_string($level);
+            $parent_id = $this->connect()->real_escape_string($parentID);
+
+            //Execute sql.
+            $result = $this->getSubcatsFromParentCat($parentID);
+            if ($result->num_rows > 0) {
+                echo '<h3 class="write-category-title text-primary">Subcategory</h3>';
+                echo '<select class="custom-select write-sub-categories-container" id="articleSubcategory" onchange="ShowSubCategories(this.value)">';
+                echo '<option option="undefined" selected disabled>Choose a subcategory</option>';
+                while($row = $result->fetch_assoc()) {
+                    echo '<option option="'.$row["row_id"].'" value="'.($level + 1).','.$row["row_id"].'">'.$row["category"].'</option>';
+                }
+                echo '</div>';  
+
+            } else {
                 echo $FunctionsObj->outcomeMessage("success","All categories and subcategories have been selected.");
-                return false;
-            }//If result <= 0.
-
-            echo '<h3 class="write-category-title text-primary">Subcategory</h3>';
-            echo '<select class="custom-select write-sub-categories-container" id="articleSubcategory" onchange="ShowSubCategories(this.value)">';
-            echo '<option option="undefined" selected disabled>Choose a subcategory</option>';
-
-            while($row = $result->fetch_assoc()) {
-                echo '<option option="'.$row["row_id"].'" value="'.($level + 1).','.$row["row_id"].'">'.$row["category"].'</option>';
-            }//While.
-
-            echo '</div>';       
+                return false;   
+            } 
         }//Method showSubcategories.
 
         public function showCatsAndSubcats() {
             $FunctionsObj = new Functions();
-            $result = $this->getCatsAndSubcats();
             $row_id = "";
 
+            //Execute sql.
+            $result = $this->getCatsAndSubcats();
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
 
@@ -95,10 +102,13 @@
         }//Method showCatsAndSubcats.
         
         //Shows the subcats from parentcat on articles page (index)
-        public function ArticlesShowSubcats($parent_id) {
-            $result = $this->getSubcatsFromParentCat($parent_id);
-            
-             if ($result->num_rows > 0) {
+        public function ArticlesShowSubcats($parentID) {
+            //Real escape string.
+            $parentID = $this->connect()->real_escape_string($parentID);
+
+            //Execute sql.
+            $result = $this->getSubcatsFromParentCat($parentID);
+            if ($result->num_rows > 0) {
                 echo "<div class='list-group index-subcategories-listgroup'>";
                 echo "<a class='list-group-item list-group-item-action active disabled list-group-items-header'>Subcategories</a>";
                 
@@ -106,12 +116,15 @@
                     echo "<a class='list-group-item list-group-item-action' onclick='showArticlesIndex(".$row["row_id"].",\"".$row['category']."\")'><i class='fa fa-file'></i>&nbsp;".$row['category']."</a>";
                 }
                 echo "</div>";
-             }
+            }
         }//Method ArticleShowSubcats.
 
         public function showCategory($categoryID) {
+            //Real escape string.
+            $categoryID = $this->connect()->real_escape_string($categoryID);
+
+            //Execute sql.
             $result = $this->getCategory($categoryID);
-            
             if ($result->num_rows > 0) {
                while($row = $result->fetch_assoc()) {
                    echo $row["category"];

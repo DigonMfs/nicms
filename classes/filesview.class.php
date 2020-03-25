@@ -9,7 +9,7 @@
          }
 
         public function showFilesFolders($admin,$aPath) {
-            
+            //Check if aPath isset.
             if ($aPath === null) {
                 $dirPath = "../assets";
                 $dirPathFiles = "assets/";
@@ -17,8 +17,8 @@
                 $dirPath = "../" . join("/",$aPath);
                 $dirPathFiles = $this->linkUrl . join("/",$aPath);
             }
-               
-
+            
+            //Validation.
             if (is_dir($dirPath)) {
                 $aFiles = scandir($dirPath);
                 for($i=0;$i<count($aFiles);$i++) {
@@ -28,9 +28,8 @@
                         $this->showFolder($admin, $aFiles[$i], $dirPath, $dirPathFiles); 
                     else 
                         $this->showFile($admin, $aFiles[$i], $dirPath, $dirPathFiles);
-
-                }//For.
-            }//if.
+                }
+            }
         }//showMediaChannels.
 
         public function showFolder($admin, string $file, string $dirPath) {
@@ -49,7 +48,7 @@
                         <p class="files-folder-file-name">'.$file.'</p>
                     </div>
                 ';
-            }//Else.
+            }
         }//Method showFolder.
 
         public function ShowFile(string $admin, string $file, string $dirPath, string $dirPathImg) {
@@ -87,7 +86,7 @@
                         <p class="files-folder-file-name">'.$file.'</p>
                     </div>
                 ';
-            }//if in_array
+            }
         }//Method showFile.
 
     }//Class FileView.

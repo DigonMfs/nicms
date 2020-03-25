@@ -12,6 +12,11 @@
         public function showArticle($visibility,$sort,$limit) {
             $FunctionsObj = new Functions();
 
+            //Real escape string.
+            $visibility = $this->connect()->real_escape_string($visibility);
+            $sort = $this->connect()->real_escape_string($sort);
+            $limit = $this->connect()->real_escape_string($limit);
+
             //Output data.
             $result = $this->getArticles($visibility,$sort,$limit);
 
@@ -54,15 +59,20 @@
             }//If $result > 0.
         }//Method showArticles.
         
-        public function showArticlesIndex($subcat_id) {
+        public function showArticlesIndex($subcatID) {
             $FunctionsObj = new Functions();
-            if($FunctionsObj->isInteger($subcat_id)) {
+
+            //Validation.
+            if($FunctionsObj->isInteger($subcatID)) {
                 echo $FunctionsObj->outcomeMessage("error","Invalid parameters.");
                 return false;
-            }//If isInteger.
+            }
+
+            //Real escape string.
+            $subcatID = $this->connect()->real_escape_string($subcatID);
 
             //Output data.
-            $result = $this->getArticleFromSubcat($subcat_id);
+            $result = $this->getArticleFromSubcat($subcatID);
             
             if ($result->num_rows > 0) {
                 echo "<table class='table-articles-overview'> ";
@@ -84,19 +94,25 @@
             }
         }//Method showArticlesIndex.
         
-        public function showRelevantArticles($subcat_id,$articleId) {
+        public function showRelevantArticles($subcatID,$articleID) {
             $FunctionsObj = new Functions();
             
-            if($FunctionsObj->isInteger($subcat_id)) {
+            //Validation.
+            if($FunctionsObj->isInteger($subcatID)) {
                 echo $FunctionsObj->outcomeMessage("error","Invalid parameters.");
                 return false;
-            }//If isInteger.
+            }
+
+            //Real escape string.
+            $subcatID = $this->connect()->real_escape_string($subcatID);
+            $articleID = $this->connect()->real_escape_string($articleID);
             
-            $result = $this->getArticleFromSubcat($subcat_id);
+            //Execute sql.
+            $result = $this->getArticleFromSubcat($subcatID);
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
                     //Check if record is current article. If so highlight it.
-                    if ($articleId == $row["a_row_id"]) {
+                    if ($articleID == $row["a_row_id"]) {
                         echo "<a href='".$this->linkUrl."article/".$row['a_link']."' class='list-group-item list-group-item-action list-group-item-secondary'>".$row['a_title']."</a>";
                     } else {
                         echo "<a href='".$this->linkUrl."article/".$row['a_link']."' class='list-group-item list-group-item-action'>".$row['a_title']."</a>";
@@ -109,7 +125,11 @@
         
         public function showFullArticle($articleLink) {
             $FunctionsObj = new Functions();
-                
+
+            //Real escape string.
+            $articleLink = $this->connect()->real_escape_string($articleLink);
+            
+            //Execute sql.
             $result = $this->getArticle($articleLink);
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
@@ -135,9 +155,9 @@
                     echo "</article>";
                 }
             } else {
-               
+                $FunctionsObj->outcomeMessage("warning","No articles have been found");
             }
-        }
+        }//Method showFullArticle.
         
     }//ArticleContr.
 
