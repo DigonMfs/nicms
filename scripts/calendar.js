@@ -42,7 +42,7 @@ function askPublishArticle(id) {
     //Set the correct content in the dialog.
     heading = "Publish Article";
     body = "<p>Are you sure you want to publish this article?</p>";
-    button = " <button class='btn btn-primary' onclick='publishArticle('+id+')'>Publish</button>";
+    button = " <button class='btn btn-primary' onclick='publishArticle("+id+")'>Publish</button>";
     openDialog(heading,body,button);
 }//Function askPublishArticle.
 
@@ -73,7 +73,7 @@ function askUnpublishArticle(id) {
     //Set the correct content in the dialog.
     heading = "Unpublish Article";
     body = "<p>Are you sure you want to unpublish this article?</p>";
-    button = "<button class='btn btn-primary' onclick='unpublishArticle('+id+')'>Unpublish</button>";
+    button = "<button class='btn btn-primary' onclick='unpublishArticle("+id+")'>Unpublish</button>";
     openDialog(heading,body,button);
 }//Function askPublishArticle.
 
@@ -97,8 +97,8 @@ function unpublishArticle(id) {
 }//Function publishArticle.
 
 //Function editArticle.
-function editArticle() {
-    alert("Coming Later.");
+function editArticle(id) {
+    window.location = linkUrl+"write/"+id;
 }//Function editArticle.
 
 //Ask to delete article.
@@ -109,7 +109,7 @@ function askDeleteArticle(id) {
     //Set the correct content in the dialog.
     heading = "Delete Article";
     body = "<p>Are you sure you want to delete this article?</p>";
-    button = "<button class='btn btn-primary' onclick='deleteArticle('+id+')'>Delete</button>";
+    button = "<button class='btn btn-primary' onclick='deleteArticle("+id+")'>Delete</button>";
     openDialog(heading,body,button);
 }//Function askDeleteArticle.
 

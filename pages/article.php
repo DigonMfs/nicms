@@ -8,12 +8,13 @@
     $CategoryContrObj = new CategoryContr();
     
     //Check if articleID isset.
-    if (isset($_GET["articleID"])) {
+    if (isset($_GET["link"])) {
         //Get article link.
-        $articleID = $_GET["articleID"];
-        $articleTitle = $articleContrObj->getArticleTitle($articleID);
-        $articleCatID = $articleContrObj->getArticleCatID($articleID);
-        $articleSubcatID = $articleContrObj->getArticleSubcatID($articleID);
+        $articleLink = $_GET["link"];
+        $articleID = $articleContrObj->getArticleID($articleLink);
+        $articleTitle = $articleContrObj->getArticleTitle($articleLink);
+        $articleCatID = $articleContrObj->getArticleCatID($articleLink);
+        $articleSubcatID = $articleContrObj->getArticleSubcatID($articleLink);
         $articleSubcat = $CategoryContrObj->getSubcat($articleSubcatID);
 
     } else {
@@ -54,7 +55,7 @@
                     
                     <!--Sidebar-->
                     <div class='list-group articles-list-group-relevant-articles'>
-                        <a class='list-group-item list-group-item-action active disabled list-group-items-header'><span  onclick="testtt()">&#9776;</span> Relevant articles</a>
+                        <a class='list-group-item list-group-item-action active disabled list-group-items-header'>Relevant articles</a>
                         <?php 
                             $ArticelViewObj->showRelevantArticles($articleSubcatID,$articleID);
                         ?>
@@ -63,8 +64,8 @@
 
                 <!--Article container-->
                 <div class="col-lg-9 col-md-12 col-sm-12 articles-article-overview-container">
-                    <?php 
-                        $ArticelViewObj->showFullArticle($articleID);
+                    <?php
+                        $ArticelViewObj->showFullArticle($articleLink);
                     ?>
                 </div><!-- Article title container-->
                 

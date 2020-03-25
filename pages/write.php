@@ -1,6 +1,7 @@
 <?php
     include_once("../includes/autoload.inc.php");
     $object = new AutoLoad();
+    $ArticleContr = new Articlecontr();
 
     //Check if user is logged in.
     if(!isset($_SESSION["userID"])) {
@@ -22,11 +23,23 @@
             });
         </script>
     </head>
-    <body>
-        <?php 
-            //Header.
-            include_once "../includes/header.inc.php";
-        ?>
+    <?php 
+        //Header.
+        include_once "../includes/header.inc.php";
+
+        //Check if edit-article is true.
+        if (isset($_GET["article-link"])) {
+            $link = $_GET["article-link"];
+            echo " <body onload='setContentToEditArticle()'>";
+            echo "<input type='hidden' name='titleInput' id='titleInput' value='".$ArticleContr->getArticleTitle($link)."'>";
+            echo "<input type='hidden' name='summaryInput' id='summaryInput' value='".$ArticleContr->getArticleSummary($link)."'>";
+            echo "<input type='hidden' name='contentInput' id='contentInput' value='".$ArticleContr->getArticleContent($link)."'>";
+            echo "<input type='hidden' name='signedInput' id='signerInput' value='".$ArticleContr->getArticleSigner($link)."'>";
+            echo "<input type='hidden' name='linkInput' id='linkInput' value='".$link."'>";
+        } else {
+            echo "<body>";
+        }
+    ?>
         
         <!-- Main.-->
         <main class="general-main container">
@@ -89,7 +102,14 @@
                         </div>
                     </div>
                     <div class="flex-fill write-publish-extra-button-container">
-                        <button class="btn btn-primary" onclick="SaveArticle()" type="submit">Save</button>
+                        <?php
+                            //Check if article will be created or edited.
+                            if (isset($_GET["article-link"])) {
+                                echo '<button class="btn btn-primary" onclick="saveEditArticle(\''.$link.'\')" type="submit">Edit</button>';
+                            } else {
+                                echo "<button class='btn btn-primary' onclick='SaveArticle()' type='submit'>Save</button>";
+                            }   
+                        ?>
                     </div>
                 </div><!--Tab pane publish.-->
                 

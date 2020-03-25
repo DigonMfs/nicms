@@ -12,6 +12,7 @@ Options -Indexes
 
 #Write page.
 RewriteRule ^write?$ ./pages/write.php
+RewriteRule ^write/([\w-\s]+)?$ ./pages/write.php?article-link=$1
 
 #Files page.
 RewriteRule ^files?$ ./pages/files.php
@@ -27,9 +28,7 @@ RewriteRule ^account/([\w-\s]+)?$ ./pages/account.php?message=$1
 RewriteRule ^account?$ ./pages/account.php
 
 #article page.
-#RewriteRule ^article/([0-9+]+)/([\w-\s]+)/([0-9+]+)/([0-9+]+)/([\w-\s]+)?$ ./pages/article.php?articleId=$1&articleTitle=$2&catID=$3&subcatId=$4&subcat=$5 [NC]
-RewriteRule ^article/([\w-\s]+)/([0-9+]+)?$ ./pages/article.php?link=$1&articleID=$2 [NC]
-RewriteRule ^article?$ ./pages/article.php
+RewriteRule ^article/([\w-\s]+)?$ ./pages/article.php?link=$1 [NC]
 
 
 

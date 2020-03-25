@@ -6,28 +6,18 @@ function openLogindialog() {
         return false;
     }
 
-    //Open overlay.
-    $(".overlay-wrapper").fadeIn();
-    $(".overlay-box").css({
-        'margin-top' : '100px'
-    });
+    //Open the overlay.
+    Toggleoverlay('open',0);
 
-    //Put in Correct Content.
-    document.getElementById("overlayBody").innerHTML ='\
-        <h2 class="overlay-title">Login</h2>\
-        <i class="fas fa-times close-overlay" onclick="Toggleoverlay(\'close\',0)"></i>\
-        <div class="form-group form-group-login">\
-            <label for="username">Username</label>\
-            <input type="text" class="form-control" id="username" placeholder="Enter Username">\
-            <label for="password">Password</label>\
-            <input type="password" class="form-control" id="password" placeholder="Enter Password">\
-            <small id="loginMessage"></small>\
-        </div>\
-        <div class="button-container button-container-login">\
-            <button class="btn btn-secondary" onclick="Toggleoverlay(\'close\',0)">Close</button>\
-            <button class="btn btn-primary" onclick="login()">Login</button>\
-        </div>\
-    ';
+    //Set the correct content in the dialog.
+    heading = "Login";
+    body = "<label for='username'>Username</label>\
+            <input type='text' class='form-control' id='username' placeholder='Enter Username'>\
+            <label for='password'>Password</label>\
+            <input type='password' class='form-control' id='password' placeholder='Enter Password'>\
+            <small id='loginMessage'></small>";
+    button = "<button class='btn btn-primary' onclick='login()''>Login</button>";
+    openDialog(heading,body,button);
 }//Function openLoginDialog.
 
 //Log the user in.

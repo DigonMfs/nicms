@@ -35,7 +35,7 @@
                     echo '<div class="testerr">';
                     if ($row["a_deleted"] == 0) {
                         echo '<button class="btn btn-danger calendar-article-publish-button" onclick="askDeleteArticle('.$row["a_row_id"].')" type="button">Delete</button>';
-                        echo '<button class="btn btn-secondary calendar-article-publish-button" onclick="editArticle('.$row["a_row_id"].')" type="button">Edit</button>';
+                        echo '<button class="btn btn-secondary calendar-article-publish-button" onclick="editArticle(\''.$row["a_link"].'\')" type="button">Edit</button>';
                         if ($row["a_published"] == 0) {
                             echo '<button class="btn btn-primary calendar-article-publish-button" onclick="askPublishArticle('.$row["a_row_id"].')" type="button">Publish</button>';
                         } else {
@@ -70,16 +70,8 @@
                 while($row = $result->fetch_assoc()) {
                     echo "<tr>";
                     echo "<td>";
-                    //echo "<a href='".$this->linkUrl."article/".$row['a_row_id']."/".$row['a_title']."/".$row["c_row_id"]."/".$row['s_row_id']."/".$row['s_category']."'>".$row["a_title"]."</a>";
-                    echo "<a href='".$this->linkUrl."article/".$row['a_link']."/".$row['a_row_id']."'>".$row["a_title"]."</a>";
+                    echo "<a href='".$this->linkUrl."article/".$row['a_link']."'>".$row["a_title"]."</a>";
                     echo "<div class='table-articles-admin-icons'>";
-
-                    //Check if admin is logged in.
-                    if (isset($_SESSION["userID"])) {
-                        echo "<i class='far fa-edit text-primary' onclick='editArticle(".$row["a_row_id"].")'></i>";
-                        echo "<i class='far fa-trash-alt text-danger' onclick='askDeleteArticle(".$row["a_row_id"].")'></i>";
-                    }
-
                     echo "</div>";
                     echo "</td>";
                     echo "</tr>";
@@ -105,9 +97,9 @@
                 while($row = $result->fetch_assoc()) {
                     //Check if record is current article. If so highlight it.
                     if ($articleId == $row["a_row_id"]) {
-                        echo "<a href='".$this->linkUrl."article/".$row['a_link']."/".$row['a_row_id']."' class='list-group-item list-group-item-action list-group-item-secondary'>".$row['a_title']."</a>";
+                        echo "<a href='".$this->linkUrl."article/".$row['a_link']."' class='list-group-item list-group-item-action list-group-item-secondary'>".$row['a_title']."</a>";
                     } else {
-                        echo "<a href='".$this->linkUrl."article/".$row['a_link']."/".$row['a_row_id']."' class='list-group-item list-group-item-action'>".$row['a_title']."</a>";
+                        echo "<a href='".$this->linkUrl."article/".$row['a_link']."' class='list-group-item list-group-item-action'>".$row['a_title']."</a>";
                     }
                 }
             } else {
@@ -115,15 +107,10 @@
             }
         }//Method showRelevantArticles.
         
-        public function showFullArticle($article_id) {
+        public function showFullArticle($articleLink) {
             $FunctionsObj = new Functions();
-            
-            if($FunctionsObj->isInteger($article_id)) {
-                echo $FunctionsObj->outcomeMessage("error","Invalid parameters.");
-                return false;
-            }//If isInteger.
-            
-            $result = $this->getArticle($article_id);
+                
+            $result = $this->getArticle($articleLink);
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
 

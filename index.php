@@ -16,7 +16,6 @@
     } else {
         $cat_id = 1;
     }
-
 ?>
 <!DOCTYPE html>
 <html lnag="nl">

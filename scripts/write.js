@@ -78,3 +78,54 @@ function SaveArticle() {
         },
     });
 }//Function saveArticle.
+
+//Sets the content of the article in the correct input boxes.
+function setContentToEditArticle() {
+    //Check if the url contains "write/".
+    url = window.location.href;
+    if (!url.includes("write/")) {
+        return false;
+    }
+
+    //Set the content of the article in the correct inputs.
+    document.getElementById("articleTitle").value = document.getElementById("titleInput").value;
+    document.getElementById("articleSummary").value = document.getElementById("summaryInput").value;
+    document.getElementById("articleSigner").value = document.getElementById("signerInput").value;
+    document.getElementById("articleURL").value = ReplaceSpaces(document.getElementById("linkInput").value);
+
+    //CKeditor needs to load, so set a delay.
+    setTimeout(function() {
+        CKEDITOR.instances.ckeditor.insertHtml(document.getElementById("contentInput").value);
+    }, 4000);
+}//Function setContentToEditArticle.
+
+function saveEditArticle(link) {
+    //get Values.
+    articleTitle = document.getElementById("articleTitle").value;
+    articleSummary = document.getElementById("articleSummary").value;
+    articleBody = CKEDITOR.instances.ckeditor.getData();
+    articleSigner = document.getElementById("articleSigner").value;
+    articleURL = document.getElementById("articleURL").value;
+
+    //Call ajax.
+    $.ajax({
+        type: "POST",
+        url: linkUrl+"classes/handler.class.php",
+        data: {
+            articleTitle:articleTitle,
+            articleSummary:articleSummary,
+            articleBody:articleBody,
+            articleSigner:articleSigner,
+            articleURL:articleURL,
+            link:link,
+            saveEditArticle:"saveEditArticle"
+        },
+        success: function(data) {
+            $(".write-alert-messages").html(data);
+            window.scrollTo(0,0);
+            setTimeout(function() {
+              location.reload();
+            }, 3000);
+        },
+    });
+}//Function saveEditArticle.

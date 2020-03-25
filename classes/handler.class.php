@@ -57,6 +57,13 @@
         unset($SaveArticleObj);
     }//If.
 
+      //Ajax called from saveEditArticle.
+      if(isset($_POST["saveEditArticle"])) {
+        $WriteContrObj = new WriteContr();
+        $WriteContrObj->saveEditArticle($_POST["articleTitle"],$_POST["articleSummary"],$_POST["articleBody"],$_POST["articleSigner"],$_POST["articleURL"],$_POST["link"]);
+        unset($WriteContrObj);
+    }//If.
+
     //Ajax called from SaveCategory.
     if(isset($_GET["setCatSubcat"])) {
         $SetCategoryObj = new CategoryContr();

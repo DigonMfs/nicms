@@ -15,7 +15,7 @@
         }//Method stripSpaces.
 
         public function replaceSpaces($value) {
-            return str_replace(' ', '_', $value);
+            return str_replace(' ', '-', $value);
         }//Method replaceSpaces.
 
         public function stripUnderscores($value) {

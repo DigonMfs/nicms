@@ -52,9 +52,17 @@
             }
         }//Method deleteArticle.
 
+        public function getArticleID($articleLink) {
+            $result = $this->getArticle($articleLink);
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    return $row["a_row_id"];
+                }
+            }
+        }//Method getArticleTitle.
 
-        public function getArticleTitle($articleID) {
-            $result = $this->getArticle($articleID);
+        public function getArticleTitle($articleLink) {
+            $result = $this->getArticle($articleLink);
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
                     return $row["a_title"];
@@ -62,8 +70,35 @@
             }
         }//Method getArticleTitle.
 
-        public function getArticleCatID($articleID) {
-            $result = $this->getArticle($articleID);
+        public function getArticleSummary($articleLink) {
+            $result = $this->getArticle($articleLink);
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    return $row["a_abstract"];
+                }
+            }
+        }//Method getArticleTitle.
+
+        public function getArticleContent($articleLink) {
+            $result = $this->getArticle($articleLink);
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    return $row["a_content"];
+                }
+            }
+        }//Method getArticleTitle.
+
+        public function getArticleSigner($articleLink) {
+            $result = $this->getArticle($articleLink);
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    return $row["a_signed_by"];
+                }
+            }
+        }//Method getArticleTitle.
+
+        public function getArticleCatID($articleLink) {
+            $result = $this->getArticle($articleLink);
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
                     return $row["c_row_id"];
@@ -71,8 +106,8 @@
             }
         }//Method getArticleCatID.
 
-        public function getArticleSubcatID($articleID) {
-            $result = $this->getArticle($articleID);
+        public function getArticleSubcatID($articleLink) {
+            $result = $this->getArticle($articleLink);
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
                     return $row["s_row_id"];

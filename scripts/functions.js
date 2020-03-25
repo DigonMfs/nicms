@@ -17,6 +17,10 @@ function StripSpaces(value) {
     return value.replace(/ /g,"");
 }//Function StripSpaces.
 
+function ReplaceSpaces(value) {
+    return value.replace(/-/g, ' ');
+}//Function StripSpaces.
+
 //Validate the length.
 function ValidateLength(value,min,max) {
     if (value.length < min || value.length > max) {
