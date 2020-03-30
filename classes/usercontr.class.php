@@ -1,11 +1,11 @@
 <?php 
 class UserContr extends User {
 
-     //Make variable $linkUrl accessible in ArticleView.
-     protected $linkUrl = '';
-     public function __construct($linkUrl) {
-         $this->linkUrl = $linkUrl;
-     }
+    //Make variable $linkUrl accessible in ArticleView.
+    protected $linkUrl = '';
+    public function __construct($linkUrl) {
+        $this->linkUrl = $linkUrl;
+    }
 
     public function loginContr($username,$password) {
         $FunctionsObj = new Functions();
@@ -39,7 +39,7 @@ class UserContr extends User {
     public function logout() {
         session_unset();
         session_destroy();
-    }
+    }//Method logout.
 
     public function changePassword($oldPassword,$newPassword,$confirmNewPassword) {
         $FunctionsObj = new Functions();
@@ -184,6 +184,33 @@ class UserContr extends User {
             return false;
         }
     }//Method addAccount.
+
+    public function deleteUser($userID) {
+        $FunctionsObj = new Functions();
+
+        //Validation.
+        if ($FunctionsObj->isInteger($userID)) {
+            echo $FunctionsObj->outcomeMessage("error","Parameter isn't an integer.");
+            return false;
+        }
+        if ($_SESSION["userFunction"] == 0) {
+            echo $FunctionsObj->outcomeMessage("error","You do not have the permission to delete this account.");
+            return false;
+        }
+        
+        //Real escape string.
+        $userID = $this->connect()->real_escape_string($userID);
+
+        //Execute sql.
+        $result = $this->unSetUser($userID);
+        if ($result === TRUE) {
+            echo $FunctionsObj->outcomeMessage("success","Account has successfully been deleted.");
+         
+        } else {
+            echo $FunctionsObj->outcomeMessage("error","Failed to delete the account.");
+            
+        }
+    }//Method deleteUser.
     
 }//UserContr.
 

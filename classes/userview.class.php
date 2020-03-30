@@ -21,8 +21,12 @@
                     //Check if user is admin or moderator to show the correct badge.
                     if ($row["function"] == 1) {
                         echo "<td><span class='badge-danger badge'>Admin</span></td>";
+                        echo "<td><button class='btn btn-danger btn-sm' disabled>Delete</button></td>";
                     } else {
                         echo "<td><span class='badge-success badge'>Moderator</span></td>";
+                        if ($_SESSION["userFunction"] == 1) {
+                            echo "<td><button class='btn btn-danger btn-sm' onclick='askDeleteUser(".$row['row_id'].")'>Delete</button></td>";
+                        }
                     }
                     echo "</tr>";
                 }

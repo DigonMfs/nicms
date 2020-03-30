@@ -23,6 +23,9 @@ RewriteRule ^files?$ ./pages/files.php
 #Categories page.
 RewriteRule ^categories?$ ./pages/categories.php
 
+#channels page
+RewriteRule ^channels?$ ./pages/channels.php
+
 #calendar page.
 RewriteRule ^calendar?$ ./pages/calendar.php
 

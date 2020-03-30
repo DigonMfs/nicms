@@ -86,6 +86,10 @@
                                 case 'addAccount-fail':
                                     echo $FunctionsObj->outcomeMessage("error","Failed to add account.");
                                     break;
+                                //Delete account.
+                                case 'deleteAccount-fail':
+                                    echo $FunctionsObj->outcomeMessage("error","Failed to delete the account.");
+                                    break;
                             //Succes.
                                 //Pasword.
                                 case 'pass-change':
@@ -102,6 +106,10 @@
                                 //Add account.
                                 case 'addAccount':
                                     echo $FunctionsObj->outcomeMessage("success","Account has succesfully been added.");
+                                    break;
+                                //Delete account.
+                                case 'deleteAccount':
+                                    echo $FunctionsObj->outcomeMessage("success","Account has succesfully been deleted.");
                                     break;
                         }
 
@@ -184,6 +192,7 @@
                                 <th scope="col">Displayname</th>
                                 <th scope="col">Password</th>
                                 <th scope="col">function</th>
+                                <th scope="col">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -191,7 +200,6 @@
                                 //Display all users.
                                 $UserViewObj = new UserView();
                                 $UserViewObj->showUsers();
-
                             ?>
                         </tbody>
                     </table>

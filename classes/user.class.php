@@ -45,6 +45,12 @@ class User extends Dbh {
         return $result;
     }//Method reSetDisplayname.
 
+    protected function unSetUser($userID) {
+        $sql = "DELETE FROM user WHERE row_id=$userID AND function=0";
+        $result = $this->connect()->query($sql);
+        return $result;
+    }//Method unSetUser.
+
 }//UserContr.
 
 ?>

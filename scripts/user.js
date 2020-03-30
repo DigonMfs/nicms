@@ -69,3 +69,32 @@ function logout() {
         },
     });
 }//Function logout.
+
+//Ask to delete the useraccount.
+function askDeleteUser(id) {
+    //Open the overlay.
+    Toggleoverlay('open',0);
+
+    //Set the correct content in the dialog.
+    heading = "Delete User account";
+    body = "<p>Are you sure you want to delete this user account?</p>";
+    button = " <button class='btn btn-primary' onclick='deleteUser("+id+")'>Delete</button>";
+    openDialog(heading,body,button);
+}//Function askDeleteUser.
+
+//Delete the user account.
+function deleteUser(id) {
+      //Call ajax.
+      $.ajax({
+        type: "POST",
+        url: linkUrl+"classes/handler.class.php",
+        data: {
+            id:id,
+            deleteUser:"deleteUser"
+        },
+        success: function(data) {
+            location.reload();
+            $(".account-alert-messages").html(data);
+        },
+    });
+}//Function deleteUser.

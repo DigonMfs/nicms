@@ -25,6 +25,9 @@
         echo "<a class='nav-link nav-link-admin' href='".$linkUrl."categories'>Categories</a>";
         echo "</li>";
         echo "<li class='nav-item admin-nav-item'>";
+        echo "<a class='nav-link nav-link-admin' href='".$linkUrl."channels'>Channels</a>";
+        echo "</li>";
+        echo "<li class='nav-item admin-nav-item'>";
         echo "<a class='nav-link nav-link-admin' href='".$linkUrl."calendar'>Calendar</a>";
         echo "</li>";
         echo "<li class='nav-item admin-nav-item'>";
@@ -34,7 +37,7 @@
         echo "<a class='nav-link nav-link-admin' href='".$linkUrl."FAQ'>FAQ</a>";
         echo "</li>";
         echo "<li class='nav-item admin-nav-item'>";
-        echo "<button class='button-logout' type='button' onclick='logout()'>Logout</button>";
+        echo "<button class='button-logout' type='button' onclick='logout()'><i class='fas fa-sign-out-alt'></i></button>";
         echo "</li>";
 
         //With relative paths.

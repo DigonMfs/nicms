@@ -91,6 +91,12 @@
         }//Method deleteCategory.
 
         public function getSubcat($subcatID) {
+             //Validation.
+             if ($FunctionsObj->isInteger($subcatID)) {
+                echo $FunctionsObj->outcomeMessage("error","Parameter isn't an integer.");
+                return false;
+            }
+            
             //Real escape string.
             $subcatID = $this->connect()->real_escape_string($subcatID);
 

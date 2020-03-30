@@ -162,4 +162,11 @@
         unset($ArticleObj);
     }//If.
 
+     //Ajax called from delete user account.
+     if(isset($_POST["deleteUser"])) {
+        $UserContr = new UserContr($linkUrl);
+        $UserContr->deleteUser($_POST["id"]);
+        unset($UserContr);
+    }//If.
+
 ?>
