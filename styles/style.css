@@ -562,6 +562,73 @@ label {
 
 
 
+
+/*FAQ page.*/
+/*Section of all the items.*/
+.faq-faq-section {
+    counter-reset: counter;
+    border: 1px solid #f2f2f2;
+    border-left: 4px solid dodgerblue;
+    padding: 1.5em;
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+.faq-faq-section h2 {
+    display: inline-block;
+}
+.faq-faq-section i {
+    font-size: 40px;
+}
+.faq-section-articles {
+    display: none;
+}
+/*Clickable arrow to toggle items*/
+.faq-angle {
+    color: red;
+    font-size: 25px;
+    position: absolute;
+    right: 1rem;
+    top: 0.5rem;
+    cursor: pointer;
+    transition: transform 300ms ease;
+}
+/*Subtitles within the items.*/
+.faq-section-articles h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: grey;
+}
+
+/*Counters*/
+.counter {
+    padding-left: 15px;
+}
+.counter::before {
+    position: absolute;
+    left: 1.5rem;
+    color: dodgerblue;
+    font-weight: bold;
+}
+.counter-bullet::before {
+    content: '•';
+}
+.counter-number::before {
+    counter-increment: counter;
+    content: counter(counter);
+}
+
+
+
+
+
+
+
+
+
+
+
+
 @media (min-width: 1200px) { 
     /*width for main*/
     main, .general-nav, .inner-header {
@@ -588,6 +655,17 @@ label {
     .articles-list-group-relevant-articles {
         position: relative;
         margin-bottom: 25px !important;
+    }
+    /*Padding left-right on main element in article page.*/
+    .articles-main {
+        padding: 0px 15px !important;
+    }
+    .articles-article-breadcrumbs {
+        position: relative;
+        padding-top: 50px;
+    }
+    .articles-article-container {
+        padding-top: 15px !important;
     }
 }
 

@@ -21,5 +21,10 @@
 <!--Link To CSS-->
 <link rel="stylesheet" type="text/css" href="<?php echo $linkUrl; ?>styles/style.css">
 
+<!--Bootstrap & Bootstrap related CDN's (notice the 'defer' element) -->
+<link defer rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
 <!--Link to Font Awesome-->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">

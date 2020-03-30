@@ -160,4 +160,18 @@ function openDialog(heading,body,button) {
         '+button+'\
     </div>\
 ';
-}
+}//Function openDialog.
+
+//Toggles the visibility of the sections on the FAQ page.
+function toggleFAQ(id) {
+    if ($("#faq-section-article-"+id).css('display') == 'none') {
+      $(".faq-section-articles").slideUp();
+      $(".faq-angle").css({'transform' : 'rotate(0deg)'});
+
+      $("#faq-angle-"+id).css({'transform' : 'rotate(180deg)'});
+    } else {
+      $(".faq-angle").css({'transform' : 'rotate(0deg)'});
+    }
+
+    $("#faq-section-article-"+id).slideToggle();
+  }//Function toggleFAQ.

@@ -10,6 +10,9 @@ Options -Indexes
     #Index with /login
     RewriteRule ^index/login?$ index.php [L]
 
+#article page.
+RewriteRule ^article/([\w-\s]+)?$ ./pages/article.php?link=$1 [NC]
+
 #Write page.
 RewriteRule ^write?$ ./pages/write.php
 RewriteRule ^write/([\w-\s]+)?$ ./pages/write.php?article-link=$1
@@ -27,9 +30,8 @@ RewriteRule ^calendar?$ ./pages/calendar.php
 RewriteRule ^account/([\w-\s]+)?$ ./pages/account.php?message=$1
 RewriteRule ^account?$ ./pages/account.php
 
-#article page.
-RewriteRule ^article/([\w-\s]+)?$ ./pages/article.php?link=$1 [NC]
-
+#FAQ page
+RewriteRule ^FAQ?$ ./pages/faq.php
 
 
 

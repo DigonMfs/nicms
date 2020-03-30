@@ -90,10 +90,9 @@ function setContentToEditArticle() {
     document.getElementById("articleSigner").value = document.getElementById("signerInput").value;
     document.getElementById("articleURL").value = ReplaceSpaces(document.getElementById("linkInput").value);
 
-    //CKeditor needs to load, so set a delay.
-    setTimeout(function() {
-        CKEDITOR.instances.ckeditor.insertHtml(document.getElementById("contentInput").value);
-    }, 4000);
+    $(document).ready(function() {
+        document.getElementById("ckeditor").value = document.getElementById("contentInput").value;
+    });
 }//Function setContentToEditArticle.
 
 function saveEditArticle(link) {

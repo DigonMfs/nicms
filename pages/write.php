@@ -19,8 +19,9 @@
         <script>
             /*Textarea met ckeditor vervangen*/
             $(document).ready(function() {
-                CKEDITOR.replace( 'ckeditor' );
+                CKEDITOR.replace( 'ckeditor' );  
             });
+            
         </script>
     </head>
     <?php 
@@ -137,10 +138,8 @@
                     </nav>
                     <div class="files-directory-body card-body">
                         <?php 
-                            //show folders and files without admin options
-                            /*$admin is true on files.php, if $admin = true, the delete icon will appear on hover, and on click of an image
-                            the image won't be inserted in ckeditor, on false the image will be inserted into ckeditor and no delete icon
-                            will be shown. */
+                            //Include the files and folders.
+                            //$admin='false' -> no delete icon on hover, but insert/copy buttons.
                             $admin = "false";
                             $fileFolderObj = new FileView($linkUrl);
                             $fileFolderObj->showFilesFolders($admin,null);
@@ -157,10 +156,6 @@
         </div>
         <div class="card card-body bg-dark" id="overlay-quick"></div>   
 
-        <!--Bootstrap & Bootstrap related CDN's.-->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     </body>
 </html>
 

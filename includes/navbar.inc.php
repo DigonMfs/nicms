@@ -31,6 +31,9 @@
         echo "<a class='nav-link nav-link-admin' href='".$linkUrl."account'>Account</a>";
         echo "</li>";
         echo "<li class='nav-item admin-nav-item'>";
+        echo "<a class='nav-link nav-link-admin' href='".$linkUrl."FAQ'>FAQ</a>";
+        echo "</li>";
+        echo "<li class='nav-item admin-nav-item'>";
         echo "<button class='button-logout' type='button' onclick='logout()'>Logout</button>";
         echo "</li>";
 
