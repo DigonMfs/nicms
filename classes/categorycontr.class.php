@@ -91,8 +91,10 @@
         }//Method deleteCategory.
 
         public function getSubcat($subcatID) {
-             //Validation.
-             if ($FunctionsObj->isInteger($subcatID)) {
+            $FunctionsObj = new Functions();
+
+            //Validation.
+            if ($FunctionsObj->isInteger($subcatID)) {
                 echo $FunctionsObj->outcomeMessage("error","Parameter isn't an integer.");
                 return false;
             }

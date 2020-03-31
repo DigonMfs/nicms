@@ -15,6 +15,7 @@
 <script src="<?php echo $linkUrl; ?>scripts/user.js"></script>
 <script src="<?php echo $linkUrl; ?>scripts/write.js"></script>
 <script src="<?php echo $linkUrl; ?>scripts/category.js"></script>
+<script src="<?php echo $linkUrl; ?>scripts/channel.js"></script>
 <script src="<?php echo $linkUrl; ?>scripts/calendar.js"></script>
 <script src="<?php echo $linkUrl; ?>scripts/index.js"></script>
 

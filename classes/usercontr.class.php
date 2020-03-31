@@ -188,6 +188,9 @@ class UserContr extends User {
     public function deleteUser($userID) {
         $FunctionsObj = new Functions();
 
+        //Check if user logged in, and thus allowed to execute this method.
+        $FunctionsObj->checkUserLoggedIn();
+
         //Validation.
         if ($FunctionsObj->isInteger($userID)) {
             echo $FunctionsObj->outcomeMessage("error","Parameter isn't an integer.");

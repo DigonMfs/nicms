@@ -457,7 +457,7 @@ label {
 .categories-category-card:hover .delete-categories-icon {
     opacity: 1;
 }
-/*Edit icon on cat/subcat hover*/
+/*Edit icon on cat/subcat hover.*/
 .delete-categories-icon {
     opacity: 0;
     transition: opacity 300ms ease;
@@ -483,7 +483,34 @@ label {
 
 
 
-/*Calendar page*/
+
+
+
+/*Channels page.*/
+.channels-table-container {
+    width: 100%;
+    padding: 0px !important;
+    overflow-x: scroll;
+}
+.channels-admin-actions-container {
+    padding-bottom: 25px;
+}
+label {
+    padding-top: 10px !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*Calendar page.*/
 .calendar-article-container {
     margin-bottom: 25px;
 }

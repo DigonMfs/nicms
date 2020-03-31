@@ -162,11 +162,32 @@
         unset($ArticleObj);
     }//If.
 
-     //Ajax called from delete user account.
-     if(isset($_POST["deleteUser"])) {
-        $UserContr = new UserContr($linkUrl);
-        $UserContr->deleteUser($_POST["id"]);
-        unset($UserContr);
+    //Ajax called from delete user account.
+    if(isset($_POST["deleteUser"])) {
+        $UserContrObj = new UserContr($linkUrl);
+        $UserContrObj->deleteUser($_POST["id"]);
+        unset($UserContrObj);
+    }//If.
+
+    //Ajax called from add channel.
+    if(isset($_POST["addChannel"])) {
+        $ChannelContrObj = new ChannelContr();
+        $ChannelContrObj->insertChannel($_POST["name"],$_POST["canUnpublish"],$_POST["type"]);
+        unset($ChannelContrObj);
+    }//If.
+
+    //Ajax called from show channels.
+    if(isset($_POST["showChannels"])) {
+        $ChannelView = new ChannelView();
+        $ChannelView->showMediaChannels();
+        unset($ChannelView);
+    }//If.
+
+    //Ajax called from delete channel.
+    if(isset($_POST["deleteChannel"])) {
+        $ChannelContrObj = new ChannelContr();
+        $ChannelContrObj->deleteChannel($_POST["channelID"]);
+        unset($ChannelContrObj);
     }//If.
 
 ?>

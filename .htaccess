@@ -36,6 +36,10 @@ RewriteRule ^account?$ ./pages/account.php
 #FAQ page
 RewriteRule ^FAQ?$ ./pages/faq.php
 
+#rssgenerate page
+RewriteRule ^rssgenerate/([\w-\s]+)?$ ./pages/rssgenerate.php?rssID=$1
+
+
 
 
 #[NC] = non-case sensitive (convert uppercase to lowercase in url)

@@ -48,6 +48,10 @@
             include_once($this->path."category.class.php");
             include_once($this->path."categoryview.class.php");
             include_once($this->path."categorycontr.class.php");
+
+            include_once($this->path."channel.class.php");
+            include_once($this->path."channelview.class.php");
+            include_once($this->path."channelcontr.class.php");
             
             include_once($this->path."filesview.class.php");
             include_once($this->path."filescontr.class.php");
