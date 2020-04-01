@@ -22,7 +22,6 @@
             if (is_dir($dirPath)) {
                 $aFiles = scandir($dirPath);
                 for($i=0;$i<count($aFiles);$i++) {
-                    
                     //File or Folder?
                     if (is_dir($dirPath . '/' . $aFiles[$i]))
                         $this->showFolder($admin, $aFiles[$i], $dirPath, $dirPathFiles); 

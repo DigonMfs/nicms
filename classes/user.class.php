@@ -1,8 +1,8 @@
 <?php 
 class User extends Dbh {
 
-    protected function login($username, $password) {
-        $sql = "SELECT * FROM user WHERE username='$username' AND password='$password'";
+    protected function login($username) {
+        $sql = "SELECT * FROM user WHERE username='$username'";
         $result = $this->connect()->query($sql);
         return $result;
     }//Method login. 
@@ -20,9 +20,8 @@ class User extends Dbh {
         return $result;
     }//Method inertUser.
 
-    protected function getCurUser($oldPassword) {
-        $id = $_SESSION["userID"];
-        $sql = "SELECT * FROM user WHERE row_id=$id AND password='$oldPassword'";
+    protected function getCurUser($id) {
+        $sql = "SELECT * FROM user WHERE row_id=$id";
         $result = $this->connect()->query($sql);
         return $result;
     }//Method getUser.

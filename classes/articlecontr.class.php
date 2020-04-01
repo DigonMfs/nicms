@@ -10,7 +10,7 @@
             $FunctionsObj->checkUserLoggedIn();
 
             //Validation.
-            if ($FunctionsObj->isInteger($id)) {
+            if (!$FunctionsObj->isInteger($id)) {
                 echo $FunctionsObj->outcomeMessage("error","Invalid parameters.");
                 return false;
             }
@@ -34,7 +34,7 @@
             $FunctionsObj->checkUserLoggedIn();
 
             //Validation.
-            if ($FunctionsObj->isInteger($id)) {
+            if (!$FunctionsObj->isInteger($id)) {
                 echo $FunctionsObj->outcomeMessage("error","Invalid parameters.");
                 return false;
             }
@@ -59,7 +59,7 @@
             $FunctionsObj->checkUserLoggedIn();
 
             //Validation.
-            if ($FunctionsObj->isInteger($id)) {
+            if (!$FunctionsObj->isInteger($id)) {
                 echo $FunctionsObj->outcomeMessage("error","Invalid parameter, is not an integer.".$id);
                 return false;
             }

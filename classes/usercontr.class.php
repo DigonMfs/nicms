@@ -28,11 +28,15 @@ class UserContr extends User {
         $result = $this->login($username,$FunctionsObj->encrypt($password));
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-                $_SESSION["userID"] = $row["row_id"];
-                $_SESSION["userFunction"] = $row["function"];
+                if (password_verify($password,$row["password"])) { 
+                    $_SESSION["userID"] = $row["row_id"];
+                    $_SESSION["userFunction"] = $row["function"];
+                } else {
+                    echo $FunctionsObj->outcomeMessage('error','password is incorrect.');
+                }
             }
         } else {
-            echo $FunctionsObj->outcomeMessage('error','Username and or password are incorrect.');
+            echo $FunctionsObj->outcomeMessage('error','Username is incorrect.');
         }
     }//Method login.
 
@@ -64,11 +68,15 @@ class UserContr extends User {
             return false;
         }
         //Check if old password is correct.
-        $result = $this->getCurUser($FunctionsObj->encrypt($oldPassword));
-        if ($result->num_rows <= 0) {
-            //echo $FunctionsObj->outcomeMessage("error","Old password is not correct.");
-            header("Location: ".$this->linkUrl."account/pass-wrong");
-            return false;
+        $result = $this->getCurUser($_SESSION["userID"]);
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                if (!password_verify($oldPassword,$row["password"])) {
+                    //echo $FunctionsObj->outcomeMessage("error","Old password is not correct.");
+                    header("Location: ".$this->linkUrl."account/pass-wrong");
+                    return false;
+                }
+            }
         }
         if ($oldPassword == $newPassword) {
             //echo $FunctionsObj->outcomeMessage("error","New password is the same as the old.");
@@ -78,7 +86,7 @@ class UserContr extends User {
 
         //Execute sql.
         $id = $_SESSION["userID"];
-        $result = $this->reSetPassword($FunctionsObj->encrypt($newPassword),$id);
+        $result = $this->reSetPassword(password_hash($newPassword,PASSWORD_DEFAULT),$id);
         if ($result === TRUE) {
             //echo $FunctionsObj->outcomeMessage("success","Password has succesfully been changed.");
             header("Location: ".$this->linkUrl."account/pass-change");
@@ -173,7 +181,7 @@ class UserContr extends User {
         $confirmPassword = $this->connect()->real_escape_string($confirmPassword);
 
         //Execute sql.
-        $result = $this->insertUser($username,$displayname,$FunctionsObj->encrypt($password));
+        $result = $this->insertUser($username,$displayname,password_hash($password,PASSWORD_DEFAULT));
         if ($result === TRUE) {
            //echo $FunctionsObj->outcomeMessage("error","Account has successfully been added.");
            header("Location: ".$this->linkUrl."account/addAccount");
@@ -192,7 +200,7 @@ class UserContr extends User {
         $FunctionsObj->checkUserLoggedIn();
 
         //Validation.
-        if ($FunctionsObj->isInteger($userID)) {
+        if (!$FunctionsObj->isInteger($userID)) {
             echo $FunctionsObj->outcomeMessage("error","Parameter isn't an integer.");
             return false;
         }

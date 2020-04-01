@@ -5,6 +5,9 @@ Options -Indexes
 #index page.
     #index with parameter.
     RewriteRule ^index/([0-9+]+)$ index.php?catID=$1 [L]
+    #Index with /login and parameter
+    RewriteRule ^index/([0-9+]+)/login$ index.php?catID=$1 [L]
+
     #index without parameter
     RewriteRule ^index?$ index.php [L]
     #Index with /login

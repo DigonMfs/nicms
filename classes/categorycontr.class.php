@@ -17,7 +17,7 @@
                 echo $FunctionsObj->outcomeMessage("error","'".$catSubcatName."' is too long or short.");
                 return false;
             }
-            if ($FunctionsObj->isInteger($parentID)) {
+            if (!$FunctionsObj->isInteger($parentID)) {
                 echo $FunctionsObj->outcomeMessage("error","Parameter is not an integer.");
                 return false;
             }
@@ -43,7 +43,7 @@
             $FunctionsObj->checkUserLoggedIn();
 
             //Validation.
-            if ($FunctionsObj->isInteger($id) || $FunctionsObj->isInteger($catSubcat)) {
+            if (!$FunctionsObj->isInteger($id) || !$FunctionsObj->isInteger($catSubcat)) {
                 echo $FunctionsObj->outcomeMessage("error","Parameters aren't integers.");
                 return false;
             }
@@ -94,7 +94,7 @@
             $FunctionsObj = new Functions();
 
             //Validation.
-            if ($FunctionsObj->isInteger($subcatID)) {
+            if (!$FunctionsObj->isInteger($subcatID)) {
                 echo $FunctionsObj->outcomeMessage("error","Parameter isn't an integer.");
                 return false;
             }

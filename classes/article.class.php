@@ -81,6 +81,23 @@
             return $result;
         }//Method unSetArticle.
 
+        protected function getArticleChannel($channelID) {
+            $sql = "SELECT c.row_id AS c_row_id, c.article_id AS c_article_id, c.channel_id AS c_channel_id,
+            c.is_published AS c_is_published, c.published_date AS c_published_date, a.row_id AS a_row_id, 
+            a.author_id AS a_author_id, a.creation_time AS a_creation_time, a.published AS a_published, 
+            a.deleted AS a_deleted, a.title AS a_title, a.content AS a_content, a.abstract AS a_abstract, 
+            a.category_id AS a_category_id, a.subcategory_id AS a_subcategory_id, a.signed_by AS a_signed_by, 
+            a.link AS a_link, cat.category AS cat_category
+            FROM articlechannel c 
+            INNER JOIN article a ON c.article_id=a.row_id
+            INNER JOIN category cat ON a.category_id=cat.row_id
+            WHERE channel_id=$channelID
+            ORDER BY published_date DESC
+            LIMIT 2";
+            $result = $this->connect()->query($sql);
+            return $result;
+        }//Method unSetArticle.
+
     }//Article.
 
 ?>

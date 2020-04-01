@@ -21,7 +21,7 @@
             $FunctionsObj = new Functions();
             
             //Validation.
-            if($FunctionsObj->isInteger($level) || $FunctionsObj->isInteger($parentID)) {
+            if(!$FunctionsObj->isInteger($level) || !$FunctionsObj->isInteger($parentID)) {
                 echo $FunctionsObj->outcomeMessage("error","Invalid parameters.");
                 return false;
             }
@@ -101,25 +101,43 @@
             echo "</div> </div> </div>";
         }//Method showCatsAndSubcats.
         
-        //Shows the subcats from parentcat on articles page (index)
+        //Shows the subcats from parentcat on index page.
         public function ArticlesShowSubcats($parentID) {
+            $FunctionsObj = new Functions();
+
+            //Validation.
+            if (!$FunctionsObj->isInteger($parentID)) {
+                echo $FunctionsObj->outcomeMessage("error","Parameter is not an integer.");
+                return false;
+            }
+
             //Real escape string.
             $parentID = $this->connect()->real_escape_string($parentID);
 
             //Execute sql.
             $result = $this->getSubcatsFromParentCat($parentID);
+            echo "<div class='list-group index-subcategories-listgroup'>";
+            echo "<a class='list-group-item list-group-item-action active disabled list-group-items-header'>Subcategories</a>";
             if ($result->num_rows > 0) {
-                echo "<div class='list-group index-subcategories-listgroup'>";
-                echo "<a class='list-group-item list-group-item-action active disabled list-group-items-header'>Subcategories</a>";
-                
+               
                 while($row = $result->fetch_assoc()) {
                     echo "<a class='list-group-item list-group-item-action' onclick='showArticlesIndex(".$row["row_id"].",\"".$row['category']."\")'><i class='fa fa-file'></i>&nbsp;".$row['category']."</a>";
                 }
-                echo "</div>";
+            } else {
+                echo "<a class='list-group-item list-group-item-action'><i class='fa fa-file'></i>&nbsp;No subcategory has been found.</a>";
             }
+            echo "</div>";
         }//Method ArticleShowSubcats.
 
         public function showCategory($categoryID) {
+            $FunctionsObj = new Functions();
+
+            //Validation.
+            if (!$FunctionsObj->isInteger($categoryID)) {
+                echo $FunctionsObj->outcomeMessage("error","Parameter is not an integer.");
+                return false;
+            }
+
             //Real escape string.
             $categoryID = $this->connect()->real_escape_string($categoryID);
 
@@ -131,6 +149,20 @@
                }
             }
         }//Method getCategory.
+
+        //This method will be used on the digon website to link
+        //to my index page.
+        public function showLinksToCategories() {
+            //Execute sql.
+            $result = $this->getCategories();
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    echo "<a href='index/".$row["row_id"]."'>".$row["category"]."</a>";
+                }
+            } else {
+                echo 'no link were found';
+            }//If.
+        }//Method showLinkstoCategories.
 
     }//Class Media.
 

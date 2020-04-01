@@ -63,7 +63,7 @@
             $FunctionsObj = new Functions();
 
             //Validation.
-            if($FunctionsObj->isInteger($subcatID)) {
+            if(!$FunctionsObj->isInteger($subcatID)) {
                 echo $FunctionsObj->outcomeMessage("error","Invalid parameters.");
                 return false;
             }
@@ -98,7 +98,7 @@
             $FunctionsObj = new Functions();
             
             //Validation.
-            if($FunctionsObj->isInteger($subcatID)) {
+            if(!$FunctionsObj->isInteger($subcatID)) {
                 echo $FunctionsObj->outcomeMessage("error","Invalid parameters.");
                 return false;
             }
@@ -158,6 +158,35 @@
                 $FunctionsObj->outcomeMessage("warning","No articles have been found");
             }
         }//Method showFullArticle.
+
+        public function showArtchanArticlesXml($channelID) {
+            $FunctionsObj = new Functions();
+        
+            //Validation.
+            if(!$FunctionsObj->isInteger($channelID)) {
+                echo $FunctionsObj->outcomeMessage("error","Invalid parameters.");
+                return false;
+            }
+
+            //Real escape string.
+            $channelID = $this->connect()->real_escape_string($channelID);
+
+            //Execute sql.
+            $result = $this->getArticleChannel($channelID);
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    echo "<item xmlns:dc='ns:1'>" . PHP_EOL;
+                    echo "<title>".$row["a_title"]."</title>" . PHP_EOL;
+                    echo "<link>".$this->linkUrl."article/".$row["a_link"]."</link>" . PHP_EOL;
+                    echo "<guid>".$row["c_row_id"]."</guid>" . PHP_EOL;
+                    echo "<pubdate>".$row["c_published_date"]."</pubdate>" . PHP_EOL;
+                    echo "<dc:creator>".$row["a_signed_by"]."</dc:creator>" . PHP_EOL;
+                    echo "<description>".$row["a_abstract"]."</description>" . PHP_EOL;
+                    echo "<category>".$row["cat_category"]."</category>" . PHP_EOL;
+                    echo "</item>" . PHP_EOL;
+                }
+            }
+        }//Method showArtchanArticlesXml
         
     }//ArticleContr.
 

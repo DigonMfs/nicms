@@ -3,6 +3,7 @@
     {
         public function showUsers() {
             $FunctionsObj = new Functions();
+            
             //Check if user logged in, and thus allowed to execute this method.
             $FunctionsObj->checkUserLoggedIn();
 

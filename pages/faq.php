@@ -34,9 +34,9 @@
             </ul>
 
             <!--Index FAQ.-->
-            <section class="faq-faq-section">
+            <section class="faq-faq-section" onclick="toggleFAQ(0)">
                 <i class="fas fa-file text-primary"></i>
-                <i class="fas fa-angle-down faq-angle" id="faq-angle-0" onclick="toggleFAQ(0)"></i>
+                <i class="fas fa-angle-down faq-angle" id="faq-angle-0"></i>
                 <h2 class="text-primary">Index</h2>
                 <article class="faq-section-articles" id="faq-section-article-0">
                     <h3>Navigation</h3>
@@ -59,9 +59,9 @@
             </section>
 
             <!--Article FAQ.-->
-            <section class="faq-faq-section">
+            <section class="faq-faq-section" onclick="toggleFAQ(1)">
                 <i class="fas fa-eye text-primary"></i>
-                <i class="fas fa-angle-down faq-angle" id="faq-angle-1" onclick="toggleFAQ(1)"></i>
+                <i class="fas fa-angle-down faq-angle" id="faq-angle-1"></i>
                 <h2 class="text-primary">Article</h2>
                 <article class="faq-section-articles" id="faq-section-article-1">
                     <h3>Article</h3>
@@ -75,9 +75,9 @@
             </section>
 
             <!--Write FAQ.-->
-            <section class="faq-faq-section">
+            <section class="faq-faq-section" onclick="toggleFAQ(2)">
                 <i class="fas fa-feather-alt text-primary"></i>
-                <i class="fas fa-angle-down faq-angle" id="faq-angle-2" onclick="toggleFAQ(2)"></i>
+                <i class="fas fa-angle-down faq-angle" id="faq-angle-2"></i>
                 <h2 class="text-primary">Write</h2>
                 <article class="faq-section-articles" id="faq-section-article-2">
                     <h3>Writing an article</h3>
@@ -130,9 +130,9 @@
             </section>
 
             <!--Files FAQ.-->
-            <section class="faq-faq-section">
+            <section class="faq-faq-section" onclick="toggleFAQ(3)">
                 <i class="fas fa-folder text-primary"></i>
-                <i class="fas fa-angle-down faq-angle" id="faq-angle-3" onclick="toggleFAQ(3)"></i>
+                <i class="fas fa-angle-down faq-angle" id="faq-angle-3"></i>
                 <h2 class="text-primary">Files</h2>
                 <article class="faq-section-articles" id="faq-section-article-3">
                     <h3>Files</h3>
@@ -154,9 +154,9 @@
             </section>
 
             <!--Categories FAQ.-->
-            <section class="faq-faq-section">
+            <section class="faq-faq-section" onclick="toggleFAQ(4)">
                 <i class="fas fa-book text-primary"></i>
-                <i class="fas fa-angle-down faq-angle" id="faq-angle-4" onclick="toggleFAQ(4)"></i>
+                <i class="fas fa-angle-down faq-angle" id="faq-angle-4"></i>
                 <h2 class="text-primary">Categories</h2>
                 <article class="faq-section-articles" id="faq-section-article-4">
                     <h3>Categories</h3>
@@ -174,9 +174,9 @@
             </section>
 
             <!--Channels FAQ.-->
-            <section class="faq-faq-section">
+            <section class="faq-faq-section" onclick="toggleFAQ(5)">
                 <i class="fas fa-tv text-primary"></i>
-                <i class="fas fa-angle-down faq-angle" id="faq-angle-5" onclick="toggleFAQ(5)"></i>
+                <i class="fas fa-angle-down faq-angle" id="faq-angle-5"></i>
                 <h2 class="text-primary">Channels</h2>
                 <article class="faq-section-articles" id="faq-section-article-5">
                     <h3>Channels</h3>
@@ -198,9 +198,9 @@
             </section>
 
             <!--Calendar FAQ.-->
-            <section class="faq-faq-section">
+            <section class="faq-faq-section" onclick="toggleFAQ(6)">
                 <i class="fas fa-calendar-minus text-primary"></i>
-                <i class="fas fa-angle-down faq-angle" id="faq-angle-6" onclick="toggleFAQ(6)"></i>
+                <i class="fas fa-angle-down faq-angle" id="faq-angle-6"></i>
                 <h2 class="text-primary">Calendar</h2>
                 <article class="faq-section-articles" id="faq-section-article-6">
                     <h3>Calendar</h3>
@@ -234,9 +234,9 @@
             </section>
 
             <!--Account FAQ.-->
-            <section class="faq-faq-section">
+            <section class="faq-faq-section" onclick="toggleFAQ(7)">
                 <i class="fas fa-user text-primary"></i>
-                <i class="fas fa-angle-down faq-angle" id="faq-angle-7" onclick="toggleFAQ(7)"></i>
+                <i class="fas fa-angle-down faq-angle" id="faq-angle-7"></i>
                 <h2 class="text-primary">Account</h2>
                 <article class="faq-section-articles" id="faq-section-article-7">
                     <h3>Account</h3>

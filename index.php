@@ -51,8 +51,7 @@
             </nav>
 
              <!--Alert messages-->
-             <div class="index-alert-messages">
-            </div>
+             <div class="index-alert-messages"></div>
            
             <!--Sidebar container-->
             <div class="row">

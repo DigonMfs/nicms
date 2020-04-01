@@ -34,7 +34,8 @@
             </ul>
                   
             <!--Alert messages-->
-            <div class="calendar-alert-messages"></div>
+            <div class="calendar-alert-messages">
+            </div>
 
             <div class="row">
                 
