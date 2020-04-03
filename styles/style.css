@@ -550,9 +550,6 @@ label {
     right: 15px;
     top: 15px
 }
-.calendar-article-publish-button {
-   margin-left: 8px;
-}
 /*Load more articles button.*/
 .calendar-load-more {
     text-align: right;
@@ -563,6 +560,52 @@ label {
 .calendar-list-group {
     margin-bottom: 25px !important;
 }
+.no-margin-padding {
+    margin: 0px !important;
+    padding: 0px !important;
+}
+.calendar-article-button {
+    margin-left: 8px;
+    position: relative;
+ }
+ /*Buttons on calendar page to publish,unpublish,delete and edit article.*/
+ .calendar-article-button::after {
+    position: absolute;
+    display: block;
+    background-color: rgba(0,0,0,0.75);
+    border-radius: 3px;
+    z-index: 5;
+    font-size: 12px;
+    padding: .200rem;
+    top: 40px;
+    display: none;
+ }
+ .calendar-article-button:hover::after {
+     display: block;
+ }
+.fa-ban {
+    position: absolute;
+    top: 0.375rem;
+    left: 0.5rem;
+    font-size: 25px;
+    opacity: 0.75;
+    color: grey !important;
+}
+.delete-button::after {
+    content: 'Delete';
+}
+.edit-button::after {
+    content: 'Edit';
+}
+.unpublish-button::after {
+    content: 'Unpublish';
+}
+.publish-button::after {
+    content: 'Publish';
+}
+
+
+
 
 
 /*Account page*/

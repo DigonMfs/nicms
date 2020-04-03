@@ -220,6 +220,13 @@
                         The reason you can still find unpublished articles is because not all media platforms allow an article to be unpublished. This way the link to the article will still
                         be valid.
                     </p>
+                    <p class="counter counter-bullet">
+                        Since you can publish an article on multiple media channels most of the times a publish and unpublish button will appear next to the article, this means the article is published
+                        but not on all existing media channels. This means when you click the publish or unpublish button you will only see the corresponding media channels to publish or unpublish the article on.
+                        If an article isn't published on any media channel or all channels only a publish or unpublish button will appear.
+                        And last if you want to unpublish an article on the website itself, the article needs to be unpublished on all media channelrs. 
+                        For publishing this is the same, the article will always be published on the website.
+                    </p>
                     <h3>Delete</h3>
                     <p class="counter counter-bullet">
                         Unlike unpublishing an article once deleted the article cannot be undeleted from the interface, this will have to be done manually in the database. This is done because

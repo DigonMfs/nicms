@@ -2,7 +2,10 @@
     session_start();
     
     //Variable containing the entire path to the website.
+    //This variable is also user to share an article on different media channels.
+    //$linkUrl + "pages/article/permalink" (ArticleView:64)
     $linkUrl = "//localhost/Websites/nicms/";
+
 
     interface AutoloadInterface {
         public function __construct();
@@ -17,19 +20,10 @@
         public function __construct() {
             $this->url = $_SERVER["HTTP_HOST"] . $_SERVER['REQUEST_URI'];
 
-            //Relative paths.
-            /*if (strpos($this->url,'classes') == TRUE) {
-                $this->path = "";
-            } else if (strpos($this->url,'pages') == TRUE) {
-                $this->path = "../classes/";
-            } else {
-                $this->path = "classes/";
-            }*/
-
             if (strpos($this->url,'index') == TRUE) {
                 $this->path = "classes/";
             } else {
-                $this->path = "../classes/";
+                $this->path = dirname(__FILE__)."/../classes/";
             }
             
 

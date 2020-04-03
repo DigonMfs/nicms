@@ -3,72 +3,111 @@
     class ArticleContr extends Article {
 
         //Publish a saved article.
-        public function publishArticle($id) {
+        public function publishArticle($articleID,$aSelectedChannels) {
             $FunctionsObj = new Functions();
 
             //Check if user logged in, and thus allowed to execute this method.
             $FunctionsObj->checkUserLoggedIn();
 
             //Validation.
-            if (!$FunctionsObj->isInteger($id)) {
+            if (!$FunctionsObj->isInteger($articleID) || !$FunctionsObj->isInteger($aSelectedChannels[0])) {
                 echo $FunctionsObj->outcomeMessage("error","Invalid parameters.");
                 return false;
             }
 
             //Real escape string.
-            $id = $this->connect()->real_escape_string($id);
+            $articleID = $this->connect()->real_escape_string($articleID);
+            //$aSelectedChannels = $this->connect()->real_escape_string($aSelectedChannels);
             
-            //Execute sql.
-            $result = $this->reSetArticle($id,1);
+            //Execute sql (change article table).
+            $result = $this->reSetArticle($articleID,1);
             if ($result) {
                 echo $FunctionsObj->outcomeMessage("success","The article has successfully been published.");
             } else {
                 echo $FunctionsObj->outcomeMessage("error","Failed to publish the article.");
             }//If $result.
+
+            //Execute sql (change articlechannel table).
+            if ($aSelectedChannels[0] != "empty") {
+                for ($i=0; $i < count($aSelectedChannels); $i++) { 
+                    $aChannelInfo = explode(',',$aSelectedChannels[$i]);
+                    if($this->setArticleChannel($articleID,$aChannelInfo[0])) {
+                    } else {
+                        echo $FunctionsObj->outcomeMessage("error","Failed to publish article on all channels.");
+                        return false;
+                    }
+                }
+                echo $FunctionsObj->outcomeMessage("success","Article has been published on all selected channels.");
+            }
         }//Method publishArticle.
 
-        public function unpublishArticle($id) {
+        public function unpublishArticle($articleID,$aSelectedChannels) {
             $FunctionsObj = new Functions();
 
             //Check if user logged in, and thus allowed to execute this method.
             $FunctionsObj->checkUserLoggedIn();
 
             //Validation.
-            if (!$FunctionsObj->isInteger($id)) {
+            if (!$FunctionsObj->isInteger($articleID) || !$FunctionsObj->isInteger($aSelectedChannels[0])) {
                 echo $FunctionsObj->outcomeMessage("error","Invalid parameters.");
                 return false;
             }
 
             //Real escape string.
-            $id = $this->connect()->real_escape_string($id);
+            $articleID = $this->connect()->real_escape_string($articleID);
 
-            //Execute sql.
-            $result = $this->reSetArticle($id,0);
-            if ($result) {
-                echo $FunctionsObj->outcomeMessage("success","The article has successfully been unpublished.");
-            } else {
-                echo $FunctionsObj->outcomeMessage("error","Failed to unpublish the article.");
-            }//If $result.
+            //Check if article is not published on any media then delete article on website.
+            $ChannelViewObj = new ChannelView();
+            if (!$ChannelViewObj->articleViewGetPublishedMedia($articleID)->num_rows > 0) {
+                
+                //Execute sql (set published to 0 in article table).
+                $result = $this->reSetArticle($articleID,0);
+                if ($result) {
+                    echo $FunctionsObj->outcomeMessage("success","The article has successfully been unpublished.");
+                } else {
+                    echo $FunctionsObj->outcomeMessage("error","Failed to unpublish the article.");
+                }//If $result.
+            }
+
+            //Delete article on all published media.
+            if ($aSelectedChannels[0] != "empty") {
+                for ($i=0; $i < count($aSelectedChannels); $i++) { 
+                    $aChannelInfo = explode(',',$aSelectedChannels[$i]);
+                    $result = $this->unSetArticleChannel($articleID,$aChannelInfo[0]);
+                    if($result) {
+                    } else {
+                        echo $FunctionsObj->outcomeMessage("error","Failed to unpublish articles on all channels.");
+                        return false;
+                    }
+                }
+                echo $FunctionsObj->outcomeMessage("success","Deleted article on all selected channels.");
+            }
         }//Method unpublishArticle.
         
         //Delete Article.
-        public function deleteArticle($id) {
+        public function deleteArticle($articleID) {
             $FunctionsObj = new Functions();
 
             //Check if user logged in, and thus allowed to execute this method.
             $FunctionsObj->checkUserLoggedIn();
 
             //Validation.
-            if (!$FunctionsObj->isInteger($id)) {
-                echo $FunctionsObj->outcomeMessage("error","Invalid parameter, is not an integer.".$id);
+            if (!$FunctionsObj->isInteger($articleID)) {
+                echo $FunctionsObj->outcomeMessage("error","Invalid parameter, is not an integer.");
+                return false;
+            }
+            //Check if article is published on any channel.
+            $ChannelViewObj = new ChannelView();
+            if ($ChannelViewObj->articleViewGetPublishedMedia($articleID)->num_rows > 0) {
+                echo $FunctionsObj->outcomeMessage("error","Article needs te be unpublished on all media channels before you can delete the article.");
                 return false;
             }
 
             //Real escape string.
-            $id = $this->connect()->real_escape_string($id);
+            $articleID = $this->connect()->real_escape_string($articleID);
 
             //Execute sql.
-            $result = $this->unSetArticle($id);
+            $result = $this->unSetArticle($articleID);
             if ($result) {
                 echo $FunctionsObj->outcomeMessage("success","Article has successfully been deleted.");
             } else {

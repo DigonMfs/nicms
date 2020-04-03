@@ -1,6 +1,4 @@
-<?php  
-
-
+<?php 
     class ArticleView extends Article {
 
         //Make variable $linkUrl accessible in ArticleView.
@@ -17,9 +15,8 @@
             $sort = $this->connect()->real_escape_string($sort);
             $limit = $this->connect()->real_escape_string($limit);
 
-            //Output data.
+            //Execute sql.
             $result = $this->getArticles($visibility,$sort,$limit);
-
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
                     echo '<div class="card calendar-article-container">';
@@ -39,13 +36,22 @@
                     echo '<li class="breadcrumb-item text-secondary">'.$row["s_category"].'</li>';
                     echo '<div class="testerr">';
                     if ($row["a_deleted"] == 0) {
-                        echo '<button class="btn btn-danger calendar-article-publish-button" onclick="askDeleteArticle('.$row["a_row_id"].')" type="button">Delete</button>';
-                        echo '<button class="btn btn-secondary calendar-article-publish-button" onclick="editArticle(\''.$row["a_link"].'\')" type="button">Edit</button>';
-                        if ($row["a_published"] == 0) {
-                            echo '<button class="btn btn-primary calendar-article-publish-button" onclick="askPublishArticle('.$row["a_row_id"].')" type="button">Publish</button>';
+                        echo '<button class="btn btn-danger calendar-article-button delete-button" onclick="askDeleteArticle('.$row["a_row_id"].')" type="button"><i class="fas fa-trash-alt"></i></button>';
+                        echo '<button class="btn btn-secondary calendar-article-button edit-button" onclick="editArticle(\''.$row["a_link"].'\')" type="button"><i class="fas fa-edit"></i></button>';
+                        //Check if there are media channels the article can be published/unbpublished on and thus don't show publish/unpublish button if not necessary.
+                        $ChannelViewObj = new ChannelView();
+                        if ($ChannelViewObj->articleViewGetPublishedMedia($row["a_row_id"])->num_rows > 0) {
+                            echo '<button class="btn btn-primary calendar-article-button unpublish-button" onclick="askUnpublishArticle('.$row["a_row_id"].')" type="button">
+                              <i class="fas fa-upload"></i><i class="fas fa-ban"></i></button>';  
                         } else {
-                            echo '<button class="btn btn-primary calendar-article-publish-button" onclick="askUnpublishArticle('.$row["a_row_id"].')" type="button">Unpublish</button>';   
-                        }  
+                            if ($row["a_published"] == 1) {
+                                echo '<button class="btn btn-primary calendar-article-button unpublish-button" onclick="askUnpublishArticle('.$row["a_row_id"].')" type="button">
+                                <i class="fas fa-upload"></i><i class="fas fa-ban"></i></button>';  
+                            }
+                        }
+                        if ($ChannelViewObj->articleViewGetNonPublishedMedia($row["a_row_id"])->num_rows > 0) {
+                            echo '<button class="btn btn-primary calendar-article-button publish-button" onclick="askPublishArticle('.$row["a_row_id"].')" type="button"><i class="fas fa-upload"></i></button>';
+                        }
                     } else {
                         echo '<button class="btn btn-danger calendar-article-publish-button" type="button" disabled>Deleted</button>'; 
                     }
@@ -53,10 +59,18 @@
                     echo '</ol>';
                     echo '</div>';
                     echo '</div>';
+
+                    //Display facebook share button. 
+                    echo "<a target='_blank' id='fb-share-".$row["a_row_id"]."' 
+                    href='https://www.facebook.com/sharer/sharer.php?u=https://".$this->linkUrl."pages/article/".$row["a_link"]."' class='d-none'></a>";
                 }
+                //Display load more button.
+                echo "<div class='calendar-load-more'>";
+                echo "<button class='btn btn-info' onclick='calendarLoadMoreArt()'>Load More</button>";
+                echo "</div>";
             } else {
                 echo $FunctionsObj->outcomeMessage("warning","No articles were found.");
-            }//If $result > 0.
+            }
         }//Method showArticles.
         
         public function showArticlesIndex($subcatID) {

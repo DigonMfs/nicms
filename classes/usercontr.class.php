@@ -25,15 +25,11 @@ class UserContr extends User {
         $password = $this->connect()->real_escape_string($password);
 
         //Execute sql.
-        $result = $this->login($username,$FunctionsObj->encrypt($password));
+        $result = $this->login($username,md5($password));
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-                if (password_verify($password,$row["password"])) { 
                     $_SESSION["userID"] = $row["row_id"];
                     $_SESSION["userFunction"] = $row["function"];
-                } else {
-                    echo $FunctionsObj->outcomeMessage('error','password is incorrect.');
-                }
             }
         } else {
             echo $FunctionsObj->outcomeMessage('error','Username is incorrect.');
@@ -68,15 +64,11 @@ class UserContr extends User {
             return false;
         }
         //Check if old password is correct.
-        $result = $this->getCurUser($_SESSION["userID"]);
-        if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-                if (!password_verify($oldPassword,$row["password"])) {
-                    //echo $FunctionsObj->outcomeMessage("error","Old password is not correct.");
-                    header("Location: ".$this->linkUrl."account/pass-wrong");
-                    return false;
-                }
-            }
+        $result = $this->getCurUser($_SESSION["userID"],md5($oldPassword));
+        if ($result->num_rows <= 0) {
+            //echo $FunctionsObj->outcomeMessage("error","Old password is not correct.");
+            header("Location: ".$this->linkUrl."account/pass-wrong");
+            return false;
         }
         if ($oldPassword == $newPassword) {
             //echo $FunctionsObj->outcomeMessage("error","New password is the same as the old.");
@@ -85,8 +77,8 @@ class UserContr extends User {
         }
 
         //Execute sql.
-        $id = $_SESSION["userID"];
-        $result = $this->reSetPassword(password_hash($newPassword,PASSWORD_DEFAULT),$id);
+        $userID = $_SESSION["userID"];
+        $result = $this->reSetPassword(md5($newPassword),$userID);
         if ($result === TRUE) {
             //echo $FunctionsObj->outcomeMessage("success","Password has succesfully been changed.");
             header("Location: ".$this->linkUrl."account/pass-change");
@@ -157,6 +149,11 @@ class UserContr extends User {
         $FunctionsObj->checkUserLoggedIn();
 
         //Validation.
+        if ($_SESSION["userFunction"] != 1) {
+             //echo $FunctionsObj->outcomeMessage("error","You do not have the permission to add an account.");
+             header("Location: ".$this->linkUrl."account/addAccount-permission");
+             return false;
+        }
         if (!$FunctionsObj->validateLength($username,3,30) || !$FunctionsObj->validateLength($displayname,3,30) || !$FunctionsObj->validateLength($password,3,30) || !$FunctionsObj->validateLength($confirmPassword,3,30)) {
             //echo $FunctionsObj->outcomeMessage("error","Values are too long/short.");
             header("Location: ".$this->linkUrl."account/addAccount-length");
@@ -181,7 +178,7 @@ class UserContr extends User {
         $confirmPassword = $this->connect()->real_escape_string($confirmPassword);
 
         //Execute sql.
-        $result = $this->insertUser($username,$displayname,password_hash($password,PASSWORD_DEFAULT));
+        $result = $this->insertUser($username,$displayname,md5($password));
         if ($result === TRUE) {
            //echo $FunctionsObj->outcomeMessage("error","Account has successfully been added.");
            header("Location: ".$this->linkUrl."account/addAccount");
@@ -216,10 +213,8 @@ class UserContr extends User {
         $result = $this->unSetUser($userID);
         if ($result === TRUE) {
             echo $FunctionsObj->outcomeMessage("success","Account has successfully been deleted.");
-         
         } else {
             echo $FunctionsObj->outcomeMessage("error","Failed to delete the account.");
-            
         }
     }//Method deleteUser.
     

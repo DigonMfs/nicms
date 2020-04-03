@@ -4,7 +4,7 @@
     $object = new AutoLoad();
     $CategoryViewObj = new CategoryView();
     $ArticelViewObj = new ArticleView($linkUrl);
-    $articleContrObj = new ArticleContr();
+    $ArticleContrObj = new ArticleContr();
     $CategoryContrObj = new CategoryContr();
     
     //Check if link isset.
@@ -13,14 +13,15 @@
         $articleLink = $_GET["link"];
 
         //Check if article exists.
-        if(!$articleContrObj->getArticleID($articleLink)) {
+        if(!$ArticleContrObj->getArticleID($articleLink)) {
             header("Location: ".$linkUrl."index");
         }
         //Get other article elements.
-        $articleID = $articleContrObj->getArticleID($articleLink);
-        $articleTitle = $articleContrObj->getArticleTitle($articleLink);
-        $articleCatID = $articleContrObj->getArticleCatID($articleLink);
-        $articleSubcatID = $articleContrObj->getArticleSubcatID($articleLink);
+        $articleID = $ArticleContrObj->getArticleID($articleLink);
+        $articleTitle = $ArticleContrObj->getArticleTitle($articleLink);
+        $articleSummary = $ArticleContrObj->getArticleSummary($articleLink);
+        $articleCatID = $ArticleContrObj->getArticleCatID($articleLink);
+        $articleSubcatID = $ArticleContrObj->getArticleSubcatID($articleLink);
         $articleSubcat = $CategoryContrObj->getSubcat($articleSubcatID);
 
     } else {
@@ -36,8 +37,15 @@
             //Head tags.
             include "../includes/head.inc.php";
         ?>
+        <!--Facebook share metatags-->
+        <meta property="og:url"           content="https://www.your-domain.com/your-page.html" />
+        <meta property="og:type"          content="Website"/>
+        <meta property="og:title"         content="<?php echo $articleTitle;?>" />
+        <meta property="og:description"   content="<?php echo $articleSummary;?>" />
     </head>
     <body>
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v6.0"></script>
         <?php 
             //Header.
             include_once "../includes/header.inc.php";
@@ -54,7 +62,7 @@
                   <li class="breadcrumb-item active" aria-current="page"><?php echo $articleTitle ?></li>
                 </ol>
             </nav>
-   
+
             <div class="row articles-article-container">
                 <!--Sidebar container-->
                 <div class="col-lg-3 col-md-12 col-sm-12 articles-sidebar-container">
@@ -78,7 +86,7 @@
             </div><!--Row-->
             
         </main>
-      
+
         <!--Overlay-->
         <div class="overlay-wrapper">
             <div class="overlay-box" id="overlayBody"></div>

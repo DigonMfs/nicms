@@ -27,6 +27,8 @@
                         echo "<td><span class='badge-success badge'>Moderator</span></td>";
                         if ($_SESSION["userFunction"] == 1) {
                             echo "<td><button class='btn btn-danger btn-sm' onclick='askDeleteUser(".$row['row_id'].")'>Delete</button></td>";
+                        } else {
+                            echo "<td><button class='btn btn-danger btn-sm' disabled>Delete</button></td>";
                         }
                     }
                     echo "</tr>";

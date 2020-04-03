@@ -1,8 +1,8 @@
 <?php 
 class User extends Dbh {
 
-    protected function login($username) {
-        $sql = "SELECT * FROM user WHERE username='$username'";
+    protected function login($username,$password) {
+        $sql = "SELECT * FROM user WHERE username='$username' AND password='$password'";
         $result = $this->connect()->query($sql);
         return $result;
     }//Method login. 
@@ -20,14 +20,14 @@ class User extends Dbh {
         return $result;
     }//Method inertUser.
 
-    protected function getCurUser($id) {
-        $sql = "SELECT * FROM user WHERE row_id=$id";
+    protected function getCurUser($userID,$password) {
+        $sql = "SELECT * FROM user WHERE row_id=$userID AND password='$password'";
         $result = $this->connect()->query($sql);
         return $result;
     }//Method getUser.
 
-    protected function reSetPassword($newPassword,$id) {
-        $sql = "UPDATE user SET password='$newPassword' WHERE row_id=$id";
+    protected function reSetPassword($newPassword,$userID) {
+        $sql = "UPDATE user SET password='$newPassword' WHERE row_id=$userID";
         $result = $this->connect()->query($sql);
         return $result;
     }//Method reSetPassword.

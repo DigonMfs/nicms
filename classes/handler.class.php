@@ -93,16 +93,16 @@
     }//If.
 
     //Ajax called from publishArticle.
-    if(isset($_GET["publishArticle"])) {
-        $publishArticleObj = new ArticleContr();
-        $publishArticleObj->publishArticle($_GET["id"]);
-        unset($publishArticleObj);
+    if(isset($_POST["publishArticle"])) {
+        $ArticleContrObj = new ArticleContr();
+        $ArticleContrObj->publishArticle($_POST["articleID"],$_POST["aSelectedChannels"]);
+        unset($ArticleContrObj);
     }//If.
 
     //Ajax called from publishArticle.
-    if(isset($_GET["unpublishArticle"])) {
+    if(isset($_POST["unpublishArticle"])) {
         $unpublishArticleObj = new ArticleContr();
-        $unpublishArticleObj->unpublishArticle($_GET["id"]);
+        $unpublishArticleObj->unpublishArticle($_POST["articleID"],$_POST["aSelectedChannels"]);
         unset($unpublishArticleObj);
     }//If.
 
@@ -178,9 +178,9 @@
 
     //Ajax called from show channels.
     if(isset($_POST["showChannels"])) {
-        $ChannelView = new ChannelView();
-        $ChannelView->showMediaChannels();
-        unset($ChannelView);
+        $ChannelViewObj = new ChannelView();
+        $ChannelViewObj->showMediaChannels();
+        unset($ChannelViewObj);
     }//If.
 
     //Ajax called from delete channel.
@@ -188,6 +188,20 @@
         $ChannelContrObj = new ChannelContr();
         $ChannelContrObj->deleteChannel($_POST["channelID"]);
         unset($ChannelContrObj);
+    }//If.
+
+    //Ajax called from get media channels (askPublishArticle).
+    if(isset($_POST["getNonPublishedMediaChannels"])) {
+        $ChannelViewObj = new ChannelView();
+        $ChannelViewObj->getChannelsNotPublished($_POST["articleID"]);
+        unset($ChannelViewObj);
+    }//If.
+
+    //Ajax called from get media channels (askUnpublishArticle).
+    if(isset($_POST["getPublishedMediaChannels"])) {
+        $ChannelViewObj = new ChannelView();
+        $ChannelViewObj->getChannelsPublished($_POST["articleID"]);
+        unset($ChannelViewObj);
     }//If.
 
 ?>

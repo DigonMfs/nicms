@@ -86,6 +86,9 @@
                                 case 'addAccount-fail':
                                     echo $FunctionsObj->outcomeMessage("error","Failed to add account.");
                                     break;
+                                case 'addAccount-permission':
+                                    echo $FunctionsObj->outcomeMessage("error","You do not have the permission to add an account, ony admin can add an account.");
+                                    break;
                                 //Delete account.
                                 case 'deleteAccount-fail':
                                     echo $FunctionsObj->outcomeMessage("error","Failed to delete the account.");

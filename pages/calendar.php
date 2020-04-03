@@ -71,14 +71,12 @@
                     ?>
                 </div><!-- Articles container-->   
 
-                <div class="calendar-load-more">
-                    <button class="btn btn-info" onclick="calendarLoadMoreArt()">Load More</button>
-                </div>
+                
                 
             </div><!--Row-->
             
         </main>
-
+        
         <!--Overlay-->
         <div class="overlay-wrapper">
             <div class="overlay-box" id="overlayBody">

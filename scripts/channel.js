@@ -5,10 +5,8 @@ function askAddChannel() {
 
      //Set the correct content in the dialog.
      heading = "Add a channel.";
-     body = "<div class='form-group'> <label>Name</label> <input type='text' class='form-control' id='channelName'placeholder='Enter Name..'>";
-     body += "<label>Can_unpublish</label><br><select class='form-control' id='channelUnpublish'><option value='1'>Yes</option><option value='0'>No</option></select>";
-     body += "<label>Type</label><br><select class='form-control' id='channelType'><option value='2'>RSS-feed</option><option value='1'>Social Media</option><option value='0'>Other</option></select>";
-     body += "<small class='form-text text-muted'>The name must be alphanumeric and between 3 and 30 characters long.</small>  </div>";
+     body = "<p>You can only add RSS-feeds dynamically, since they work dynamically.</p>"
+     body += "<div class='form-group'> <label>Name</label> <input type='text' class='form-control' id='channelName'placeholder='Enter Name..'>";
      button = " <button class='btn btn-primary' onclick='addChannel()'>Add</button>";
      openDialog(heading,body,button);
 }//Function askAddChannel.
@@ -17,8 +15,6 @@ function askAddChannel() {
 function addChannel() {
     //Get values.
     name = document.getElementById('channelName').value;
-    canUnpublish = document.getElementById('channelUnpublish').value;
-    type = document.getElementById('channelType').value;
 
     //Call ajax.
     $.ajax({
@@ -26,8 +22,8 @@ function addChannel() {
         url: linkUrl+"classes/handler.class.php",
         data: {
             name:name,
-            canUnpublish:canUnpublish,
-            type:type,
+            canUnpublish:1,
+            type:2,
             addChannel:"addChannel"
         },
         success: function(data) {

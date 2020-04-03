@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 01, 2020 at 09:32 AM
+-- Generation Time: Apr 01, 2020 at 09:48 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.1.32
 
@@ -69,6 +69,18 @@ CREATE TABLE `category` (
   `parent_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`row_id`, `category`, `parent_id`) VALUES
+(1, 'Knowledge Base', 0),
+(2, 'Blogs', 0),
+(3, 'MFS', 1),
+(4, 'Nieuws', 1),
+(5, 'Blogs', 2),
+(6, 'Nieuws', 2);
+
 -- --------------------------------------------------------
 
 --
@@ -81,6 +93,15 @@ CREATE TABLE `channel` (
   `can_unpublish` tinyint(1) NOT NULL,
   `type` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `channel`
+--
+
+INSERT INTO `channel` (`row_id`, `name`, `can_unpublish`, `type`) VALUES
+(1, 'Facebook', 1, 1),
+(2, 'LinkedIn', 1, 1),
+(3, 'RSS Feed 1', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -139,7 +160,8 @@ ALTER TABLE `channel`
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`row_id`);
+  ADD PRIMARY KEY (`row_id`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -149,7 +171,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `article`
 --
 ALTER TABLE `article`
-  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `articlechannel`
@@ -161,19 +183,19 @@ ALTER TABLE `articlechannel`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `channel`
 --
 ALTER TABLE `channel`
-  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `row_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
