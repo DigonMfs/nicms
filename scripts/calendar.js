@@ -56,7 +56,7 @@ function askPublishArticle(articleID) {
             checkboxes = "<input type='checkbox' name='chkWebsite' value='0' disabled checked> <label class='no-margin-padding text-secondary' >Website</label><br>";
             aChannels.forEach(channel => {
                 aChannelVals = channel.split(","); //0=ID, 1=type, 2=name;
-                checkboxes += "<input type='checkbox' name='chkPublishChannels' id='"+aChannelVals[2]+"-"+aChannelVals[0]+"' value='"+aChannelVals[0]+","+aChannelVals[1]+"'>\
+                checkboxes += "<input type='checkbox' name='chkPublishChannels' id='"+aChannelVals[2]+"-"+articleID+"' value='"+aChannelVals[0]+","+aChannelVals[1]+"'>\
                 <label class='no-margin-padding' >"+aChannelVals[2]+"</label><br>";
             });
         },
@@ -98,7 +98,7 @@ function publishArticle(articleID) {
             filterArticles();
 
             //Check if facebook was checked.
-            if(document.getElementById('Facebook-1')) {
+            if($('#Facebook-'+articleID).is(":checked")) {
                 document.getElementById("fb-share-"+articleID).click();
             }
         },

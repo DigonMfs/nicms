@@ -1,6 +1,6 @@
 <?php 
 
-    class Functions {
+    class Functions implements LinkUrl {
 
         public function isAlphanumeric($value) {
             return ctype_alnum($value);

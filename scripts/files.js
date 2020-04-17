@@ -197,7 +197,7 @@ function InsertFile(path,fileName,type) {
     if (type == "pdf")
         CKEDITOR.instances.ckeditor.insertHtml('<a href="'+path+'/'+fileName+'" target="_blank" class="pdf-ckeditor-a">'+fileName+'</a> <br>');
     else 
-        CKEDITOR.instances.ckeditor.insertHtml('<img class="articles-article-img" src="'+path+'/'+fileName+'" alt="'+fileName+'" class="images-ckeditor"> <br>');
+        CKEDITOR.instances.ckeditor.insertHtml('<img class="articles-article-img" src="'+path+'/'+fileName+'" class="images-ckeditor"> <br>');
 }//Function InsertFile.
 
 //Copy the file to the clipboard of the user.
@@ -209,7 +209,7 @@ function copyFile(path,fileName,type) {
     if (type == "pdf") {
         copyText = '<a href="'+path+'/'+fileName+'" target="_blank" class="pdf-ckeditor-a">'+fileName+'</a>';
     } else {
-        copyText = '<img class="articles-article-img" src="'+path+'/'+fileName+'" alt="'+fileName+'" class="images-ckeditor">';
+        copyText = '<img class="articles-article-img" src="'+path+'/'+fileName+'" class="images-ckeditor">';
     }
 
     //Copy to clipboard.

@@ -1,6 +1,6 @@
 <?php 
 
-    class FileContr {
+    class FileContr implements LinkUrl {
 
         //Properties
         public $dirPath;

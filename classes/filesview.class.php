@@ -1,12 +1,6 @@
 <?php
     //FileView class.
-    class FileView {
-
-         //Make variable $linkUrl accessible in FileView.
-         protected $linkUrl = '';
-         public function __construct($linkUrl) {
-             $this->linkUrl = $linkUrl;
-         }
+    class FileView implements LinkUrl {
 
         public function showFilesFolders($admin,$aPath) {
             //Check if aPath isset.
@@ -15,7 +9,7 @@
                 $dirPathFiles = "assets/";
             } else {
                 $dirPath = "../" . join("/",$aPath);
-                $dirPathFiles = $this->linkUrl . join("/",$aPath);
+                $dirPathFiles = LinkUrl::LINKURL . join("/",$aPath);
             }
             
             //Validation.

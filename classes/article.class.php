@@ -1,6 +1,6 @@
 <?php 
 
-    class Article extends Dbh {
+    class Article extends Dbh implements LinkUrl {
 
         protected function getArticles($visibility,$sort,$limit) {
             $aFilter = array();

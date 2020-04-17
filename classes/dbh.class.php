@@ -1,16 +1,10 @@
 <?php 
     //Database class.
-    class Dbh {
-
-        //Declare variables.
-        private $servername = "localhost";
-        private $username = "root";
-        private $password = "";
-        private $dbname = "nicms";
-
+    class Dbh implements DatabaseConst, LinkUrl {
+        
         //Connection method.
         protected function connect() {
-            $conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
+            $conn = new mysqli(DatabaseConst::SERVERNAME, DatabaseConst::USERNAME, DatabaseConst::PASSWORD, DatabaseConst::DBNAME);
             if ($conn->connect_error) {
                 die("Connection failed: " . $conn->connect_error);
             }

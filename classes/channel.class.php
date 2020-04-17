@@ -1,5 +1,5 @@
 <?php 
-    Class Channel extends Dbh {
+    Class Channel extends Dbh implements LinkUrl {
 
         //Get all media channels.
         protected function getNonPublishedChannels($articleID) {

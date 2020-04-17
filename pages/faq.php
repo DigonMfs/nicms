@@ -4,7 +4,7 @@
 
     //Check if user is logged in.
     if(!isset($_SESSION["userID"])) {
-        header("Location: ".$linkUrl."index");
+        header("Location: ".LinkUrl::LINKURL."index");
     }
 ?>
 <!DOCTYPE html>
@@ -193,6 +193,13 @@
                         format on the website, so 3rd party platforms can use them.
                         The last type is 'Other', this type has no difference from 'Social Media', apart from the type. They are still different types, for a clear visual
                         representation.
+                    </p>
+                    <h3>Access a channel</h3>
+                    <p class="counter counter-bullet">
+                        After you made an RSS-feed channel and uploaded some articles to that RSS-feed on the calendar page, it is very easy to access the RSS-feed of these articles.
+                        You go the correct website path to the root folder of my project within the root folder of the website. Then you add '/rssgenerate/ID' to the url. The ID is the ID
+                        of the rss-feed. This ID is very easy to determine. On the Channels page you have a table with all the channels, the first column of each channel starts with a number.
+                        This number is the ID of that channel. And thus the ID you have to enter in the url.
                     </p>
                 </article>
             </section>

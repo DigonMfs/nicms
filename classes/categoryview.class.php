@@ -1,6 +1,6 @@
 <?php 
     //MediaView class.
-    class CategoryView extends Category {
+    class CategoryView extends Category implements LinkUrl {
 
         public function showCategories() {
             //Execute sql.

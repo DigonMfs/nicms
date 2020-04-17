@@ -1,6 +1,6 @@
 <?php 
     //Category Class.
-    class Write extends Dbh {
+    class Write extends Dbh implements LinkUrl {
 
         protected function setArticle($articleTitle,$date,$articleSummary,$articleBody,$articleCategory,$articleSubcategory,$articleSigner,$articleURL) {
             $user = $_SESSION["userID"];

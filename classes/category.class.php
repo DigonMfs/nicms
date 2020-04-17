@@ -1,6 +1,6 @@
 <?php 
     //Category Class.
-    class Category extends Dbh {
+    class Category extends Dbh implements LinkUrl {
 
         protected function getCategories() {
             $sql = "SELECT * FROM category WHERE parent_id= 0";

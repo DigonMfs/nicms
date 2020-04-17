@@ -4,7 +4,7 @@
 
     //Check if user is logged in.
     if(!isset($_SESSION["userID"])) {
-        header("Location: ".$linkUrl."index");
+        header("Location: ".LinkUrl::LINKURL."index");
     }
 ?>
 <!DOCTYPE html>
@@ -129,7 +129,7 @@
 
                 <!--Change password.-->
                 <div class="col-lg-6 col-md-12 col-sm-12">
-                    <form action="<?php echo $linkUrl ?>classes/handler.class.php?changePassword" method="POST">
+                    <form action="<?php echo LinkUrl::LINKURL ?>classes/handler.class.php?changePassword" method="POST">
                         <h4 class="account-settings-subtitle">Change password</h4>
                         <hr class="account-settings-subtitle-underline">
                         <div class="form-group">
@@ -152,7 +152,7 @@
 
                 <!--Change username and displayname-->
                 <div class="col-lg-6 col-md-12 col-sm-12">
-                    <form action="<?php echo $linkUrl ?>classes/handler.class.php?changeUsername" method="GET">
+                    <form action="<?php echo LinkUrl::LINKURL ?>classes/handler.class.php?changeUsername" method="GET">
                         <h4 class="account-settings-subtitle">Change username</h4>
                         <hr class="account-settings-subtitle-underline">
                         <div class="form-group">
@@ -163,7 +163,7 @@
                             <button type="submit" class="account-settings-button btn btn-primary btn-sm">Save</button>
                         </div>
                     </form>
-                    <form action="<?php echo $linkUrl ?>classes/handler.class.php?changeDisplayname" method="GET">
+                    <form action="<?php echo LinkUrl::LINKURL ?>classes/handler.class.php?changeDisplayname" method="GET">
                         <h4 class="account-settings-subtitle">Change displayname</h4>
                         <hr class="account-settings-subtitle-underline">
                         <div class="form-group">
@@ -220,7 +220,7 @@
 
                  <!--Change password.-->
                  <div class="col-lg-6 col-md-12 col-sm-12">
-                    <form action="<?php echo $linkUrl ?>classes/handler.class.php?addAccount" method="POST">
+                    <form action="<?php echo LinkUrl::LINKURL ?>classes/handler.class.php?addAccount" method="POST">
                         <div class="form-group">
                             <label for="chooseUsername" class="account-settings-label text-primary">Username</label>
                             <input type="text" class="form-control" id="chooseUsername" name="chooseUsername" placeholder="Enter username..">

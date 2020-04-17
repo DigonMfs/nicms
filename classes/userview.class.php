@@ -1,6 +1,5 @@
 <?php 
-    class UserView extends User
-    {
+    class UserView extends User implements LinkUrl {
         public function showUsers() {
             $FunctionsObj = new Functions();
             

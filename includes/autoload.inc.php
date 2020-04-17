@@ -1,11 +1,5 @@
 <?php 
     session_start();
-    
-    //Variable containing the entire path to the website.
-    //This variable is also user to share an article on different media channels.
-    //$linkUrl + "pages/article/permalink" (ArticleView:64)
-    $linkUrl = "//localhost/Websites/nicms/";
-
 
     interface AutoloadInterface {
         public function __construct();
@@ -27,6 +21,7 @@
             }
             
 
+            include_once($this->path."dbhpriv.class.php");
             include_once($this->path."dbh.class.php");
             //include_once($this->path."handler.class.php");
             include_once($this->path."functions.class.php");

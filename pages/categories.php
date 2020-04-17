@@ -4,7 +4,7 @@
 
     //Check if user is logged in.
     if(!isset($_SESSION["userID"])) {
-        header("Location: ".$linkUrl."index");
+        header("Location: ".LinkUrl::LINKURL."index");
     }
 ?>
 <!DOCTYPE html>

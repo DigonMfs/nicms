@@ -4,7 +4,7 @@
 
     //Check if user is logged in.
     if(!isset($_SESSION["userID"])) {
-        header("Location: ".$linkUrl."index");
+        header("Location: ".LinkUrl::LINKURL."index");
     }
 
 ?>
@@ -66,7 +66,7 @@
                 <div class="col-lg-9 col-md-12 col-sm-12 articles-article-overview-container" id="calendarArticlesContainer">
                     <!--Show all articles-->
                     <?php 
-                        $ArticleObj = new ArticleView($linkUrl);
+                        $ArticleObj = new ArticleView();
                         $ArticleObj->showArticle('all','DATEASC',10);
                     ?>
                 </div><!-- Articles container-->   

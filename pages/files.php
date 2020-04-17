@@ -4,7 +4,7 @@
 
     //Check if user is logged in.
     if(!isset($_SESSION["userID"])) {
-        header("Location: ".$linkUrl."index");
+        header("Location: ".LinkUrl::LINKURL."index");
     }
 
 ?>
@@ -60,7 +60,7 @@
                 <div class="files-directory-body card-body">
                      <?php
                         $admin = "true";
-                        $fileFolderObj = new FileView($linkUrl);
+                        $fileFolderObj = new FileView();
                         $fileFolderObj->showFilesFolders($admin, null);
                         unset($fileFolderObj);
                     ?>

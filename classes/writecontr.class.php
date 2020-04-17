@@ -1,6 +1,6 @@
 <?php 
     //Category Class.
-    class WriteContr extends Write {
+    class WriteContr extends Write implements LinkUrl {
 
         //Properties
         public $date;

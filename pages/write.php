@@ -5,7 +5,7 @@
 
     //Check if user is logged in.
     if(!isset($_SESSION["userID"])) {
-        header("Location: ".$linkUrl."index");
+        header("Location: ".LinkUrl::LINKURL."index");
     }
 ?>
 <!DOCTYPE html>
@@ -141,7 +141,7 @@
                             //Include the files and folders.
                             //$admin='false' -> no delete icon on hover, but insert/copy buttons.
                             $admin = "false";
-                            $fileFolderObj = new FileView($linkUrl);
+                            $fileFolderObj = new FileView();
                             $fileFolderObj->showFilesFolders($admin,null);
                         ?>
                     </div>

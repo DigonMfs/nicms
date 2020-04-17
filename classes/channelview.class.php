@@ -1,5 +1,5 @@
 <?php 
-    Class ChannelView extends channel{
+    Class ChannelView extends channel implements LinkUrl {
          //Show all media channels.
          public function showMediaChannels() {
             $FunctionsObj = new Functions();
@@ -10,7 +10,7 @@
                 echo "<tr>";
                 echo " <th>#</th>";
                 echo "<th>Channel</th>";
-                echo "<th>unpublish</th>";
+                echo "<th>Unpublish</th>";
                 echo "<th>Type</th>";
                 echo "<th>Actions</th>";
                 echo "</tr>";

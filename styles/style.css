@@ -250,6 +250,7 @@ label {
 }
 .articles-list-group-relevant-articles {
     position: fixed;
+    width: 250px;
 }
 
 
@@ -708,7 +709,15 @@ label {
     .pdf-icon {
         font-size: 75px;
     }
+  
 }
+
+@media (max-width: 1200px) {
+    .articles-list-group-relevant-articles {
+        width: 200px;
+    }
+}
+
 /*Media queries*/
 @media (max-width: 992px) { 
     /*width for main*/
@@ -725,6 +734,7 @@ label {
     .articles-list-group-relevant-articles {
         position: relative;
         margin-bottom: 25px !important;
+        max-width: 100%;
     }
     /*Padding left-right on main element in article page.*/
     .articles-main {

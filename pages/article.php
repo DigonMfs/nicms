@@ -3,7 +3,7 @@
     include_once("../includes/autoload.inc.php");
     $object = new AutoLoad();
     $CategoryViewObj = new CategoryView();
-    $ArticelViewObj = new ArticleView($linkUrl);
+    $ArticelViewObj = new ArticleView();
     $ArticleContrObj = new ArticleContr();
     $CategoryContrObj = new CategoryContr();
     
@@ -14,7 +14,7 @@
 
         //Check if article exists.
         if(!$ArticleContrObj->getArticleID($articleLink)) {
-            header("Location: ".$linkUrl."index");
+            header("Location: ".LinkUrl::LINKURL."index");
         }
         //Get other article elements.
         $articleID = $ArticleContrObj->getArticleID($articleLink);
@@ -25,7 +25,7 @@
         $articleSubcat = $CategoryContrObj->getSubcat($articleSubcatID);
 
     } else {
-        header("Location: ".$linkUrl."index");
+        header("Location: ".LinkUrl::LINKURL."index");
     }
 ?>
 <!DOCTYPE html>
@@ -44,21 +44,19 @@
         <meta property="og:description"   content="<?php echo $articleSummary;?>" />
     </head>
     <body>
-        <div id="fb-root"></div>
-        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v6.0"></script>
+
         <?php 
             //Header.
             include_once "../includes/header.inc.php";
         ?>
         
         <main class="general-main articles-main container">
- 
             <!--Breadcrumbs.-->
             <nav class="container general-nav articles-article-breadcrumbs" aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item">Home</li>
-                  <li class="breadcrumb-item active" aria-current="page"><a href="<?php echo $linkUrl; ?>index"><?php echo $CategoryViewObj->showCategory($articleCatID) ?></a></li>
-                  <li class="breadcrumb-item active" aria-current="page"><a href="<?php echo $linkUrl; ?>index"><?php echo $articleSubcat ?></a></li>
+                  <li class="breadcrumb-item active" aria-current="page"><a href="<?php echo LinkUrl::LINKURL; ?>index"><?php echo $CategoryViewObj->showCategory($articleCatID) ?></a></li>
+                  <li class="breadcrumb-item active" aria-current="page"><a href="<?php echo LinkUrl::LINKURL; ?>index"><?php echo $articleSubcat ?></a></li>
                   <li class="breadcrumb-item active" aria-current="page"><?php echo $articleTitle ?></li>
                 </ol>
             </nav>

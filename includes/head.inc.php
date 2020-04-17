@@ -5,22 +5,22 @@
 <script src="//cdn.ckeditor.com/4.13.1/full/ckeditor.js"></script>
 
 <!--//Link to jquery-->
-<script src="<?php echo $linkUrl; ?>scripts/jquery.js"></script>
+<script src="<?php echo LinkUrl::LINKURL; ?>scripts/jquery.js"></script>
 
 <!--//Link to all the javascript files-->
-<!--<script src="<?php //echo $linkUrl; ?>scripts/script.js"></script>-->
-<script src="<?php echo $linkUrl; ?>scripts/variables.js"></script>
-<script src="<?php echo $linkUrl; ?>scripts/functions.js"></script>
-<script src="<?php echo $linkUrl; ?>scripts/files.js"></script>
-<script src="<?php echo $linkUrl; ?>scripts/user.js"></script>
-<script src="<?php echo $linkUrl; ?>scripts/write.js"></script>
-<script src="<?php echo $linkUrl; ?>scripts/category.js"></script>
-<script src="<?php echo $linkUrl; ?>scripts/channel.js"></script>
-<script src="<?php echo $linkUrl; ?>scripts/calendar.js"></script>
-<script src="<?php echo $linkUrl; ?>scripts/index.js"></script>
+<!--<script src="<?php //echo LinkUrl::LINKURL; ?>scripts/script.js"></script>-->
+<script src="<?php echo LinkUrl::LINKURL; ?>scripts/variables.js"> var linkUrl="<?php echo LinkUrl::LINKURL; ?>"  </script>
+<script src="<?php echo LinkUrl::LINKURL; ?>scripts/functions.js"></script>
+<script src="<?php echo LinkUrl::LINKURL; ?>scripts/files.js"></script>
+<script src="<?php echo LinkUrl::LINKURL; ?>scripts/user.js"></script>
+<script src="<?php echo LinkUrl::LINKURL; ?>scripts/write.js"></script>
+<script src="<?php echo LinkUrl::LINKURL; ?>scripts/category.js"></script>
+<script src="<?php echo LinkUrl::LINKURL; ?>scripts/channel.js"></script>
+<script src="<?php echo LinkUrl::LINKURL; ?>scripts/calendar.js"></script>
+<script src="<?php echo LinkUrl::LINKURL; ?>scripts/index.js"></script>
 
 <!--Link To CSS-->
-<link rel="stylesheet" type="text/css" href="<?php echo $linkUrl; ?>styles/style.css">
+<link rel="stylesheet" type="text/css" href="<?php echo LinkUrl::LINKURL; ?>styles/style.css">
 
 <!--Bootstrap & Bootstrap related CDN's (notice the 'defer' element) -->
 <link defer rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">

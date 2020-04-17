@@ -1,5 +1,5 @@
 <?php 
-    Class ChannelContr extends Channel{
+    Class ChannelContr extends Channel implements LinkUrl {
 
         public function insertChannel($name,$canUnpublish,$type) {  
             $FunctionsObj = new Functions();

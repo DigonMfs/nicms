@@ -1,6 +1,6 @@
 <?php 
 
-    class CategoryContr extends Category {
+    class CategoryContr extends Category implements LinkUrl {
 
         public function createCatSubcat($catSubcatName,$parentID) {
             $FunctionsObj = new Functions();

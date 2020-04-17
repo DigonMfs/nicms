@@ -1,6 +1,6 @@
 <?php  
 
-    class ArticleContr extends Article {
+    class ArticleContr extends Article implements LinkUrl{
 
         //Publish a saved article.
         public function publishArticle($articleID,$aSelectedChannels) {

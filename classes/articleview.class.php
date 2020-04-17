@@ -1,11 +1,5 @@
 <?php 
-    class ArticleView extends Article {
-
-        //Make variable $linkUrl accessible in ArticleView.
-        protected $linkUrl = '';
-        public function __construct($linkUrl) {
-            $this->linkUrl = $linkUrl;
-        }
+    class ArticleView extends Article implements LinkUrl {
 
         public function showArticle($visibility,$sort,$limit) {
             $FunctionsObj = new Functions();
@@ -62,7 +56,7 @@
 
                     //Display facebook share button. 
                     echo "<a target='_blank' id='fb-share-".$row["a_row_id"]."' 
-                    href='https://www.facebook.com/sharer/sharer.php?u=https://".$this->linkUrl."pages/article/".$row["a_link"]."' class='d-none'></a>";
+                    href='https://www.facebook.com/sharer/sharer.php?u=https://".LinkUrl::LINKURL."pages/article/".$row["a_link"]."' class='d-none'></a>";
                 }
                 //Display load more button.
                 echo "<div class='calendar-load-more'>";
@@ -94,7 +88,7 @@
                 while($row = $result->fetch_assoc()) {
                     echo "<tr>";
                     echo "<td>";
-                    echo "<a href='".$this->linkUrl."article/".$row['a_link']."'>".$row["a_title"]."</a>";
+                    echo "<a href='".LinkUrl::LINKURL."article/".$row['a_link']."'>".$row["a_title"]."</a>";
                     echo "<div class='table-articles-admin-icons'>";
                     echo "</div>";
                     echo "</td>";
@@ -127,9 +121,9 @@
                 while($row = $result->fetch_assoc()) {
                     //Check if record is current article. If so highlight it.
                     if ($articleID == $row["a_row_id"]) {
-                        echo "<a href='".$this->linkUrl."article/".$row['a_link']."' class='list-group-item list-group-item-action list-group-item-secondary'>".$row['a_title']."</a>";
+                        echo "<a href='".LinkUrl::LINKURL."article/".$row['a_link']."' class='list-group-item list-group-item-action list-group-item-secondary'>".$row['a_title']."</a>";
                     } else {
-                        echo "<a href='".$this->linkUrl."article/".$row['a_link']."' class='list-group-item list-group-item-action'>".$row['a_title']."</a>";
+                        echo "<a href='".LinkUrl::LINKURL."article/".$row['a_link']."' class='list-group-item list-group-item-action'>".$row['a_title']."</a>";
                     }
                 }
             } else {
@@ -184,18 +178,46 @@
 
             //Real escape string.
             $channelID = $this->connect()->real_escape_string($channelID);
-
+            
             //Execute sql.
             $result = $this->getArticleChannel($channelID);
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
                     echo "<item xmlns:dc='ns:1'>" . PHP_EOL;
                     echo "<title>".$row["a_title"]."</title>" . PHP_EOL;
-                    echo "<link>".$this->linkUrl."article/".$row["a_link"]."</link>" . PHP_EOL;
+                    echo "<link>".LinkUrl::LINKURL."article/".$row["a_link"]."</link>" . PHP_EOL;
                     echo "<guid>".$row["c_row_id"]."</guid>" . PHP_EOL;
                     echo "<pubdate>".$row["c_published_date"]."</pubdate>" . PHP_EOL;
                     echo "<dc:creator>".$row["a_signed_by"]."</dc:creator>" . PHP_EOL;
                     echo "<description>".$row["a_abstract"]."</description>" . PHP_EOL;
+
+                    //Get article content.
+                    $content = $row["a_content"];
+
+                    //Check if article has an image.
+                    if (stripos($content,'class="articles-article-img" src="')) {
+                        //Split on image tag (class + name + source).
+                        $aContent = explode('class="articles-article-img" src="',$content);
+
+                        //extract image url. 
+                        //1: get only the entire image url. 
+                        //2:split on assets (=get url only after in assets folder.) (reasons for this = url before assets changes = unpredictable what is can be.) 
+                        //3: php dirname(file) + assets folder + img url in assets)
+                        $aImage = explode('"',$aContent[1]);
+                        $aImage2 = explode('assets',$aImage[0]);
+                        $image =  dirname(__FILE__)."/../assets".$aImage2[1];
+
+                    } else {
+                        //Take standard image
+                        $image = dirname(__FILE__)."/../images/no_image.png";
+                    }
+
+                    //Get image information.
+                    $imageSize = filesize($image);
+                    $aImageMime = getimagesize($image);
+                    $imageMime = $aImageMime["mime"];
+
+                    echo "<enclosure url='".$image."' length='".$imageSize."' type='".$imageMime."'></enclosure>" . PHP_EOL;
                     echo "<category>".$row["cat_category"]."</category>" . PHP_EOL;
                     echo "</item>" . PHP_EOL;
                 }

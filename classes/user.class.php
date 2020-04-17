@@ -1,5 +1,5 @@
 <?php 
-class User extends Dbh {
+class User extends Dbh implements LinkUrl {
 
     protected function login($username,$password) {
         $sql = "SELECT * FROM user WHERE username='$username' AND password='$password'";
