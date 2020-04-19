@@ -8,8 +8,8 @@
 <script src="<?php echo LinkUrl::LINKURL; ?>scripts/jquery.js"></script>
 
 <!--//Link to all the javascript files-->
-<!--<script src="<?php //echo LinkUrl::LINKURL; ?>scripts/script.js"></script>-->
-<script src="<?php echo LinkUrl::LINKURL; ?>scripts/variables.js"> var linkUrl="<?php echo LinkUrl::LINKURL; ?>"  </script>
+<script> linkUrl = "<?php echo LinkUrl::LINKURL; ?>"; </script>
+<script src="<?php echo LinkUrl::LINKURL; ?>scripts/variables.js"></script>
 <script src="<?php echo LinkUrl::LINKURL; ?>scripts/functions.js"></script>
 <script src="<?php echo LinkUrl::LINKURL; ?>scripts/files.js"></script>
 <script src="<?php echo LinkUrl::LINKURL; ?>scripts/user.js"></script>

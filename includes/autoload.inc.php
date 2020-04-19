@@ -19,7 +19,6 @@
             } else {
                 $this->path = dirname(__FILE__)."/../classes/";
             }
-            
 
             include_once($this->path."dbhpriv.class.php");
             include_once($this->path."dbh.class.php");
