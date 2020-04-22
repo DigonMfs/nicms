@@ -37,8 +37,8 @@
             //Head tags.
             include "../includes/head.inc.php";
         ?>
-        <!--Facebook share metatags-->
-        <meta property="og:url"           content="https://www.your-domain.com/your-page.html" />
+        <!--Facebook and LinkedIn share metatags-->
+        <meta property="og:url"           content="<?php echo LinkUrl::LINKURL; ?>article/<?php echo $articleLink;?>" />
         <meta property="og:type"          content="Website"/>
         <meta property="og:title"         content="<?php echo $articleTitle;?>" />
         <meta property="og:description"   content="<?php echo $articleSummary;?>" />
@@ -55,7 +55,7 @@
             <nav class="container general-nav articles-article-breadcrumbs" aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item">Home</li>
-                  <li class="breadcrumb-item active" aria-current="page"><a href="<?php echo LinkUrl::LINKURL; ?>index"><?php echo $CategoryViewObj->showCategory($articleCatID) ?></a></li>
+                  <li class="breadcrumb-item active" aria-current="page"><a href="<?php echo LinkUrl::LINKURL; ?>index/<?php echo $articleCatID; ?> "><?php echo $CategoryViewObj->showCategory($articleCatID) ?></a></li>
                   <li class="breadcrumb-item active" aria-current="page"><a href="<?php echo LinkUrl::LINKURL; ?>index"><?php echo $articleSubcat ?></a></li>
                   <li class="breadcrumb-item active" aria-current="page"><?php echo $articleTitle ?></li>
                 </ol>

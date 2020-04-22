@@ -101,6 +101,10 @@ function publishArticle(articleID) {
             if($('#Facebook-'+articleID).is(":checked")) {
                 document.getElementById("fb-share-"+articleID).click();
             }
+            //Check if linkedIn was checked.
+            if($('#LinkedIn-'+articleID).is(":checked")) {
+                document.getElementById("linkedin-share-"+articleID).click();
+            }
         },
     });
 }//Function publishArticle.

@@ -54,9 +54,12 @@
                     echo '</div>';
                     echo '</div>';
 
-                    //Display facebook share button. 
+                    //add facebook and linkedin share button. 
                     echo "<a target='_blank' id='fb-share-".$row["a_row_id"]."' 
                     href='https://www.facebook.com/sharer/sharer.php?u=https://".LinkUrl::LINKURL."pages/article/".$row["a_link"]."' class='d-none'></a>";
+                    echo "<a target='_blank' id='linkedin-share-".$row["a_row_id"]."'
+                    href='https://www.linkedin.com/sharing/share-offsite/?url=".LinkUrl::LINKURL."pages/article".$row["a_link"]."' class='d-none'>Share</a>";
+
                 }
                 //Display load more button.
                 echo "<div class='calendar-load-more'>";
