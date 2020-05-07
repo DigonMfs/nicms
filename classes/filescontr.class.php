@@ -1,8 +1,8 @@
 <?php 
-
+    //FileContr.
     class FileContr implements LinkUrl {
 
-        //Properties
+        //Properties.
         public $dirPath;
 
         public function createDir($aPath,$dirName) {

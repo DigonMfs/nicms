@@ -34,6 +34,21 @@
                 }
             }
         }//Method Users.
+
+        public function showUserName() {
+            $FunctionsObj = new Functions();
+
+            //Check if user logged in, and thus allowed to execute this method.
+            $FunctionsObj->checkUserLoggedIn();
+
+            //Get username.
+            $result = $this->getUserName($_SESSION["userID"]);
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    return $row["display_name"];
+                }
+            }
+        }//Method getUserName.
     }
     
 ?>

@@ -1,15 +1,11 @@
 <?php
-    //Include all php files
+    //Include all php files.
     include_once("includes/autoload.inc.php"); 
 
-    //Create objects
+    //Create objects.
     $object = new AutoLoad();
     $CategoryViewObj = new CategoryView();
-
-    /*if(isset($_SESSION["userID"])) {
-        header("Location: pages/write.php");
-    }*/
-
+	
     //Make sure cat_id exists.
     if (isset($_GET["catID"])) {
         $cat_id = $_GET["catID"];
@@ -31,8 +27,7 @@
             //Header.
             include_once "includes/header.inc.php";
         ?>
-        
-       
+		
         <main class="general-main container">
 
             <!--Navbar for admin pages-->
@@ -65,14 +60,12 @@
 
                 <!--Article titles container-->
                 <div class="col-md-9 col-lg-9 articles-article-overview-container">
-                    <p class="alert alert-warning" role="alert">Click on a subcategory to view the articles.</p>
+                    <p class="alert alert-warning" role="alert">Klik op een categorie om de artikels weer te geven.</p>
                 </div><!-- Article title container-->   
             </div><!--Row-->
               
         </main>
-
-      
-        
+		
         <!--Overlay-->
         <div class="overlay-wrapper">
             <div class="overlay-box" id="overlayBody"></div>

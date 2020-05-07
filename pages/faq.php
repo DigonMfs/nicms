@@ -1,5 +1,8 @@
 <?php
+    //Includes.
     include_once("../includes/autoload.inc.php");
+
+    //Objects.
     $object = new AutoLoad();
 
     //Check if user is logged in.
@@ -17,16 +20,15 @@
         ?>
     </head>
     <body>
-
         <?php 
             //Header
             include_once "../includes/header.inc.php";
         ?>
         
-        <!--Main-->
+        <!--Main.-->
         <main class="general-main container">
 
-            <!--Navbar for admin pages-->
+            <!--Navbar for admin pages.-->
             <ul class='nav nav-pills admin-navbar'>
                 <?php 
                     include_once "../includes/navbar.inc.php";
@@ -124,7 +126,7 @@
                     <p class="counter counter-number">
                         Now that you have written your article, included all files, selected the category and subcategory you can proceed to change the article.
                         The article will now be saved, not published.
-                        You can go to the 'Calendar' section to read how to publish or edit an article.
+                        You can go to the 'Articles' section to read how to publish or edit an article.
                     </p>
                 </article>
             </section>
@@ -208,13 +210,13 @@
             <section class="faq-faq-section" onclick="toggleFAQ(6)">
                 <i class="fas fa-calendar-minus text-primary"></i>
                 <i class="fas fa-angle-down faq-angle" id="faq-angle-6"></i>
-                <h2 class="text-primary">Calendar</h2>
+                <h2 class="text-primary">Articles</h2>
                 <article class="faq-section-articles" id="faq-section-article-6">
-                    <h3>Calendar</h3>
+                    <h3>Articles</h3>
                     <p>
-                        The calendar page is a big page, in the sense it has a lot of functionality. You can view all the articles on the calendar page. No matter
+                        The articles page is a big page, in the sense it has a lot of functionality. You can view all the articles on the articles page. No matter
                         if the article is saved, published or even deleted. You can sort and filter these articles on there status (saved,...) and sort them on their creation time.
-                        the main purpose of the calendar page is to publish or edit articles. But you can also delete or unpublish the articles.
+                        the main purpose of the articles page is to publish or edit articles. But you can also delete or unpublish the articles.
                     </p>
                     <h3>Publish & unpublish</h3>
                     <p class="counter counter-bullet">
@@ -241,7 +243,7 @@
                     </p>
                     <h3>Edit</h3>
                     <p class="counter counter-bullet">
-                        To edit an article you can simply click on the edit button in the calendar page. This will redirect you to the write page. but all the inputboxes, textareas, etc.. are already filled in 
+                        To edit an article you can simply click on the edit button in the articles page. This will redirect you to the write page. but all the inputboxes, textareas, etc.. are already filled in 
                         with the article you chose to edit. You can now edit the article, and save it afterwards. The article has now been edited.
                     </p>
                 </article>
@@ -279,5 +281,3 @@
   
     </body>
 </html>
-
-

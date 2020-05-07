@@ -34,6 +34,7 @@
                     $text = '<i class="fas fa-trash-alt files-hover-icons files-delete" onclick="askDeleteFileFolder(\''.$dirPath.'\',\''.$file.'\',\'folder\')"></i>';
                 else 
                     $text = '';
+
                 echo '
                     <div class="files-file-container">
                         <i class="fas fa-folder text-warning dir-icon files-icon" onclick="DirClick(\''.addslashes($file).'\',\''.$admin.'\')"></i>
@@ -63,14 +64,20 @@
                     $container = '<div class="files-file-container">';
                     $text = '<i class="fas fa-trash-alt files-hover-icons files-delete" onclick="askDeleteFileFolder(\''.$dirPath.'\',\''.$file.'\',\'file\')"></i>';
                 } else {
-                    //Type is extension, images need to be inserted as an <img>, pdf files not.
+
+                    //Create html content.
                     $container = '
                         <div class="files-file-container">
                         <div class="files-file-actions-container">
                             <button class="files-file-actions-buttons btn btn-secondary btn-sm" onclick="copyFile(\''.$dirPathImg.'\',\''.$file.'\',\''.$extension.'\')">Copy</button>
                             <button class="files-file-actions-buttons btn btn-secondary btn-sm" onclick="InsertFile(\''.$dirPathImg.'\',\''.$file.'\',\''.$extension.'\')">Insert</button>
-                        </div>
                     ';
+                    //Check if extension is pdf (no preview)
+                    if (strtolower($extension) != "pdf") {
+                        $container .= '   <button class="files-file-actions-buttons btn btn-secondary btn-sm" onclick="askPreviewImg(\''.$dirPathImg.'\',\''.$file.'\',\''.$extension.'\')">View</button>';
+                    }
+                    $container .= "  </div>";
+
                     $text = '';
                 }//If $admin ==true.
 

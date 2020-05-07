@@ -18,6 +18,7 @@ function filterArticles() {
     //Get the values.
     visibility = $("#selectSortArticles").val();
     sort = $("#selectFilterArticles").val();
+    keyword = $("#searchKeyword").val();
 
     //Call ajax.
     $.ajax({
@@ -26,6 +27,7 @@ function filterArticles() {
         data: {
             visibility:visibility,
             sort:sort,
+            keyword:keyword,
             filterArticles:"filterArticles"
         },
         success: function(data) {
@@ -64,7 +66,7 @@ function askPublishArticle(articleID) {
 
     //Set the correct content in the dialog.
     heading = "Publish Article";
-    body = "<p class='no-margin-padding'>Select all channels you want this article to be published on.</p>"+checkboxes;
+    body = "<p class='no-margin-padding'>Select all channels you want this article to be published on. To publish to social media channels please select one at a time and press publish.</p>"+checkboxes;
     button = "<button class='btn btn-primary' onclick='publishArticle("+articleID+")'>Publish</button>";
     openDialog(heading,body,button);
 }//Function askPublishArticle.
@@ -104,6 +106,10 @@ function publishArticle(articleID) {
             //Check if linkedIn was checked.
             if($('#LinkedIn-'+articleID).is(":checked")) {
                 document.getElementById("linkedin-share-"+articleID).click();
+            }
+            //Check if Twitter was checked.
+            if($('#Twitter-'+articleID).is(":checked")) {
+                document.getElementById("twitter-share-"+articleID).click();
             }
         },
     });
@@ -219,6 +225,7 @@ function calendarLoadMoreArt() {
     //Get values. And make sure the filters still apply after the load more.
     visibility = $("#selectSortArticles").val();
     sort = $("#selectFilterArticles").val();
+    keyword = $("#searchKeyword").val();
     amount = amount + 10;
 
     //Call ajax.
@@ -229,6 +236,7 @@ function calendarLoadMoreArt() {
             amount:amount,
             visibility:visibility,
             sort:sort,
+            keyword:keyword,
             calendarLoadMoreArt:"calendarLoadMoreArt"
         },
         success: function(data) {
@@ -236,3 +244,27 @@ function calendarLoadMoreArt() {
         },
     });
 }//Function calendarLoadMoreArt.
+
+//Apply search on keypresses.
+function searchArticles(keyword) {
+    //Get values. And make sure the filters still apply after the load more.
+    visibility = $("#selectSortArticles").val();
+    sort = $("#selectFilterArticles").val();
+    amount = amount + 10;
+
+    //Call ajax.
+    $.ajax({
+        type: "POST",
+        url: linkUrl+"classes/handler.class.php",
+        data: {
+            amount:amount,
+            visibility:visibility,
+            sort:sort,
+            keyword:keyword,
+            calendarLoadMoreArt:"calendarLoadMoreArt"
+        },
+        success: function(data) {
+            $("#calendarArticlesContainer").html(data);
+        },
+    });
+}//Function searchArticles.

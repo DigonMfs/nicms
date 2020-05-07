@@ -1,4 +1,5 @@
 <?php 
+    //Start session.
     session_start();
 
     interface AutoloadInterface {
@@ -6,12 +7,13 @@
     }
 
     class Autoload implements AutoloadInterface {
-        //Properties
+        //Properties.
         private $url;
         protected $path;
 
         //Methods.
         public function __construct() {
+            //Get server url.
             $this->url = $_SERVER["HTTP_HOST"] . $_SERVER['REQUEST_URI'];
 
             if (strpos($this->url,'index') == TRUE) {

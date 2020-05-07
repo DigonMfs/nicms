@@ -56,7 +56,6 @@ function ListCategories() {
     });
 }//Function ListCategories.
 
-
 //Add a category.
 function SaveCategory(parent_id) {
     //Get the value.
@@ -90,7 +89,6 @@ function SaveCategory(parent_id) {
         },
     });
 }//Function SaveCategory.
-
 
 //Add a subcategory.
 function AddSubcategory(parent_id) {
@@ -130,4 +128,4 @@ function AddSubcategory(parent_id) {
             ListCategories();
         },
     });
-}//Function AddSubcategory
+}//Function AddSubcategory.

@@ -42,30 +42,7 @@ RewriteRule ^FAQ?$ ./pages/faq.php
 #rssgenerate page
 RewriteRule ^rssgenerate/([\w-\s]+)?$ ./pages/rssgenerate.php?rssID=$1
 
-
-
-
 #[NC] = non-case sensitive (convert uppercase to lowercase in url)
 #[L] = Last rule
 #[N] = New rule
-# ([\w-\s]+) is the same as ([0-9a-zA-Z_-]+) + with spaces
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#[NC] = non-case sensitive (automatically convert url to lower case)
-#[L] = last rule
-#[N] = new rule
+# ([\w-\s]+) is the same as ([0-9a-zA-Z_-]+) + with spaces.

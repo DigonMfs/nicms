@@ -2,7 +2,7 @@
     //Category Class.
     class WriteContr extends Write implements LinkUrl {
 
-        //Properties
+        //Properties.
         public $date;
 
         public function createArticle($articleTitle,$articleSummary,$articleBody,$articleCategory,$articleSubcategory,$articleSigner,$articleURL) {
@@ -13,7 +13,7 @@
             $FunctionsObj->checkUserLoggedIn();
 
             //Validation.
-            if (empty($articleTitle) || empty($articleSummary) || empty($articleBody) || empty($articleCategory) || empty($articleSubcategory) || empty($articleSigner || empty($articleURL))) {
+            if (empty($articleTitle) || empty($articleSummary) || empty($articleBody) || empty($articleCategory) || empty($articleSubcategory) || empty($articleURL)) {
                 echo $FunctionsObj->outcomeMessage("error","Not all variables contain a value.");
                 return false;
             }
@@ -29,10 +29,6 @@
             $result = $this->checkSubcatIsSubcat($articleSubcategory);
             if ($result->num_rows <= 0) {
                 echo $FunctionsObj->outcomeMessage("error","Selected subcategory is not a valid category.");
-                return false;
-            }
-            if (!$FunctionsObj->isAlphanumeric($FunctionsObj->stripSpaces($articleURL))) {
-                echo $FunctionsObj->outcomeMessage("error","URL is not alphanumeric.");
                 return false;
             }
 
@@ -62,10 +58,6 @@
             //Validation
             if (empty($articleTitle) || empty($articleSummary) || empty($articleBody) || empty($articleSigner || empty($articleURL))) {
                 echo $FunctionsObj->outcomeMessage("error","Not all variables contain a value.");
-                return false;
-            }
-            if (!$FunctionsObj->isAlphanumeric($FunctionsObj->stripSpaces($articleURL))) {
-                echo $FunctionsObj->outcomeMessage("error","URL is not alphanumeric.");
                 return false;
             }
 

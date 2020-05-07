@@ -1,5 +1,8 @@
 <?php
+    //Includes.
     include_once("../includes/autoload.inc.php");
+
+    //Objects.
     $object = new AutoLoad();
     $ArticleContr = new Articlecontr();
 
@@ -17,7 +20,7 @@
             include "../includes/head.inc.php";
         ?>
         <script>
-            /*Textarea met ckeditor vervangen*/
+            /*Textarea met ckeditor vervangen.*/
             $(document).ready(function() {
                 CKEDITOR.replace( 'ckeditor' );  
             });
@@ -52,7 +55,7 @@
                 ?>
             </ul>
 
-            <!--Alert messages-->
+            <!--Alert messages.-->
             <div class="write-alert-messages"></div>
             
             <!-- Title and summary.-->
@@ -95,11 +98,11 @@
                     <div class="write-publish-row d-lg-flex d-lg-fler-row">
                         <div class="flex-fill write-publish-extra">
                             <label for="exampleInputEmail1">Signed</label>
-                            <input type="text" class="form-control" id="articleSigner" placeholder="Enter Signer..">
+                            <input type="text" class="form-control" id="articleSigner" placeholder="Enter Signer.." value="<?php $UserViewObj = new UserView(); echo $UserViewObj->showUserName(); ?>">
                         </div>
                         <div class="flex-fill write-publish-extra">
-                            <label for="exampleInputEmail1">URL</label>
-                            <input type="text" class="form-control" id="articleURL" placeholder="Enter URL..">
+                            <label for="exampleInputEmail1">Permalink</label>
+                            <input type="text" class="form-control" id="articleURL" placeholder="Enter Permalink..">
                         </div>
                     </div>
                     <div class="flex-fill write-publish-extra-button-container">
@@ -149,7 +152,6 @@
 
             </div> 
         </main>
-        
         <!--Overlay.-->
         <div class="overlay-wrapper">
             <div class="overlay-box" id="overlayBody"></div>

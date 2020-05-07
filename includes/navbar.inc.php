@@ -28,7 +28,7 @@
         echo "<a class='nav-link nav-link-admin' href='".LinkUrl::LINKURL."channels'>Channels</a>";
         echo "</li>";
         echo "<li class='nav-item admin-nav-item'>";
-        echo "<a class='nav-link nav-link-admin' href='".LinkUrl::LINKURL."calendar'>Calendar</a>";
+        echo "<a class='nav-link nav-link-admin' href='".LinkUrl::LINKURL."calendar'>Articles</a>";
         echo "</li>";
         echo "<li class='nav-item admin-nav-item'>";
         echo "<a class='nav-link nav-link-admin' href='".LinkUrl::LINKURL."account'>Account</a>";
@@ -39,9 +39,5 @@
         echo "<li class='nav-item admin-nav-item'>";
         echo "<button class='button-logout' type='button' onclick='logout()'><i class='fas fa-sign-out-alt'></i></button>";
         echo "</li>";
-
-        //With relative paths.
-        //if (!strpos($url,'pages') == TRUE) {   }
-        //else {}
     } 
 ?>

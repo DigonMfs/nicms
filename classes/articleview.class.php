@@ -1,16 +1,17 @@
 <?php 
     class ArticleView extends Article implements LinkUrl {
 
-        public function showArticle($visibility,$sort,$limit) {
+        public function showArticle($visibility,$sort,$keyword,$limit) {
             $FunctionsObj = new Functions();
 
             //Real escape string.
             $visibility = $this->connect()->real_escape_string($visibility);
             $sort = $this->connect()->real_escape_string($sort);
+            $keyword = $this->connect()->real_escape_string($keyword);
             $limit = $this->connect()->real_escape_string($limit);
 
             //Execute sql.
-            $result = $this->getArticles($visibility,$sort,$limit);
+            $result = $this->getArticles($visibility,$sort,$keyword,$limit);
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
                     echo '<div class="card calendar-article-container">';
@@ -59,6 +60,7 @@
                     href='https://www.facebook.com/sharer/sharer.php?u=https://".LinkUrl::LINKURL."pages/article/".$row["a_link"]."' class='d-none'></a>";
                     echo "<a target='_blank' id='linkedin-share-".$row["a_row_id"]."'
                     href='https://www.linkedin.com/sharing/share-offsite/?url=".LinkUrl::LINKURL."pages/article".$row["a_link"]."' class='d-none'>Share</a>";
+                    echo "<a target='_blank' id='twitter-share-".$row["a_row_id"]."' href='http://www.twitter.com/share?url=https://".LinkUrl::LINKURL."pages/article".$row["a_link"]."' class='d-none'>Tweet</a>";
 
                 }
                 //Display load more button.
@@ -101,7 +103,7 @@
                 echo "</table>";
                 
             } else {
-                 echo $FunctionsObj->outcomeMessage("warning","There are no articles for this subcategory.");
+                 echo $FunctionsObj->outcomeMessage("warning","Er zijn geen artikels gevonden voor deze categorie.");
             }
         }//Method showArticlesIndex.
         
@@ -205,13 +207,13 @@
                         //extract image url. 
                         //1: get only the entire image url. 
                         //2:split on assets (=get url only after in assets folder.) (reasons for this = url before assets changes = unpredictable what is can be.) 
-                        //3: php dirname(file) + assets folder + img url in assets)
+                        //3: php dirname(file) + assets folder + img url in assets.)
                         $aImage = explode('"',$aContent[1]);
                         $aImage2 = explode('assets',$aImage[0]);
                         $image =  dirname(__FILE__)."/../assets".$aImage2[1];
 
                     } else {
-                        //Take standard image
+                        //Take standard image.
                         $image = dirname(__FILE__)."/../images/no_image.png";
                     }
 

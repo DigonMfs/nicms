@@ -1,4 +1,5 @@
 <?php 
+    //Channel.
     Class ChannelView extends channel implements LinkUrl {
          //Show all media channels.
          public function showMediaChannels() {

@@ -123,7 +123,7 @@
     //Ajax called from filterArticles.
     if(isset($_POST["filterArticles"])) {
         $filterArticlesObj = new ArticleView();
-        $filterArticlesObj->showArticle($_POST["visibility"],$_POST["sort"],10);
+        $filterArticlesObj->showArticle($_POST["visibility"],$_POST["sort"],$_POST["keyword"],10);
         unset($filterArticlesObj);
     }//If.
 
@@ -158,7 +158,7 @@
     //Ajax called from load more articles on calendar page.
     if(isset($_POST["calendarLoadMoreArt"])) {
         $ArticleObj = new ArticleView();
-        $ArticleObj->showArticle($_POST["visibility"],$_POST["sort"],$_POST["amount"]);
+        $ArticleObj->showArticle($_POST["visibility"],$_POST["sort"],$_POST["keyword"],$_POST["amount"]);
         unset($ArticleObj);
     }//If.
 
@@ -204,4 +204,5 @@
         unset($ChannelViewObj);
     }//If.
 
+    
 ?>

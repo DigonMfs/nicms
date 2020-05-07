@@ -1,5 +1,8 @@
 <?php
+    //Includes.
     include_once("../includes/autoload.inc.php");
+
+    //Objects.
     $object = new AutoLoad();
 
     //Check if user is logged in.
@@ -26,14 +29,14 @@
         <!--Main.-->
         <main class="general-main container">
 
-            <!--Navbar for admin pages-->
+            <!--Navbar for admin pages.-->
             <ul class='nav nav-pills admin-navbar'>
                 <?php 
                     include_once "../includes/navbar.inc.php";
                 ?>
             </ul>
                  
-            <!--Alert messages.-->
+            <!--Alert messages..-->
             <div class="account-alert-messages">
                 <?php 
                     $FunctionsObj = new Functions();
@@ -150,7 +153,7 @@
                     </form>
                 </div>
 
-                <!--Change username and displayname-->
+                <!--Change username and displayname.-->
                 <div class="col-lg-6 col-md-12 col-sm-12">
                     <form action="<?php echo LinkUrl::LINKURL ?>classes/handler.class.php?changeUsername" method="GET">
                         <h4 class="account-settings-subtitle">Change username</h4>
@@ -253,17 +256,11 @@
             
         </main>
 
-        <!--Overlay-->
+        <!--Overlay.-->
         <div class="overlay-wrapper">
             <div class="overlay-box" id="overlayBody">
             </div>
         </div>
         
-        <!--Bootstrap & Bootstrap related CDN's-->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     </body>
 </html>
-
-

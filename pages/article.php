@@ -37,55 +37,55 @@
             //Head tags.
             include "../includes/head.inc.php";
         ?>
-        <!--Facebook and LinkedIn share metatags-->
+        <!--Facebook and LinkedIn share metatags.-->
         <meta property="og:url"           content="<?php echo LinkUrl::LINKURL; ?>article/<?php echo $articleLink;?>" />
         <meta property="og:type"          content="Website"/>
         <meta property="og:title"         content="<?php echo $articleTitle;?>" />
         <meta property="og:description"   content="<?php echo $articleSummary;?>" />
     </head>
     <body>
-
         <?php 
             //Header.
             include_once "../includes/header.inc.php";
         ?>
         
         <main class="general-main articles-main container">
+            
             <!--Breadcrumbs.-->
             <nav class="container general-nav articles-article-breadcrumbs" aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item">Home</li>
-                  <li class="breadcrumb-item active" aria-current="page"><a href="<?php echo LinkUrl::LINKURL; ?>index/<?php echo $articleCatID; ?> "><?php echo $CategoryViewObj->showCategory($articleCatID) ?></a></li>
-                  <li class="breadcrumb-item active" aria-current="page"><a href="<?php echo LinkUrl::LINKURL; ?>index"><?php echo $articleSubcat ?></a></li>
+                  <li class="breadcrumb-item active" aria-current="page"><a href="<?php echo LinkUrl::LINKURL; ?>index/<?php echo $articleCatID; ?>"><?php echo $CategoryViewObj->showCategory($articleCatID) ?></a></li>
+                  <li class="breadcrumb-item active" aria-current="page"><a href="<?php echo LinkUrl::LINKURL; ?>index/<?php echo $articleCatID; ?>"><?php echo $articleSubcat ?></a></li>
                   <li class="breadcrumb-item active" aria-current="page"><?php echo $articleTitle ?></li>
                 </ol>
             </nav>
 
             <div class="row articles-article-container">
-                <!--Sidebar container-->
+                <!--Sidebar container.-->
                 <div class="col-lg-3 col-md-12 col-sm-12 articles-sidebar-container">
                     
-                    <!--Sidebar-->
+                    <!--Sidebar.-->
                     <div class='list-group articles-list-group-relevant-articles'>
-                        <a class='list-group-item list-group-item-action active disabled list-group-items-header'>Relevant articles</a>
+                        <a class='list-group-item list-group-item-action active disabled list-group-items-header'>Gerelateerde artikels</a>
                         <?php 
                             $ArticelViewObj->showRelevantArticles($articleSubcatID,$articleID);
                         ?>
                     </div>
-                </div><!--Sidebar container-->
+                </div><!--Sidebar container.-->
 
-                <!--Article container-->
+                <!--Article container.-->
                 <div class="col-lg-9 col-md-12 col-sm-12 articles-article-overview-container">
                     <?php
                         $ArticelViewObj->showFullArticle($articleLink);
                     ?>
-                </div><!-- Article title container-->
+                </div><!-- Article title container.-->
                 
-            </div><!--Row-->
+            </div><!--Row.-->
             
         </main>
 
-        <!--Overlay-->
+        <!--Overlay.-->
         <div class="overlay-wrapper">
             <div class="overlay-box" id="overlayBody"></div>
         </div>

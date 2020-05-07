@@ -41,7 +41,6 @@
             return $result;
         }//Method unsetCatSubcat.
 
-       
     }//Class Category.
 
 ?>

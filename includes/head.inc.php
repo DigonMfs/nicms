@@ -22,7 +22,7 @@
 <!--Link To CSS.-->
 <link rel="stylesheet" type="text/css" href="<?php echo LinkUrl::LINKURL; ?>styles/style.css">
 
-<!--Bootstrap & Bootstrap related CDN's (notice the 'defer' element). -->
+<!--Bootstrap & Bootstrap related CDN's (notice the 'defer' element).-->
 <link defer rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>

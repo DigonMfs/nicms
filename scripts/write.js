@@ -122,3 +122,15 @@ function saveEditArticle(link) {
         },
     });
 }//Function saveEditArticle.
+
+//Show a previev of the image.
+function askPreviewImg(image_path,image,extension) {
+    //Open overlay.
+    Toggleoverlay('open',0);
+
+   //Set the correct content in the dialog.
+   heading = "Image preview";
+   body = "<figure class='image-preview-figure'><img class='image-preview' src='"+image_path+"/"+image+"' alt='Image Preview'></figure>";
+   button = "";
+   openDialog(heading,body,button);
+}//Function AskDelete.

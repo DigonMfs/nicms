@@ -1,5 +1,5 @@
 <?php 
-
+    //Functions.
     class Functions implements LinkUrl {
 
         public function isAlphanumeric($value) {

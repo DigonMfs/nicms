@@ -3,6 +3,10 @@
   padding: 0;
   scroll-behavior: smooth;
 }
+/*Allow position sticky in flexbox container.*/
+.row {
+    align-items: flex-start !important;
+}
 
 /*General*/
 
@@ -74,6 +78,8 @@ label {
 .bread-crumb-item:first-child a {
     color: #007bff;
 }
+
+
 /*Header*/
 .header {
     background-color: #222;
@@ -117,6 +123,18 @@ label {
     background-color: #222;
     border-radius: 0.25rem;
     margin-bottom: 25px !important;
+    position: sticky;
+    top: 100px;
+    z-index: 99999;
+}
+.admin-navbar::before, .articles-article-breadcrumbs::before {
+    content: '';
+    position: absolute;
+    display: block;
+    margin-top: -100px;
+    background-color: white;
+    width: 100%;
+    height: 100px;
 }
 .admin-navbar-header {
     background-color: crimson;
@@ -229,28 +247,24 @@ label {
 
 /*Article page*/
 
-/*Position Fixed*/
 .articles-article-breadcrumbs {
-    position: fixed;
-    top: 0px;
     z-index: 100;
-    margin-top: 50px !important;
-    padding-top: 50px !important;
     background-color: white;
+    position: sticky;
+    top: 100px;
 }
 .articles-main {
     padding: 0px !important;
     margin-top: 0px !important;
 }
-.articles-article-container {
-    padding-top: 175px;
-}
+
 .articles-sidebar-container {
-    position: relative;
+    position: sticky !important;
+    top: 175px;
 }
 .articles-list-group-relevant-articles {
-    position: fixed;
-    width: 250px;
+    position: sticky;
+    top: 175px
 }
 
 
@@ -344,6 +358,24 @@ label {
 #overlay-quick p {
     margin-top: 15px;
 }
+
+/*Preview image in overlay box on write page*/
+.image-preview-figure {
+    position: relative;
+    overflow-y: scroll;
+    max-height: 60vh;
+}
+.image-preview {
+    width: 100%;
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -507,11 +539,12 @@ label {
 
 
 
-
-
-
-
 /*Calendar page.*/
+.calendar-sort-filter-container {
+    position: sticky !important;
+    top: 175px;
+    z-index: 999999999;
+}
 .calendar-article-container {
     margin-bottom: 25px;
 }
@@ -604,9 +637,6 @@ label {
 .publish-button::after {
     content: 'Publish';
 }
-
-
-
 
 
 /*Account page*/
@@ -712,12 +742,6 @@ label {
   
 }
 
-@media (max-width: 1200px) {
-    .articles-list-group-relevant-articles {
-        width: 200px;
-    }
-}
-
 /*Media queries*/
 @media (max-width: 992px) { 
     /*width for main*/
@@ -729,23 +753,12 @@ label {
         font-size: 85px;
     }
 
-    /*Media query articles page.*/
-    /*Position fixed elements*/
-    .articles-list-group-relevant-articles {
-        position: relative;
-        margin-bottom: 25px !important;
-        max-width: 100%;
-    }
-    /*Padding left-right on main element in article page.*/
-    .articles-main {
-        padding: 0px 15px !important;
-    }
-    .articles-article-breadcrumbs {
-        position: relative;
-        padding-top: 50px;
-    }
-    .articles-article-container {
-        padding-top: 15px !important;
+    /*Calendar pagina*/
+    .calendar-sort-filter-container, .articles-sidebar-container {
+       position: relative !important;
+       top: 5px;
+       z-index: 50;
+       margin-bottom: 2rem;
     }
 }
 
@@ -768,8 +781,6 @@ label {
         margin-top: 15px;
     }
 }
-
-
 
 
 @media (min-width: 1200px) {

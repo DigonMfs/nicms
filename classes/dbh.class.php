@@ -12,5 +12,4 @@
         }//Connect method.
 
     }//Db class.
-
 ?>

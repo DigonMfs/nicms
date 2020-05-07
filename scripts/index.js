@@ -25,4 +25,4 @@ function showArticlesIndex(id,name) {
             $(".articles-article-overview-container").html(data);
         },
     });
-}//Function askDeleteArticle.
+}//Function showArticlesIndex.

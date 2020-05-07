@@ -1,5 +1,5 @@
 <?php 
-    //Category Class.
+    //Write Class.
     class Write extends Dbh implements LinkUrl {
 
         protected function setArticle($articleTitle,$date,$articleSummary,$articleBody,$articleCategory,$articleSubcategory,$articleSigner,$articleURL) {

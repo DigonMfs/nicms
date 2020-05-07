@@ -44,11 +44,11 @@ function BaseDir(cur_level,admin) {
 }//Function BaseDir.
 
 
-//Create a directory in folder
+//Create a directory in folder.
 function CreateDir() {
     dirName = document.getElementById("dirName").value;
 
-    //Check if dirname is not empty, and is alphanumeric
+    //Check if dirname is not empty, and is alphanumeric.
     if (!IsAlphaNumeric(StripSpaces(dirName)) || !dirName) {
         document.getElementById("overlaySmall").style.color = "red";
         return false;
@@ -69,13 +69,13 @@ function CreateDir() {
         },
         success: function(data) {
             $(".files-alert-messages").html(data);
-            //close overlay
+            //close overlay.
             Toggleoverlay('close',0);
-            //Go in to the created dir
+            //Go in to the created dir.
             DirClick(undefined,true);
         },
     });
-}//Function CreateDir/
+}//Function CreateDir.
 
 //Upload a file to "assets" function.
 function UploadFile() {
@@ -144,7 +144,6 @@ function askDeleteFileFolder(dirPath,fileName,type) {
     body = "<p>Are you sure you want to delete this "+file_folder+"?</p>";
     button = '<button class="btn btn-primary" onclick="deleteFileFolder(\''+dirPath+'\',\''+fileName+'\',\''+type+'\')">Yes, Delete</button>';
     openDialog(heading,body,button);
-        
 }//Function AskDelete.
 
 

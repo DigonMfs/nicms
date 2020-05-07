@@ -1,4 +1,5 @@
 <?php 
+    //ChannelContr.
     Class ChannelContr extends Channel implements LinkUrl {
 
         public function insertChannel($name,$canUnpublish,$type) {  

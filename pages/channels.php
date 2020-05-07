@@ -1,5 +1,8 @@
 <?php
+    //Includes.
     include_once("../includes/autoload.inc.php");
+
+    //Objects.
     $object = new AutoLoad();
 
     //Check if user is logged in.
@@ -52,7 +55,6 @@
                 </table>
             </div>       
             
-        
         </main>
 
         <!--Overlay-->

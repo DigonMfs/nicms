@@ -1,5 +1,8 @@
 <?php
+    //Includes.
     include_once("../includes/autoload.inc.php");
+
+    //Objects.
     $object = new AutoLoad();
 
     //Check if user is logged in.
@@ -20,35 +23,30 @@
     <body>
     
         <?php 
-            //Header
+            //Header.
             include_once "../includes/header.inc.php";
         ?>
         
-        <!-- Main-->
+        <!-- Main.-->
         <main class="general-main container">
 
-            <!--Navbar for admin pages-->
+            <!--Navbar for admin pages.-->
             <ul class='nav nav-pills admin-navbar'>
                 <?php 
                     include_once "../includes/navbar.inc.php";
                 ?>
             </ul>
             
-             <!--Directory Actions-->
+             <!--Directory Actions.-->
             <div class="admin files-admin-div">
                 <button type="button" class="btn btn-primary buttons" onclick="Toggleoverlay('open',1)">Create Folder</button>
                 <button type="button" class="btn btn-primary buttons" onclick="Toggleoverlay('open',2)">Upload File</button>
             </div>
              
-            <!--Alert messages-->
-            <div class="files-alert-messages">
-                <?php 
-                    //$Object = new Functions();
-                    //echo $Object->encrypt('admin');
-                ?>
-            </div>
+            <!--Alert messages.-->
+            <div class="files-alert-messages"></div>
               
-            <!--Container of the directory window-->
+            <!--Container of the directory window.-->
             <div class="files-file-directory-container card">
                 <!--Breadcrumbs-->
                 <nav aria-label="breadcrumb" class="files-breadcrumbs-directory-path card-header">
@@ -56,7 +54,7 @@
                         <li class="breadcrumb-item bread-crumb-item"><a class="bread-crumb-links" id="breadcrumbs-0" data-value="assets" onclick="BaseDir(0,'true')">assets</a></li>
                     </ol>
                 </nav>
-                <!--Directory body-->
+                <!--Directory body.-->
                 <div class="files-directory-body card-body">
                      <?php
                         $admin = "true";
@@ -72,7 +70,6 @@
         <!--Overlay-->
         <div class="overlay-wrapper">
             <div class="overlay-box" id="overlayBody">
-
             </div>
         </div>
         
