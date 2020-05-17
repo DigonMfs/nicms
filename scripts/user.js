@@ -18,6 +18,15 @@ function openLogindialog() {
             <small id='loginMessage'></small>";
     button = "<button class='btn btn-primary' onclick='login()''>Login</button>";
     openDialog(heading,body,button);
+
+    //Prefill username and password from cookie, if they exist.
+    if ($('#usernamePrefill').length) {
+        $('#username').val($('#usernamePrefill').val());
+    }
+    if ($('#passwordPrefill').length) {
+        $('#password').val($('#passwordPrefill').val());
+    }
+
 }//Function openLoginDialog.
 
 //Log the user in.

@@ -1,23 +1,13 @@
+/*GLOBAL CSS.*/
 * {
   margin: 0;
   padding: 0;
   scroll-behavior: smooth;
 }
+
 /*Allow position sticky in flexbox container.*/
 .row {
     align-items: flex-start !important;
-}
-
-/*General*/
-
-/*nav nav at the top of the admin page*/
-.general-nav {
-    margin: 100px 0px 25px 0px !important;
-    padding: 0px !important;
-}
-.general-main {
-    margin-top: 25px !important;
-    margin: 100px auto 100px auto !important;
 }
 
 /*Style of the overlay box*/
@@ -55,6 +45,10 @@
     color: lightgrey;
     cursor: pointer;
 }
+.stop-scrolling {
+    height: 100%;
+    overflow: hidden;
+}
 label {
     font-weight: bold;
 }
@@ -67,18 +61,6 @@ label {
 .overlay-small {
     color: grey;
 }
-
-/*Breadcrumbs above the explorer window, at write and files.php*/
-.bread-crumb-links {
-    cursor: pointer;
-}
-.bread-crumb-links:hover {
-    color: #007bff !important;
-}
-.bread-crumb-item:first-child a {
-    color: #007bff;
-}
-
 
 /*Header*/
 .header {
@@ -95,7 +77,6 @@ label {
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
-
 .inner-header-logo-image {
     height: 40px;
     margin-top: -15px;
@@ -112,13 +93,15 @@ label {
     cursor: pointer;
 }
 
-/*Overlay no scroll*/
-.stop-scrolling {
-    height: 100%;
-    overflow: hidden;
-  }
-
-/*Navbar that is visible whne logged in as admin*/
+/*Admin nav bar.*/
+.general-nav {
+    margin: 100px 0px 25px 0px !important;
+    padding: 0px !important;
+}
+.general-main {
+    margin-top: 25px !important;
+    margin: 100px auto 100px auto !important;
+}
 .admin-navbar {
     background-color: #222;
     border-radius: 0.25rem;
@@ -164,21 +147,7 @@ label {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*Index page*/
+/*INDEX PAGE.*/
 .nav-index {
     margin-top: 25px !important;
 }
@@ -192,14 +161,11 @@ label {
 .button-container-login {
     margin-top: 0 !important;
 }
-/*Sidebar with the subcategories.*/
 .index-subcategories-listgroup {
     margin-bottom: 25px !important;
 }
-/*Table*/
 .table-articles-overview { 
     border-collapse:collapse; 
-    /*border-spacing:0;*/
     empty-cells:show ; 
     font-size:130%;
     width: 100%;
@@ -212,7 +178,6 @@ label {
     position: relative;
     width: 100%;
 }
-/*Table icons*/
 .table-articles-admin-icons {
     display: inline-block;
     opacity: 0;
@@ -224,12 +189,9 @@ label {
     opacity: 1;
     cursor: pointer;
 }
-/*Subcategories on articles page (index).*/
 .list-group-item {
     cursor: pointer;
 }
-
-/*Subcategory in the breadcrumbs on the indx page*/
 .index-breadcrumb-button {
     color: dodgerblue !important;
 }
@@ -239,14 +201,7 @@ label {
 }
 
 
-
-
-
-
-
-
-/*Article page*/
-
+/*ARTICLE PAGE.*/
 .articles-article-breadcrumbs {
     z-index: 100;
     background-color: white;
@@ -257,7 +212,6 @@ label {
     padding: 0px !important;
     margin-top: 0px !important;
 }
-
 .articles-sidebar-container {
     position: sticky !important;
     top: 175px;
@@ -266,8 +220,6 @@ label {
     position: sticky;
     top: 175px
 }
-
-
 .articles-article-content p {
     display: inline-block !important;
 }
@@ -288,19 +240,10 @@ label {
 }
 
 
-
-
-
-
-
-
-/*Write page*/
-
-/*Textarea van abstract*/
+/*WRITE PAGE.*/
 .form-control {
     resize: none;
 }
-/*Container van ckeditor*/
 .write-ckeditor-container {
     margin-top: 25px;
 }
@@ -309,26 +252,19 @@ label {
     max-height: 400px;
     overflow-y: scroll;
 }
-/*Nav tabs van write page*/
 .write-nav-tabs {
     margin-top: 25px;
 }
-/*Container of the different tabs*/
 .write-tabpane-container {
     margin-top: 25px;
     margin-bottom: 100px;
 }
-/*input text, on publish section*/
 .write-publish-extra:first-child {
     margin-right: 25px;
 }
-/*Save button container.*/
 .write-publish-extra-button-container {
     margin-top: 25px;
 }
-
-/*category section on write page*/
-/*the category button selectors*/
 .category-dropwdown-selectors {
     border: 1px solid black;
     width: 100%;
@@ -341,9 +277,15 @@ label {
 .write-category-title {
     font-size: 25px;
 }
-
-
-/*Files on write page*/
+.bread-crumb-links {
+    cursor: pointer;
+}
+.bread-crumb-links:hover {
+    color: #007bff !important;
+}
+.bread-crumb-item:first-child a {
+    color: #007bff;
+}
 #overlay-quick {
     position: fixed;
     z-index: 999999;
@@ -359,7 +301,6 @@ label {
     margin-top: 15px;
 }
 
-/*Preview image in overlay box on write page*/
 .image-preview-figure {
     position: relative;
     overflow-y: scroll;
@@ -370,32 +311,19 @@ label {
 }
 
 
-
-
-
-
-
-
-
-
-
-/*Files Page*/
-/*The container of the operations on the dir body*/
+/*FILES PAGE.*/
 .files-admin-div {
     display: block !important;
     margin: 25px 0px;
 }
-/*Container of the alert messages*/
 .alert-messages {
     width: 70%;
     margin: 0 auto;
     padding: 15px 0px;
 }
-/*container of dir body + breadcrumbs*/
 .files-file-directory-container {
     margin-top: 25px;
 }
-/*Breadcrumbs showing the path*/
 .files-breadcrumbs-directory-path {
     grid-column: 1/2;
 }
@@ -404,7 +332,6 @@ label {
     margin: 0px;
     padding: 0px;
 }
-/*The body that shows all the files*/
 .files-directory-body {
     display: flex !important;
     flex-direction: row;
@@ -412,17 +339,15 @@ label {
     max-height: 550px;
     overflow-y: scroll;
 }
-/*The container containing each individual file/folder in dir body*/
 .files-file-container {
     padding: 0px 5px 5px 5px;
     margin: 5px;
     position: relative;
-    /*border: 1px solid black;*/
 }
 .files-file-container:hover .files-hover-icons {
     opacity: 1;
     cursor: pointer;
-    text-shadow: 4px 0px 4px rgba(150, 150, 150, 1); /*Makes the icon clearly visible on all surfaces*/
+    text-shadow: 4px 0px 4px rgba(150, 150, 150, 1);
 }
 .files-hover-icons {
     position: absolute;
@@ -431,14 +356,12 @@ label {
     opacity: 0;
     transition: opacity 300ms ease;
 }
-/*Icons and text of the file/folder in dir body*/
 .files-icon{
     font-size: 100px;
 }
 .files-folder-file-name {
     text-align: center;
 }
-/*Style of the inputs.buttons*/
 .form-group {
     padding: 0px 25px 15px 25px;
 }
@@ -446,7 +369,6 @@ label {
     padding: 0px 25px 15px 25px;
     text-align: right;
 }
-/*insert or copy text on write page in files tab*/
 .files-file-actions-container {
     position: absolute;
     opacity: 0;
@@ -462,25 +384,13 @@ label {
 }
 
 
-
-
-
-
-
-
-
-
-/*Category page*/
-
-/*Div with the "add category" button*/
+/*CATEGORY PAGE.*/
 .categories-admin-div {
     padding: 0px 0px 25px 0px;
 }
-/*Card container of the category cards*/
 .categories-category-container {
     align-items: flex-start;
 }
-/*Category card div*/
 .categories-category-card {
     margin: 15px;
     text-align: center;
@@ -490,7 +400,6 @@ label {
 .categories-category-card:hover .delete-categories-icon {
     opacity: 1;
 }
-/*Edit icon on cat/subcat hover.*/
 .delete-categories-icon {
     opacity: 0;
     transition: opacity 300ms ease;
@@ -513,13 +422,7 @@ label {
 }
 
 
-
-
-
-
-
-
-/*Channels page.*/
+/*CHANNELS PAGE.*/
 .channels-table-container {
     width: 100%;
     padding: 0px !important;
@@ -533,13 +436,7 @@ label {
 }
 
 
-
-
-
-
-
-
-/*Calendar page.*/
+/*CALENDAR PAGE.*/
 .calendar-sort-filter-container {
     position: sticky !important;
     top: 175px;
@@ -584,13 +481,11 @@ label {
     right: 15px;
     top: 15px
 }
-/*Load more articles button.*/
 .calendar-load-more {
     text-align: right;
     width: 100%;
     margin-right: 15px;
 }
-/*Sidebar showing the filter options.*/
 .calendar-list-group {
     margin-bottom: 25px !important;
 }
@@ -602,7 +497,6 @@ label {
     margin-left: 8px;
     position: relative;
  }
- /*Buttons on calendar page to publish,unpublish,delete and edit article.*/
  .calendar-article-button::after {
     position: absolute;
     display: block;
@@ -639,7 +533,7 @@ label {
 }
 
 
-/*Account page*/
+/*ACCOUNT PAGE.*/
 .form-group {
     margin-bottom: 0px !important;
 }
@@ -659,13 +553,7 @@ label {
 }
 
 
-
-
-
-
-
-/*FAQ page.*/
-/*Section of all the items.*/
+/*FAQ PAGE.*/
 .faq-faq-section {
     counter-reset: counter;
     border: 1px solid #f2f2f2;
@@ -684,7 +572,6 @@ label {
 .faq-section-articles {
     display: none;
 }
-/*Clickable arrow to toggle items*/
 .faq-angle {
     color: red;
     font-size: 25px;
@@ -694,14 +581,11 @@ label {
     cursor: pointer;
     transition: transform 300ms ease;
 }
-/*Subtitles within the items.*/
 .faq-section-articles h3 {
     font-size: 18px;
     font-weight: bold;
     color: grey;
 }
-
-/*Counters*/
 .counter {
     padding-left: 15px;
 }
@@ -721,39 +605,28 @@ label {
 
 
 
-
-
-
-
-
-
-
-
-
+/*MEDIA QUERIES.*/
 @media (min-width: 1200px) { 
-    /*width for main*/
+    /*GLOBAL.*/
     main, .general-nav, .inner-header {
         width: 970px;
     }
-    /*Fontsize for pdf icon*/
+    /*WRITE, FILES PAGE.*/
     .pdf-icon {
         font-size: 75px;
     }
   
 }
-
-/*Media queries*/
 @media (max-width: 992px) { 
-    /*width for main*/
+    /*GLOBAL.*/
     main, .general-nav, .inner-header {
         width: 750px;
     }
-    /*Fontsize for pdf icon*/
+    /*WRITE, FILES PAGE.*/
     .pdf-icon {
         font-size: 85px;
     }
-
-    /*Calendar pagina*/
+    /*CALENDAR PAGE.*/
     .calendar-sort-filter-container, .articles-sidebar-container {
        position: relative !important;
        top: 5px;
@@ -761,9 +634,8 @@ label {
        margin-bottom: 2rem;
     }
 }
-
 @media (max-width: 768px) {
-    /*Admin navbar media query*/
+    /*GLOBAL.*/
     .admin-navbar {
         display: block !important;
     }
@@ -781,14 +653,12 @@ label {
         margin-top: 15px;
     }
 }
-
-
 @media (min-width: 1200px) {
-    /*width for main*/
+     /*GLOBAL.*/
     main, .general-nav, .inner-header {
         width: 1180px;
     }
-    /*Fontsize for pdf icon*/
+    /*WRITE, FILES PAGE.*/
     .pdf-icon {
         font-size: 100px;
     }

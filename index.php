@@ -70,6 +70,15 @@
         <div class="overlay-wrapper">
             <div class="overlay-box" id="overlayBody"></div>
         </div>
+
+        <?php 
+            if (isset($_COOKIE["username"])) {
+                echo "<input type='hidden' value='".$_COOKIE["username"]."' id='usernamePrefill'>";
+            }
+            if (isset($_COOKIE["password"])) {
+                echo "<input type='hidden' value='".$_COOKIE["password"]."' id='passwordPrefill'>";
+            }
+        ?>
         
     </body>
 </html>

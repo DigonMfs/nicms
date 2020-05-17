@@ -22,8 +22,13 @@ class UserContr extends User implements LinkUrl {
         $result = $this->login($username,md5($password));
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
+                    //Set session.
                     $_SESSION["userID"] = $row["row_id"];
                     $_SESSION["userFunction"] = $row["function"];
+
+                    //Set cookies.
+                    setcookie("username",$row["username"],time() + (86400 * 30),'/');
+                    setcookie("password",$password,time() + (86400 * 30),'/');
             }
         } else {
             echo $FunctionsObj->outcomeMessage('error','Username is incorrect.');

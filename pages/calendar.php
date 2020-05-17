@@ -14,7 +14,7 @@
 <!DOCTYPE html>
 <html lang="nl">
     <head>
-        <title>Digon | Admin | Calendar</title>
+        <title>Digon | Admin | Articles</title>
         <?php 
             //Head tags.
             include "../includes/head.inc.php";
