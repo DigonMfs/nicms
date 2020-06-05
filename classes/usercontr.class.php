@@ -1,7 +1,7 @@
 <?php 
 class UserContr extends User implements LinkUrl {
 
-    public function loginContr($username,$password) {
+    public function loginContr($username,$password, $cookiePreset) {
         $FunctionsObj = new Functions();
 
         //Validation.
@@ -9,7 +9,7 @@ class UserContr extends User implements LinkUrl {
             echo $FunctionsObj->outcomeMessage("error","The length is too long/short.");
             return false;
         }
-        if(!$FunctionsObj->isAlphanumeric(str_replace(' ','',$username)) || !$FunctionsObj->isAlphanumeric(str_replace(' ','',$password))) {
+        if(!$FunctionsObj->isAlphanumeric(str_replace(' ','',$username)) || !$FunctionsObj->isAlphanumeric(str_replace(' ','',$password)) || !$FunctionsObj->isInteger($cookiePreset)) {
             echo $FunctionsObj->outcomeMessage("error","Username and or password are not alphanumeric.");
             return false;
         }
@@ -17,6 +17,7 @@ class UserContr extends User implements LinkUrl {
         //Real escape string.
         $username = $this->connect()->real_escape_string($username);
         $password = $this->connect()->real_escape_string($password);
+        $cookiePreset = $this->connect()->real_escape_string($cookiePreset);
 
         //Execute sql.
         $result = $this->login($username,md5($password));
@@ -26,10 +27,18 @@ class UserContr extends User implements LinkUrl {
                     $_SESSION["userID"] = $row["row_id"];
                     $_SESSION["userFunction"] = $row["function"];
 
-                    //Set cookies.
-                    setcookie("username",$row["username"],time() + (86400 * 30),'/');
-                    setcookie("password",$password,time() + (86400 * 30),'/');
-            }
+                    //Set or update cookie if user allowed it, otherwise don't set or delete it.
+                    if ($cookiePreset == 1) {
+                        setcookie("username",$row["username"],time() + (86400 * 30),'/');
+                        setcookie("password",$password,time() + (86400 * 30),'/');
+                    } else {
+                        //Check if cookie exists and delete if they do.
+                        if (isset($_COOKIE["username"])) {
+                            setcookie("username",$row["username"],time() - 1000,'/');
+                            setcookie("password",$password,time() - 1000,'/');
+                        }//If.
+                    }//If.  
+            }//While.
         } else {
             echo $FunctionsObj->outcomeMessage('error','Username is incorrect.');
         }

@@ -15,6 +15,10 @@ function openLogindialog() {
             <input type='text' class='form-control' id='username' placeholder='Enter Username'>\
             <label for='password'>Password</label>\
             <input type='password' class='form-control' id='password' placeholder='Enter Password'>\
+            <input type='radio' name='loginCookieRadio' value='1'>\
+            <small>Save (or update) login data in a cookie.</small><br>\
+            <input type='radio' name='loginCookieRadio' value='0' checked>\
+            <small>Don't save (or delete) login data from the cookie.</small>\
             <small id='loginMessage'></small>";
     button = "<button class='btn btn-primary' onclick='login()''>Login</button>";
     openDialog(heading,body,button);
@@ -31,16 +35,17 @@ function openLogindialog() {
 
 //Log the user in.
 function login() {
-    //Get the username and password.
+    //Get the username, password and cookie preset.
     username = document.getElementById("username").value;
     password = document.getElementById("password").value;
+    cookiePreset = document.querySelector('input[name="loginCookieRadio"]:checked').value;
 
     //Validate the username and password.
     if (username == "" || password == "") {
         $("#loginMessage").html("Values are empty.");
         return false;
     }
-    if (!IsAlphaNumeric(username) || !IsAlphaNumeric(password)) {
+    if (!IsAlphaNumeric(username) || !IsAlphaNumeric(password) || !IsAlphaNumeric(cookiePreset)) {
         $("#loginMessage").html("Values are not alphanumeric.");
         return false;
     }
@@ -52,6 +57,7 @@ function login() {
         data: {
             username:username,
             password:password,
+            cookiePreset:cookiePreset,
             login:"login"
         },
         success: function(data) {

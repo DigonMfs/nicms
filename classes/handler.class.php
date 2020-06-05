@@ -5,7 +5,7 @@
     //Ajax called from login.
     if(isset($_POST["login"])) {
        $UserContrObj = new UserContr();
-       $UserContrObj->loginContr($_POST["username"],$_POST["password"]);
+       $UserContrObj->loginContr($_POST["username"],$_POST["password"],$_POST["cookiePreset"]);
        unset($UserContrObj);
     }//If.
 
