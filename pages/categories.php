@@ -29,11 +29,9 @@
         <main class="general-main container">
 
             <!--Navbar for admin pages.-->
-            <ul class='nav nav-pills admin-navbar'>
-                <?php 
-                    include_once "../includes/navbar.inc.php";
-                ?>
-            </ul>
+            <?php 
+                include_once "../includes/navbar.inc.php";
+            ?>
              
             <!--Admin actions div.-->
             <div class="admin categories-admin-div">

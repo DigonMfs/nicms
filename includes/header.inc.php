@@ -1,3 +1,10 @@
+<?php 
+if (file_exists(dirname(__FILE__) . '/../../nav.php')){
+    include dirname(__FILE__) . '/../../nav.php';
+} else {
+    
+?>
+    
 <header class="header">
     <div class="inner-header">
         <div class="inner-header-logo-container">
@@ -6,3 +13,7 @@
         </div>
     </div>
 </header>
+
+<?php 
+}
+?>

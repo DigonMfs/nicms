@@ -53,8 +53,8 @@
             $FunctionsObj->checkUserLoggedIn();
 
             //Validation.
-            if(!$FunctionsObj->isAlphanumeric(str_replace(' ','',$nameWithoutExtension))) {
-                echo $FunctionsObj->outcomeMessage("error","Filename is not alphanumeric.");
+            if(!$FunctionsObj->isAlphanumeric(str_replace('-','',str_replace(' ','',$nameWithoutExtension)))) {
+                echo $FunctionsObj->outcomeMessage("error","Filename is not alphanumeric (dashes are allowed).");
                 return false;
             }
             if (!in_array(strtolower($extension), $allowed)) {
@@ -65,8 +65,8 @@
                 echo $FunctionsObj->outcomeMessage("error","This file is too big. The maximum size is 5MB, your file is ".round(($fileSize / 1000000),2)."MB.");
                 return false;
             }
-            if(!$FunctionsObj->validateLength($nameWithoutExtension,3,30)) {
-                echo $FunctionsObj->outcomeMessage("error","The filename is too long/short, the length should be between 3 and 30.");
+            if(!$FunctionsObj->validateLength($nameWithoutExtension,3,60)) {
+                echo $FunctionsObj->outcomeMessage("error","The filename is too long/short, the length should be between 3 and 60.");
                 return false;
             }
             if (file_exists($location)) {
@@ -78,7 +78,7 @@
             if (move_uploaded_file($_FILES["file"]["tmp_name"], $location)) {
                 $FunctionsObj->outcomeMessage("success","File '".$name."' has successfully been uploaded.");
             } else {
-                $FunctionsObj->outcomeMessage("error","Failed to upload '".$name."'. dsafa");
+                $FunctionsObj->outcomeMessage("error","Failed to upload '".$name."'. ");
             }
         }//Method uploadFile.
 

@@ -29,12 +29,10 @@
         <main class="general-main container">
 
             <!--Navbar for admin pages.-->
-            <ul class='nav nav-pills admin-navbar'>
-                <?php 
+            <?php 
                     include_once "../includes/navbar.inc.php";
-                ?>
-            </ul>
-
+            ?>
+          
             <!--Index FAQ.-->
             <section class="faq-faq-section" onclick="toggleFAQ(0)">
                 <i class="fas fa-file text-primary"></i>

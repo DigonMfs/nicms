@@ -31,17 +31,15 @@
         <main class="general-main container">
 
             <!--Navbar for admin pages-->
-            <ul class='nav nav-pills admin-navbar'>
-                <?php 
-                    include_once "includes/navbar.inc.php";
-                ?>
-            </ul>
-
+            <?php 
+                include_once "includes/navbar.inc.php";
+            ?>
+          
             <!--Breadcrumbs-->
             <nav class="container general-nav nav-index" aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumbs-index">
-                  <li class="breadcrumb-item">Home</li>
-                  <li class="breadcrumb-item active" aria-current="page"><a href="<?php echo $linkUrl; ?>index"><?php echo $CategoryViewObj->showCategory($cat_id) ?></a></li>
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page"><a qhref="<?php echo LinkUrl::LINKURL;?>index"><?php echo $CategoryViewObj->showCategory($cat_id) ?></a></li>
                 </ol>
             </nav>
 

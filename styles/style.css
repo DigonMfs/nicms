@@ -108,7 +108,7 @@ label {
     margin-bottom: 25px !important;
     position: sticky;
     top: 100px;
-    z-index: 99999;
+    z-index: 1000;
 }
 .admin-navbar::before, .articles-article-breadcrumbs::before {
     content: '';
