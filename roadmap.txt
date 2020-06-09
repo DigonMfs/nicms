@@ -5,5 +5,6 @@ Remarks :
 - maximum on nr. of subdirs should be removed : much more than 10 is needed.
 - hyphens in permalinks : shown as spaces on "edit"
 - "edit" button on "edit"-screen should say "save" or "update" instead of "edit".
-- permalink-field : to small. "failed to save", but not clear why.
+- permalink-field : too small. "failed to save", but not clear why. (changed to 60 in production database)
+- title-field : too small (changed to 120 in production DB)
 - It should be possible to change the category when editing (new category is not persisted)

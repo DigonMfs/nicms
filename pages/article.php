@@ -63,7 +63,7 @@
 
             <div class="row articles-article-container">
                 <!--Sidebar container.-->
-                <div class="col-lg-3 col-md-12 col-sm-12 articles-sidebar-container">
+                <div class="col-lg-3 col-md-12 col-sm-12 articles-sidebar-container d-none d-lg-block">
                     
                     <!--Sidebar.-->
                     <div class='list-group articles-list-group-relevant-articles'>
@@ -89,7 +89,12 @@
         <div class="overlay-wrapper">
             <div class="overlay-box" id="overlayBody"></div>
         </div>
-
+        
+     <?php 
+            //Footer
+            include_once "../includes/footer.inc.php";
+        ?>
+  
     </body>
 </html>
 
