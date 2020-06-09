@@ -1,0 +1,9 @@
+
+Remarks : 
+- create new  : save-button : "successfully saved" is invisible when screen is not high enough, and no user feedback if it is saved.
+- create new : edit -> save -> edit -> save again does not work (this is a common workflow). If the article was saved once (insert), you have to go to find it in the list, and edit it there.
+- maximum on nr. of subdirs should be removed : much more than 10 is needed.
+- hyphens in permalinks : shown as spaces on "edit"
+- "edit" button on "edit"-screen should say "save" or "update" instead of "edit".
+- permalink-field : to small. "failed to save", but not clear why.
+- It should be possible to change the category when editing (new category is not persisted)
