@@ -168,7 +168,7 @@ label {
     border-collapse:collapse; 
     empty-cells:show ; 
     width: 100%;
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid  rgba(0,0,0,.125);
 }
 .table-articles-overview td { 
     vertical-align:top; 
