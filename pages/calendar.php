@@ -72,7 +72,7 @@
                     <!--Show all articles.-->
                     <?php 
                         $ArticleObj = new ArticleView();
-                        $ArticleObj->showArticle('all','DATEASC','',10);
+                        $ArticleObj->showArticle('all','DATEDESC','',10);
                     ?>
                 </div><!-- Articles container.-->   
 

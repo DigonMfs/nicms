@@ -167,13 +167,12 @@ label {
 .table-articles-overview { 
     border-collapse:collapse; 
     empty-cells:show ; 
-    font-size:130%;
     width: 100%;
     border-bottom: 1px solid grey;
 }
 .table-articles-overview td { 
     vertical-align:top; 
-    border-top: 1px solid grey;
+    border-top: 1px solid rgba(0,0,0,.125);
     padding-top:10px;
     position: relative;
     width: 100%;
