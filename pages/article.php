@@ -56,7 +56,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
                   <li class="breadcrumb-item" aria-current="page"><a href="<?php echo LinkUrl::LINKURL; ?>index/<?php echo $articleCatID; ?>"><?php echo $CategoryViewObj->showCategory($articleCatID) ?></a></li>
-                  <li class="breadcrumb-item" aria-current="page"><a href="<?php echo LinkUrl::LINKURL; ?>index/<?php echo $articleCatID; ?>"><?php echo $articleSubcat ?></a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="<?php echo LinkUrl::LINKURL; ?>index.php?catID=<?php echo $articleCatID; ?>&subCatID=<?php echo $articleSubcatID?>&name=<?php echo $articleSubcat ?>"><?php echo $articleSubcat ?></a></li>
                   <li class="breadcrumb-item active" aria-current="page"><?php echo $articleTitle ?></li>
                 </ol>
             </nav>

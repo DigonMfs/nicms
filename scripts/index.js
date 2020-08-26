@@ -1,4 +1,5 @@
 //Show the title of the articles of the correct subcategory on the index page.
+// TODO : check name or else redirect to correct name. For google indexing unique page.
 function showArticlesIndex(id,name) {
     //Check if parameter is an integer.
     if(!IsInteger(id)) {

@@ -12,6 +12,18 @@ if (isset($_GET["catID"])) {
 } else {
     $cat_id = 1;
 }
+//Make sure cat_id exists.
+if (isset($_GET["subCatID"])) {
+    $subcat_id = $_GET["subCatID"];
+} else {
+    $subcat_id = 0;
+}
+//TODO : NAME SHOULD BE CHECKED (see if it is really the name of the category) or redirect (goal : google should have a unique link to the page).
+if (isset($_GET["name"])) {
+    $subcatname = htmlentities($_GET["name"]);
+} else {
+    $subcatname = "";
+}
 ?>
 <!DOCTYPE html>
 <html lnag="nl">
@@ -39,8 +51,18 @@ if (isset($_GET["catID"])) {
             <nav class="container general-nav nav-index" aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumbs-index">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page"><a qhref="<?php echo LinkUrl::LINKURL; ?>index"><?php echo $CategoryViewObj->showCategory($cat_id) ?></a></li>
-                </ol>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="<?php echo LinkUrl::LINKURL; ?>index"><?php echo $CategoryViewObj->showCategory($cat_id) ?></a></li>
+
+                    <?php
+                    if ($subcat_id != 0) {
+                        ?>
+                    
+                    <li class="breadcrumb-item active" aria-current="page"><a><?php echo $subcatname ?></a></li>
+       
+                    <?php
+                    }
+                     ?>
+              </ol>
             </nav>
 
             <!--Alert messages-->
@@ -58,11 +80,21 @@ if (isset($_GET["catID"])) {
 
                 <!--Article titles container-->
                 <div class="col-md-9 col-lg-9 articles-article-overview-container">
-                    <p class="alert alert-warning" role="alert">Klik op een categorie om de artikels weer te geven.</p>
+                    <?php
+                    if ($subcat_id != 0) {
+                        $showArticlesIndexObj = new ArticleView();
+                        $showArticlesIndexObj->showArticlesIndex($subcat_id);
+                        unset($showArticlesIndexObj);
+                    } else {
+                        ?>
+                        <p class="alert alert-warning" role="alert">Klik op een categorie om de artikels weer te geven.</p>
+                        <?php
+                    }
+                    ?>
                 </div><!-- Article title container-->   
             </div><!--Row-->
 
-            
+
         </main>
 
         <!--Overlay-->

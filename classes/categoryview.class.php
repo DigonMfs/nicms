@@ -121,7 +121,8 @@
             if ($result->num_rows > 0) {
                
                 while($row = $result->fetch_assoc()) {
-                    echo "<a class='list-group-item list-group-item-action' onclick='showArticlesIndex(".$row["row_id"].",\"".$row['category']."\")'><i class='fa fa-file'></i>&nbsp;".$row['category']."</a>";
+//                    echo "<a class='list-group-item list-group-item-action' onclick='showArticlesIndex(".$row["row_id"].",\"".$row['category']."\")'><i class='fa fa-file'></i>&nbsp;".$row['category']."</a>";
+                      echo "<a class='list-group-item list-group-item-action' href='".LinkUrl::LINKURL."index.php?catID=".$parentID."&subCatID=".$row["row_id"]."&name=".$row['category']."'><i class='fa fa-file'></i>&nbsp;".$row['category']."</a>";
                 }
             } else {
                 echo "<a class='list-group-item list-group-item-action'><i class='fa fa-file'></i>&nbsp;No subcategory has been found.</a>";
